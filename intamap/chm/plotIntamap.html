@@ -1,0 +1,133 @@
+<html><head><title>plot intamap objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>plotIntamap(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   plotIntamap">
+<param name="keyword" value="R:   plot.default">
+<param name="keyword" value="R:   plot.copula">
+<param name="keyword" value="R:   plot.idw">
+<param name="keyword" value="R:   plot.automap">
+<param name="keyword" value="R:   plot.linearVariogram">
+<param name="keyword" value="R:   plot.transGaussian">
+<param name="keyword" value="R:   plot.yamamoto">
+<param name="keyword" value=" plot intamap objects">
+</object>
+
+
+<h2>plot intamap objects</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Plotting function for <code>intamap</code>-objects of the type described in 
+<code><a href="intamap-package.html">intamap-package</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plotIntamap(object, zcol = "all", sp.layout = NULL, plotMat = c(2,2), ...)
+## S3 method for class 'copula':
+plot(x,  ...)
+## S3 method for class 'idw':
+plot(x, ...)
+## S3 method for class 'automap':
+plot(x, ...)
+## S3 method for class 'linearVariogram':
+plot(x, ...)
+## S3 method for class 'transGaussian':
+plot(x, ...)
+## S3 method for class 'yamamoto':
+plot(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+a list object. Most arguments necessary for interpolation
+are passed through this object. See <code><a href="intamap-package.html">intamap-package</a></code> for further 
+description of the necessary content of this variable</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+intamap object, when plot is called directly</td></tr>
+<tr valign="top"><td><code>zcol</code></td>
+<td>
+a list of column names to be plotted; if equal to all, the column names
+will correspond to all possible column names from <code>outputWhat</code>
+(see <code><a href="createIntamapObject.html">createIntamapObject</a></code>) </td></tr>
+<tr valign="top"><td><code>sp.layout</code></td>
+<td>
+an object that can contain lines, points and polygons that function as extra layout;
+see <code><a onclick="findlink('sp', 'spplot.html')" style="text-decoration: underline; color: blue; cursor: hand">spplot</a></code> for more information</td></tr>
+<tr valign="top"><td><code>plotMat</code></td>
+<td>
+an array of lengt two with the number of rows and columns of plots per page</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other parameters that can be passed to other plot functions (e.g. 
+<code><a onclick="findlink('graphics', 'plot.html')" style="text-decoration: underline; color: blue; cursor: hand">plot</a></code>, <code><a onclick="findlink('sp', 'spplot.html')" style="text-decoration: underline; color: blue; cursor: hand">spplot</a></code>, <code><a onclick="findlink('automap', 'automapPlot.html')" style="text-decoration: underline; color: blue; cursor: hand">automapPlot</a></code>
+and <code><a onclick="findlink('lattice', 'xyplot.html')" style="text-decoration: underline; color: blue; cursor: hand">xyplot</a></code> </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+All the plot methods above are simple wrapper functions around the plotIntamap function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A plot of some of the elements of <code>object</code>. This will typically be the 
+sample variogram and the fitted variogram model (if a method based on variograms 
+has been used) and all the predictions.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(meuse)
+meuse$value = log(meuse$zinc)
+data(meuse.grid)
+coordinates(meuse) = ~x+y
+coordinates(meuse.grid) = ~x+y
+object = interpolate(meuse,meuse.grid,outputWhat = list(mean = TRUE, variance = TRUE, excprob = 7, excprob = 8, quantile = 0.9, quantile = 0.95),methodName = "automap")
+plot(object)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: intamap\nVersion: 1.4-2\nDate: 2016-09-30\nTitle: Procedures for Automated Interpolation\nAuthor: Edzer Pebesma <edzer.pebesma@uni-muenster.de>, Jon Olav Skoien\n    <jon.skoien@gmail.com> with contributions from Olivier Baume, A.Chorti, D.T.\n    Hristopulos, H. Kazianka, S.J. Melles, G. Spiliopoulos\nMaintainer: Jon Olav Skoien <jon.skoien@gmail.com>\nDepends:\n    R (>= 2.14.0),\n    sp (>= 0.9-0)\nImports:\n    gstat (>= 0.9-36),\n    automap,\n    mvtnorm,\n    MASS,\n    evd,\n    doParallel,\n    foreach,\n    rgdal,\n    parallel,\n    stats,\n    methods,\n    grDevices,\n    utils,\n    graphics\nEnhances: psgp\nDescription: Provides classes and methods for automated\n    spatial interpolation.\nLicense: GPL (>= 2)\n",
+    "created" : 1467968755781.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1818335947",
+    "id" : "B78A2F3D",
+    "lastKnownWriteTime" : 1475250496,
+    "last_content_update" : 1475250496461,
+    "path" : "E:/Intamap/SVNI/intamap/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}

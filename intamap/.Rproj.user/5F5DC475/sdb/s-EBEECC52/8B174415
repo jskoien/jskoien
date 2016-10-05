@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "estimateParameters.linearVariogram = function(object, ...) {\n\t# no parameters to be estimated...\n\treturn(object)\n}\n\nspatialPredict.linearVariogram = function(object, nsim = 0, ...) {\n  dots = list(...)\n  if (\"nmax\" %in% names(dots)) {\n    nmax = dots$nmax\n  } else nmax = object$params$nmax\n  if (\"maxdist\" %in% names(dots)) {\n    maxdist = dots$maxdist\n  } else maxdist = object$params$maxdist\n  if (is.null(maxdist)) maxdist = Inf\n  if (\"debug.level\" %in% names(dots)) debug.level = dots$debug.level else \n    debug.level = object$params$debug.level\n  object$predictions = krige(object$formulaString,object$observations, \n           object$predictionLocations, vgm(1, \"Lin\", 0), nsim=nsim, nmax = nmax, \n           maxdist = maxdist, debug.level = debug.level)\n\n\n\treturn(object)\n}\n\n",
+    "created" : 1475158248447.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3281220447",
+    "id" : "8B174415",
+    "lastKnownWriteTime" : 1475250246,
+    "last_content_update" : 1475250246652,
+    "path" : "E:/Intamap/SVNI/intamap/R/linearVariogram.R",
+    "project_path" : "R/linearVariogram.R",
+    "properties" : {
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

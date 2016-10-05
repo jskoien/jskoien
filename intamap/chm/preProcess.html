@@ -1,0 +1,95 @@
+<html><head><title>pre-processing of data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>preProcess(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   preProcess">
+<param name="keyword" value="R:   preProcess.default">
+<param name="keyword" value="R:   preProcess.idw">
+<param name="keyword" value=" pre-processing of data">
+</object>
+
+
+<h2>pre-processing of data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+pre-processing of the data for the <code><a href="intamap-package.html">intamap-package</a></code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 method:
+preProcess(object, ...)
+## S3 method for class 'idw':
+preProcess(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+see <code><a href="intamap-package.html">intamap-package</a></code>; list that should at
+least contain (i) an element called <code>observations</code> of class
+<code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code>. The measured values should be named
+<code>value</code>, and (ii) an element <code>params</code> of class <code>list</code>, by calling the
+function <code><a href="getIntamapParams.html">getIntamapParams</a></code>. (iii) Usually, the object will also
+contain an element called <code>predictionLocations</code>,
+of a class extending <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>. 
+<br>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional parameters</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function <code>preProcess</code> includes code for preprocessing an object before interpolation. 
+The function can easily be replaced by more specific methods relevant for a 
+certain data set. Functions can be called from <code>preProcess</code> according to the settings in parameters
+in the <code>object</code>, set by the function <code><a href="getIntamapParams.html">getIntamapParams</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The input object is returned, after its components have been pre-processed.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

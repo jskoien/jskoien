@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\\name{coarsenGrid}\n\\alias{coarsenGrid}\n\\title{ Coarsening of a spatial grid}\n\n\\description{\\code{coarsenGrid} is a function that resamples a SpatialGridDataFrame.\n}\n\n\n\\usage{\ncoarsenGrid(object,coarse=2,offset = sample(c(0:(coarse-1)),2,replace=TRUE))\n}\n\n\\arguments{\n\\item{object}{a \\code{\\link[sp:SpatialPixelsDataFrame]{SpatialGridDataFrame}} or gridded\n              \\code{\\link[sp:SpatialPixelsDataFrame]{SpatialPixelsDataFrame}}}\n\\item{coarse}{an integer telling how much the grid should be coarsened}\n\\item{offset}{integer giving the relative offset of the first point, see details \n                below for a closer description} \n} \n\n\n\\details{\nThe function \\code{coarsenGrid} is a function that samples from a \n\\code{\\link[sp:SpatialPixelsDataFrame]{SpatialGridDataFrame}}.\nThe argument \\code{coarse} indicates that every \\code{coarse} row and column will\nbe sampled, starting with the row and column represented in \\code{offset}. offset = c(0,0) \nimplies that the smallest x- and y-coordinates will be a part of the resampled\ndata set, offset = c(1,1) implies that sampling will start on the second row and column.\n}\n\n\\value{ \na \\code{\\link[sp:SpatialPixelsDataFrame]{SpatialGridDataFrame}}.\n}\n\n\n\\references{ \n\nPebesma, E., Cornford, D., Dubois, G., Heuvelink, G.B.M., Hristopulos, D., Pilz, J., Stohlker, U., Morin, G., Skoien, J.O. INTAMAP: The design and implementation f an interoperable automated interpolation Web Service. Computers and Geosciences 37 (3), 2011. \n\n}\n\n\\author{ Jon Olav Skoien}\n\\examples{\ndata(meuse.grid)\ngridded(meuse.grid) = ~x+y\nnewMeuseGrid = coarsenGrid(meuse.grid,coarse=2,offset=c(1,1))\n\n}\n\\keyword{spatial}\n",
+    "created" : 1470142911437.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4176279619",
+    "id" : "47FBFEBE",
+    "lastKnownWriteTime" : 1469605049,
+    "last_content_update" : 1469605049,
+    "path" : "E:/Intamap/SVNI/intamap/man/coarsenGrid.Rd",
+    "project_path" : "man/coarsenGrid.Rd",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}

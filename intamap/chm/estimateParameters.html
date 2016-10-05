@@ -1,0 +1,208 @@
+<html><head><title>Automatic estimation of correlation structure parameters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>estimateParameters(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   estimateParameters">
+<param name="keyword" value="R:   estimateParameters.automap">
+<param name="keyword" value="R:   estimateParameters.copula">
+<param name="keyword" value="R:   estimateParameters.default">
+<param name="keyword" value="R:   estimateParameters.idw">
+<param name="keyword" value="R:   estimateParameters.linearVariogram">
+<param name="keyword" value="R:   estimateParameters.transGaussian">
+<param name="keyword" value="R:   estimateParameters.yamamoto">
+<param name="keyword" value=" Automatic estimation of correlation structure parameters">
+</object>
+
+
+<h2>Automatic estimation of correlation structure parameters</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Function to estimate correlation structure parameters. The actual parameters
+depend on the method used.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'automap':
+estimateParameters(object, ... )
+## S3 method for class 'copula':
+estimateParameters(object, ... )
+## Default S3 method:
+estimateParameters(object, ...)
+## S3 method for class 'idw':
+estimateParameters(object, ... , idpRange = seq(0.1, 2.9, 0.1), nfolds = 5)
+## S3 method for class 'linearVariogram':
+estimateParameters(object, ...)
+## S3 method for class 'transGaussian':
+estimateParameters(object, lambda, significant = TRUE, ... )
+## S3 method for class 'yamamoto':
+estimateParameters(object, ... )
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+an intamap object of the type described in <code><a href="intamap-package.html">intamap-package</a></code></td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments that will be passed to the requested interpolation method. 
+See the individual methods for more information</td></tr>
+<tr valign="top"><td><code>idpRange</code></td>
+<td>
+range of idp (inverse distance weighting power) values over which to optimize mse </td></tr>
+<tr valign="top"><td><code>nfolds</code></td>
+<td>
+number of folds in n-fold cross validation </td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+lambda parameter for <code><a onclick="findlink('MASS', 'boxcox.html')" style="text-decoration: underline; color: blue; cursor: hand">boxcox</a></code>-transformation</td></tr>
+<tr valign="top"><td><code>significant</code></td>
+<td>
+logical; if TRUE only transform if any of the four tests 
+described under <code><a href="interpolate.html">interpolate</a></code> are TRUE.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function <code>estimateParameters</code> is a wrapper around different
+methods for estimating correlation parameters to be used for the spatial 
+prediction method <code><a href="spatialPredict.html">spatialPredict</a></code>. 
+Below are some details about and/or links to the different methods currently implemented
+in the <code><a href="intamap-package.html">intamap-package</a></code>.
+</p>
+
+<dl>
+<dt><code>automap</code></dt><dd>It is possible but not necessary to estimate variogram parameters for 
+this method. If <code>estimateParameters</code> is called with an object of class <EM>automap</EM>,
+<code><a onclick="findlink('automap', 'autofitVariogram.html')" style="text-decoration: underline; color: blue; cursor: hand">autofitVariogram</a></code> will be called. 
+If <code>object</code> already includes a variogram model when 
+<code><a href="spatialPredict.html">spatialPredict</a></code> is called, 
+<code><a onclick="findlink('gstat', 'krige.html')" style="text-decoration: underline; color: blue; cursor: hand">krige</a></code> in the <code>gstat</code>-package will be called directly.</dd>
+
+
+<dt><code>copula</code></dt><dd>finding the best copula parameters using <code><a href="copulaEstimation.html">copulaEstimation</a></code></dd>
+
+
+<dt><code>default</code></dt><dd>a default method is not really implemented, this function is only 
+created to give a sensible error message if the function is called
+with an object for which no method exist</dd>
+
+
+<dt><code>idw</code></dt><dd>fits the best possible idw-power to the data set by brute force searching within
+the <code>idpRange</code></dd>
+
+
+<dt><code>linearVariogram</code></dt><dd>this function just returns the original data, no parameter 
+fitting is necessary for linear variogram kriging</dd>
+
+
+<dt><code>transGaussian</code></dt><dd>Finding the best model parameters for transGaussian kriging 
+(<code><a onclick="findlink('gstat', 'krigeTg.html')" style="text-decoration: underline; color: blue; cursor: hand">krigeTg</a></code>). This means finding the best <code>lambda</code> for 
+the <code><a onclick="findlink('MASS', 'boxcox.html')" style="text-decoration: underline; color: blue; cursor: hand">boxcox</a></code>-transformation and the fitted variogram
+parameters for the transformed variable. If <code>significant = TRUE</code>
+will <code>lambda</code> only be estimated
+if the data show some deviation from normality, i.e., that at least one
+of the tests described under <code><a href="interpolate.html">interpolate</a></code> is TRUE. 
+</dd>
+
+
+<dt><code>yamamoto</code></dt><dd>a wrapper around <code>estimateParameters.automap</code>, only to assure that there is a method
+also for this class, difference to <code>automap</code> is more important in <code><a href="spatialPredict.html">spatialPredict</a></code></dd>
+
+<p>
+</dl>
+<p>
+It is also possible to add to the above methods with functionality from
+other packages, if wanted. See description on <a href="http://www.intamap.org/newMethods.php">http://www.intamap.org/newMethods.php</a>
+You can also check which methods are available from other packages by calling 
+<pre>
+&gt;methods(estimateParameters)
+</pre>
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+a list object similar to <code>object</code>, but extended with correlation parameters.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="createIntamapObject.html">createIntamapObject</a></code>, <code><a href="spatialPredict.html">spatialPredict</a></code>, <code><a href="intamap-package.html">intamap-package</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(intamap)
+
+set.seed(13131)
+
+# set up data:
+data(meuse)
+coordinates(meuse) = ~x+y
+meuse$value = log(meuse$zinc)
+data(meuse.grid)
+gridded(meuse.grid) = ~x+y
+proj4string(meuse) = CRS("+init=epsg:28992")
+proj4string(meuse.grid) = CRS("+init=epsg:28992")
+
+# set up intamap object:
+idwObject = createIntamapObject(
+        observations = meuse,
+        formulaString=as.formula(zinc~1),
+  predictionLocations = meuse.grid,
+        class = "idw"
+)
+
+# run test:
+checkSetup(idwObject)
+
+# do interpolation steps:
+idwObject = estimateParameters(idwObject, idpRange = seq(0.25,2.75,.25),
+                               nfold=3) # faster
+idwObject$inverseDistancePower
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

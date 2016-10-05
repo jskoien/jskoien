@@ -1,0 +1,97 @@
+<html><head><title>check setup</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>checkSetup(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   checkSetup">
+<param name="keyword" value=" check setup">
+</object>
+
+
+<h2>check setup</h2>
+
+
+<h3>Description</h3>
+
+<p>
+checkSetup will do some sanity checks on input data provided through object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+checkSetup(object, quiet = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+object, to be passed to <code><a href="preProcess.html">preProcess</a></code>, see <code><a href="intamap-package.html">intamap-package</a></code></td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+logical; TRUE to suppress OK statement </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>checkSetup</code> is a function that makes certain tests on the intamap object to 
+make sure that it is suited for interpolation. Particularly, it will issue a warning
+or an error if one of the following conditions are met:
+<ul>
+<li><code>observations</code> is not an element of <code>object</code>
+<li><code>observations</code> contain less than 20 observations
+<li>Some of the observation locations are duplicated
+<li><code>formulaString</code> is not an element of <code>object</code>
+<li>None of the columns of <code>observations</code> has a name that corresponds to the independent variable of <code>formulaString</code> 
+<li><code>predictionLocations</code> is not an element of <code>object</code>
+<li><code>predictionLocations</code> is not a <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code> object
+<li><code>targetCRS</code> is given, but <code>observations</code> and <code>predictionLocations</code> do not have CRS set
+<li><code>addBias</code> includes biases that are not part of <code>removeBias</code>
+</ul>
+<p>
+The function will issue a warning if it appears that <code>predictionLocations</code> 
+and <code>observations</code> share a small region. This warning is given as it is 
+a likely cause of errors, although it can also happen if <code>predictionLocations</code>
+are limited to one small cluster.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+returns TRUE if check passes, will halt with error when some some error condition is met.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Edzer J. Pebesma
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

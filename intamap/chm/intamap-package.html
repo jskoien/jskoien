@@ -1,0 +1,252 @@
+<html><head><title>A package providing methods for automatic interpolation:
+pre-processing, parameter estimation, spatial prediction and post processing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>intamap-package(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   intamap-package">
+<param name="keyword" value=" A package providing methods for automatic interpolation:
+pre-processing parameter estimation spatial prediction and post processing">
+</object>
+
+
+<h2>A package providing methods for automatic interpolation:
+pre-processing parameter estimation spatial prediction and post processing</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This package provides S3 methods for the R processing to be done in the INTAMAP
+project (<a href="http://www.intamap.org">http://www.intamap.org</a>). In addition to the methods available
+through a web-based interface, the package includes several other options
+for automatic interpolation and pre- and post-processing of observations
+from monitoring networks.
+</p>
+
+
+<h3>General setup</h3>
+
+<p>
+The normal work flow for working with the <code>intamap</code> package can best be illustrated
+with the following R-script. The procedure starts with reading data and meta data,
+then setting up an object which is used in the following functions: preprocess data,
+estimate parameters, compute spatial predictions, and post process them
+(i.e., write them out):
+</p>
+<pre>
+library(intamap)
+
+# set up intamap object, either manually:
+obj = list(
+        observations = readOGR("PG:dbname=postgis", "eurdep.data"),
+        predictionLocations = readOGR("PG:dbname=postgis", "eurdep1km.grid"),
+        targetCRS = "+init=epsg:3035",
+        params = getIntamapParams()
+)
+class(obj) = c("idw")
+
+# or using createIntamapObject
+obj = createIntamapObject(
+        observations = readOGR("PG:dbname=postgis", "eurdep.data"),
+        predictionLocations = readOGR("PG:dbname=postgis", "eurdep1km.grid"),
+        targetCRS = "+init=epsg:3035",class = c("idw")
+)
+
+
+
+
+# run test:
+checkSetup(obj)
+
+# do interpolation steps:
+obj = preProcess(obj)
+obj = estimateParameters(obj) # faster
+obj = spatialPredict(obj)
+obj = postProcess(obj)
+</pre>
+</p>
+<p>
+Our idea is that a script following this setup will allow the full
+statistical analysis required for the R back-end to the automatic
+interpolation service, and provides the means to extend the current
+(over-simplistic) code with the full-grown statistical analysis routines
+developed by INTAMAP partners. Running the package independently under
+R gives the user more flexibility in the utilization than what is possible 
+through the web-interface.
+</p>
+<p>
+Let us look into detail what the code parts do:
+<pre>
+library(intamap)
+</pre>
+The command <code>library(intamap)</code> loads the R code of the <code>intamap</code>
+package to the current R session, along with the packages required for
+this (sp, rgdal, gstat, akima, automap, mvtnorm, evd, MASS). 
+All packages need to be available to the
+R session, which is possible after downloading them from 
+the Comprehensive R Network Archives (CRAN) (<a href="http://cran.r-project.org">http://cran.r-project.org</a>)
+</p>
+<pre>
+# set up intamap object:
+obj = createIntamapObject(
+        observations = readOGR("PG:dbname=postgis", "eurdep.data"),
+        predictionLocations = readOGR("PG:dbname=postgis", "inspire1km.grid"),
+        targetCRS = "+init=epsg:3051", 
+        class = "idw"
+)
+</pre>
+</p>
+<p>
+This code sets up a list object called <code>obj</code>, and assigns a class
+(or a group of classes) to it. This list should hold anything we need in the next steps, and the
+bare minimum seems to be measured point data (which will be extended to 
+polygon data) and prediction locations,
+and a suggestion what to do with it. Here, the data are read from a
+PostGIS data base running on localhost; data base connections over a
+network are equally simple to set up. From the data base <code>postgis</code>
+the tables <code>eurdep.data</code> and <code>inspire1km.grid</code> are read; it
+is assumed that these have their SRID (spatial reference identifier) set.
+</p>
+<p>
+The suggestion what to do with these data is put in the classes,
+<code>idw</code>. This will determine which <EM>versions</EM> of <code>preProcess</code>,
+<code>parameterEstimate</code> etc will be used: <code>intamap</code> provides <EM>methods</EM>
+for each of the <EM>generic</EM> functions 
+<code>preProcess</code>, 
+<code>estimateParameters</code>,
+<code>spatialPredict</code>, 
+<code>postProcess</code>.
+Although it would be possible to apply two classes in this case (<code>dataType</code> in addition to <code>idw</code>), 
+as the choice of pre- and post-processing steps 
+tend to be data-dependent, we have tried to limit the number of classes to one for most applications.
+</p>
+<p>
+The S3 method mechanism (used here) hence requires these versions to
+be called <code>preProcess.idw</code>, <code>estimateParameters.idw</code>,
+<code>spatialPredict.idw</code>, and <code>postProcess.idw</code> (and eventually 
+also <code>preProcess.eurdep</code> and <code>preProcess.eurdep</code>).
+</p>
+<p>
+To see that, we get in an interactive session:
+<pre>
+&gt; library(intamap)
+Loading required package: sp
+Loading required package: gstat
+Loading required package: rgdal
+Geospatial Data Abstraction Library extensions to R successfully loaded
+&gt; methods(estimateParameters)
+[1] estimateParameters.automap*         estimateParameters.copula*         
+[3] estimateParameters.default*         estimateParameters.idw*            
+[5] estimateParameters.linearVariogram* estimateParameters.transGaussian*  
+[7] estimateParameters.yamamoto*
+</pre>
+</p>
+<p>
+Now if a partner provides additional methods for BayesianKriging, one could integrate them by
+<pre>
+class(obj) = "BayesianKriging"
+</pre>
+</p>
+<p>
+and provide some or all of the functions
+<code>preProcess.BayesianKriging</code>,
+<code>estimateParameters.BayesianKriging</code>,
+<code>spatialPredict.BayesianKriging</code>, and
+<code>postProcess.BayesianKriging</code>, which would be called automatically
+when using their generic form (<code>preProcess</code> etc).  
+</p>
+<p>
+It is also possible to provide a method that calls another
+method. Further, for each generic there is a default method. For
+<code>estimateParameter</code> and <code>spatialPredict</code> these print an
+error message and stop, for the pre- and postprocessing the default
+methods may be the only thing needed for the full procedure; if no
+<code>preProcess.BayesianKriging</code> is found, <code>preProcess.default</code>
+will be used when the generic (<code>preProcess</code>) is called.
+</p>
+<p>
+If a method does something, then it adds its result to the object it
+received, and returns this object. If it doesn't do anything, then it
+just passes (returns) the object it received.
+</p>
+<p>
+To make these different methods exchangable, it is needed that they can
+all make the same assumptions about the contents of the object that they
+receive when called, and that what they return complies with what the
+consequent procedures expect. The details about that are given in the
+descriptions of the respective methods, below.
+</p>
+<p>
+Because a specific interpolation method implemented may have its peculiar
+characteristics, it may have to extend these prescriptions by passing
+more information than described below, for example information about
+priors from <code>estimateParameters</code> to <code>spatialPredict</code>.
+</p>
+
+
+<h3>Input object components</h3>
+
+<dl>
+<dt><code>observations</code></dt><dd>object of class 
+code{<a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a>}, containing
+a field <code>value</code> that is the target variable.</dd>
+<dt><code>predictionLocations</code></dt><dd>object extending class <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>, containing
+prediction locations.</dd>
+<dt><code>targetCRS</code></dt><dd>character; target CRS or missing</dd>
+<dt><code>formulaString</code></dt><dd>formula string for parameter estimation and prediction functions</dd>  
+<dt><code>params</code></dt><dd><code>list</code> of parameters, to be set in <code><a href="getIntamapParams.html">getIntamapParams</a></code>. These parameters include: </dd>
+
+
+<dl>
+<dt>doAnisotropy = FALSE</dt><dd>Defining whether anisotropy should be calculated</dd>
+<dt>removeBias = NA</dt><dd>Defining whether biases should be removed, and in case yes, which ones
+(<code>localBias</code> and <code>regionalBias</code> implemented</dd>
+<dt>addBias = NA</dt><dd>Defining which biases to be added in the <code><a href="postProcess.html">postProcess</a></code> function.
+This has not yet been implemented.</dd>
+<dt>biasRemovalMethod = <code>"LM"</code></dt><dd>character; specifies which methods to use to remove bias. See below.</dd>
+<dt>doSegmentation = FALSE</dt><dd>Defining if the predictions should be subject to segmentation.
+Segmentation has been implemented, but not the use of it.</dd>
+<dt>nmax = 50</dt><dd>for local kriging: the number of nearest observations that
+should be used for a kriging prediction or simulation, where
+nearest is defined in terms of the space of the spatial locations.
+By default, 50 observations are used. </dd>
+<dt>ngrid = 100</dt><dd>The number of grid points to be used if an Averaged Cumulative
+Distribution Function (ACDF) needs to be computed for unbiased kriging</dd>
+<dt>nsim=100</dt><dd>Number of simulations when needed</dd>
+<dt>block = numeric(0)</dt><dd>Block size; a vector with 1, 2 or 3 values containing the size
+of a rectangular in x-, y- and z-dimension respectively
+(0 if not set), or a data frame with 1, 2 or 3 columns,
+containing the points that discretize the block in the
+x-, y- and z-dimension to define irregular blocks relative to
+(0,0) or (0,0,0) - see also the details section of <code><a onclick="findlink('gstat', 'predict.gstat.html')" style="text-decoration: underline; color: blue; cursor: hand">predict.gstat</a></code>.
+By default, predictions or simulations refer to the support of the data values. </dd>
+<dt>processType = <code>"gaussian"</code> </dt><dd>If known - the distribution of the data. Defaults to gaussian,
+analytical solutions also exists in some cases for logNormal.
+This setting only affects a limited number of methods, e.g. the
+block prediciton</dd>
+<dt>confProj = FALSE</dt><dd>If set, the program will attempt conform projections in <code><a href="preProcess.html">preProcess</a></code>,
+calling the function <code><a href="conformProjections.html">conformProjections</a></code>.</dd>
+<dt>debug.level = 0</dt><dd>Used in some functions for giving additional output. See 
+individual functions for more information. </dd>
+<dt>...</dt><dd>Additional parameters that do not exist in the default parameter set,
+particularly parameters necessary for new methods within the <code>intamap</code>
+package</dd>
+</dl>
+</dl>
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

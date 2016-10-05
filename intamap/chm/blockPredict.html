@@ -1,0 +1,160 @@
+<html><head><title>Spatial block prediction</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>blockPredict(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   blockPredict">
+<param name="keyword" value="R:   spatialPredict.block">
+<param name="keyword" value=" Spatial block prediction">
+</object>
+
+
+<h2>Spatial block prediction</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>blockPredict</code> is a generic method for prediction of 
+spatially aggregated variables within the <code><a href="intamap-package.html">intamap-package</a></code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre> blockPredict(object, ...) </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+a list object of the type described in <code><a href="intamap-package.html">intamap-package</a></code></td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments that will be passed to the requested interpolation method. 
+See the individual interpolation methods for more information. The following arguments 
+from <code>object</code> can be overrun through <code>...</code>:
+<dl>
+<dt><code>block</code></dt><dd>Block size; a vector with 1, 2 or 3 values containing the size
+of a rectangular in x-, y- and z-dimension respectively
+(0 if not set), or a data frame with 1, 2 or 3 columns,
+containing the points that discretize the block in the
+x-, y- and z-dimension to define irregular blocks relative to
+(0,0) or (0,0,0) - see also the details section of <code><a onclick="findlink('gstat', 'predict.gstat.html')" style="text-decoration: underline; color: blue; cursor: hand">predict.gstat</a></code>.
+By default, predictions or simulations refer to the support of the data values. </dd>
+<dt><code>cellsize</code></dt><dd>size of cells for discretization of blocks for numerical simulation</dd>
+</dl>
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function <code>blockPredict</code> is a wrapper around the <code>spatialPredict.block</code> function 
+within the <code><a href="intamap-package.html">intamap-package</a></code> package, to simplify the calls for block predictions. 
+</p>
+<p>
+Block predictions are spatial predictions assumed to be valid for a certain area. 
+The blocks can either be given by passing <code><a onclick="findlink('sp', 'SpatialPolygons.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygons</a></code> as the 
+predicitonLocations or by passing the block-argument through the parameters of the 
+object or through the <code>...</code>-argument.
+</p>
+<p>
+There are esentially two ways to solve the problems of block predictions.
+<ul>
+<dt>analytical</dt><dd>block predictions can be found directly by block kriging</dd>
+<dt>numerical</dt><dd>block predictions can be found through numerical simulations
+over a set of points within the block, the requested output is found by 
+averaging over these simulations </dd>
+</ul>
+
+<p>
+The analytical solutions are used when applicable. This is typically for 
+ordinary kriging based methods and prediction types that can be
+found by linear aggregation (e.g. block mean). 
+</p>
+<p>
+If the prediction type necessitates simulations, this is done by subsampling
+the blocks. This can either be done block-wise, with a certain number of points
+within each block, with a certain cellsize, or with a certain number of points
+</p>
+<p>
+<code>automap</code> Uses function <code><a onclick="findlink('automap', 'autoKrige.html')" style="text-decoration: underline; color: blue; cursor: hand">autoKrige</a></code> in the 
+<code>automap</code> package.
+If <code>object</code> already includes a variogram model, 
+<code><a onclick="findlink('gstat', 'krige.html')" style="text-decoration: underline; color: blue; cursor: hand">krige</a></code> in the <code>gstat</code>-package will be called directly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+a list object similar to <code>object</code>, but extended with predictions at
+a the set of locations defined <code>object</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('gstat', 'gstat.html')" style="text-decoration: underline; color: blue; cursor: hand">gstat</a></code>,<code><a onclick="findlink('automap', 'autoKrige.html')" style="text-decoration: underline; color: blue; cursor: hand">autoKrige</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# This example skips some steps that might be necessary for more complicated
+# tasks, such as estimateParameters and pre- and postProcessing of the data
+data(meuse)
+coordinates(meuse) = ~x+y
+meuse$value = log(meuse$zinc)
+data(meuse.grid)
+gridded(meuse.grid) = ~x+y
+proj4string(meuse) = CRS("+init=epsg:28992")
+proj4string(meuse.grid) = CRS("+init=epsg:28992")
+
+# set up intamap object:
+obj = createIntamapObject(
+        observations = meuse,
+        predictionLocations = meuse.grid,
+        targetCRS = "+init=epsg:3035",
+        class = "automap"
+)
+
+# do interpolation step:
+obj = conformProjections(obj)
+obj = estimateParameters(obj)  # blockPredict
+obj = blockPredict(obj,block=c(100,100))  # blockPredict
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

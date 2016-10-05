@@ -1,0 +1,115 @@
+
+R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(intamap)
+Loading required package: sp
+> data(meuse)
+> coordinates(meuse) = ~x+y
+> data(meuse.grid)
+> coordinates(meuse.grid) = ~x+y
+> set.seed(13531)
+> 
+> predictionLocations = spsample(meuse,50,"regular")
+> gridded(predictionLocations) = TRUE
+> cs = predictionLocations@grid@cellsize[1]/2
+> meuse$value = log(meuse$zinc)
+> 
+> outputWhat = list(mean=TRUE,variance=TRUE,quantile=0.025,quantile=0.0975)
+> res1 = interpolateBlock(meuse,predictionLocations,outputWhat,methodName = "automap")$outputTable
+R 2016-06-16 14:25:47 interpolating 155 observations, 48 prediction locations
+Checking object ... OK
+[using ordinary kriging]
+[1] "performed ordinary block kriging"
+Warning messages:
+1: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+2: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
+  pseudoinverse used at 0.073968 0.0070413
+3: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
+  neighborhood radius 2.9545
+4: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
+  reciprocal condition number  0
+> summary(t(res1))
+       x                y               mean          variance       
+ Min.   :179019   Min.   :330013   Min.   :4.920   Min.   :0.007617  
+ 1st Qu.:179485   1st Qu.:330829   1st Qu.:5.478   1st Qu.:0.022547  
+ Median :180183   Median :331644   Median :5.798   Median :0.135380  
+ Mean   :180183   Mean   :331644   Mean   :5.970   Mean   :0.209191  
+ 3rd Qu.:180882   3rd Qu.:332459   3rd Qu.:6.477   3rd Qu.:0.395162  
+ Max.   :181348   Max.   :333275   Max.   :7.207   Max.   :0.527126  
+ quantile0.025   quantile0.0975 
+ Min.   :4.161   Min.   :4.583  
+ 1st Qu.:4.720   1st Qu.:4.971  
+ Median :5.133   Median :5.422  
+ Mean   :5.201   Mean   :5.461  
+ 3rd Qu.:5.660   3rd Qu.:5.828  
+ Max.   :6.767   Max.   :6.916  
+> 
+> Srl = list()
+> for (i in 1:dim(coordinates(predictionLocations))[1]) {
++   pt1 = coordinates(predictionLocations)[i,]
++   x1 = pt1[1]-cs
++   x2 = pt1[1]+cs
++   y1 = pt1[2]-cs
++   y2 = pt1[2]+cs
++ 
++   boun = data.frame(x=c(x1,x2,x2,x1,x1),y=c(y1,y1,y2,y2,y1))
++   coordinates(boun) = ~x+y
++   boun = Polygon(boun)
++   Srl[[i]] = Polygons(list(boun),ID = as.character(i))
++ }
+> predictionLocations = SpatialPolygons(Srl)
+> 
+> res2 = interpolateBlock(meuse,predictionLocations,outputWhat,methodName="automap")$outputTable
+R 2016-06-16 14:25:47 interpolating 155 observations, 48 prediction locations
+Checking object ... OK
+[using ordinary kriging]
+[1] "performed ordinary block kriging"
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> summary(t(res2))
+       x                y               mean          variance       
+ Min.   :179019   Min.   :330013   Min.   :4.917   Min.   :0.005616  
+ 1st Qu.:179485   1st Qu.:330829   1st Qu.:5.479   1st Qu.:0.020985  
+ Median :180183   Median :331644   Median :5.800   Median :0.136722  
+ Mean   :180183   Mean   :331644   Mean   :5.970   Mean   :0.208580  
+ 3rd Qu.:180882   3rd Qu.:332459   3rd Qu.:6.480   3rd Qu.:0.397064  
+ Max.   :181348   Max.   :333275   Max.   :7.212   Max.   :0.528377  
+ quantile0.025   quantile0.0975 
+ Min.   :4.158   Min.   :4.579  
+ 1st Qu.:4.723   1st Qu.:4.976  
+ Median :5.132   Median :5.420  
+ Mean   :5.208   Mean   :5.466  
+ 3rd Qu.:5.665   3rd Qu.:5.840  
+ Max.   :6.785   Max.   :6.930  
+> 
+> max((res2-res1)/res1)
+[1] 0.01724326
+> 
+> 
+> proc.time()
+   user  system elapsed 
+   2.59    0.23    2.82 
