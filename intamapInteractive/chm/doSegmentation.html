@@ -1,0 +1,158 @@
+<html><head><title>Spatial Segmentation - Clustering for Scattered Observations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>doSegmentation(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   doSegmentation">
+<param name="keyword" value=" Spatial Segmentation - Clustering for Scattered Observations">
+</object>
+
+
+<h2>Spatial Segmentation - Clustering for Scattered Observations</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function performs segmentation of scattered 2D
+data based on  sampling density and location.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>doSegmentation(object)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+An Intamap type object containing the element (list)
+<code>observations</code>, which includes the coordinates of the
+observation locations</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function performs segmentation of scattered 2D data
+based on  sampling density and location. Let us assume that
+<code>No</code> is the number of observation locations. If <code>No</code>&lt; 200,
+then a single cluster is returned. 
+</p>
+<p>
+(1) The segmentation algorithm
+first  removes isolated distant points, if there are any, from the
+observation locations.
+Points $(xi,yi)$ are characterized as 'isolated' and 'distant' if they satisfy the following conditions :
+$abs(xi-mean(x)) &gt; 4 *std(x) or abs(yi-mean(y)) &gt; 4 *std(y)$
+and distance from closest neighbor $&gt;
+sqrt((std(x)/2)^2+(std(y)/2)^2)$. After the first step the size of
+the original dataset is reduced to N (N= No - isolated points)
+points. 
+</p>
+<p>
+(2) A sampling density matrix (lattice) consisting of N
+cells that cover the study area is constructed. Each cell is
+assigned  a density value equal to the number of  observation points
+inside the cell. In addition, each observation point is assigned the
+sampling density value of the containing cell. 
+</p>
+<p>
+(3) Unsupervised
+clustering edge detection is used to determine potential cluster
+perimeters.  
+</p>
+<p>
+(4) Each closed region's perimeter is labeled with a
+different cluster (segment) number. 
+</p>
+<p>
+(5) All observation points
+internal to a cluster perimeter are assigned to the specific
+cluster. 
+</p>
+<p>
+(6) Each cluster that contains fewer than 50 observation
+points is rejected. 
+</p>
+<p>
+(7) The observation points that have not
+initially been assigned to a cluster and those belonging to rejected
+(small) clusters are assigned at this stage. The assignment takes
+into account both the distance of the points from the centroids of
+the accepted clusters as well as the mean sampling density of the
+clusters.
+</p>
+<p>
+Note: The <code>No</code>&lt; 200 empirical constraint is used to avoid
+extreme situations in which the sampling density is concentrated
+inside a few cells of the background lattice, thereby inhibiting the
+edge detection algorithm.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A modified Intamap object which additionally includes the
+list element <code>clusters</code>. This element is a list that contains
+(i) the indices of  removed points from <code>observations</code>; (ii)
+the indices of the clusters to which the remaining observation
+points are assigned
+and (iii) the number of clusters detected.
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>clusters</code></td>
+<td>
+list element added to the original object containing the segmentation results.
+<ul>       
+<dt>rmdist</dt><dd>Indices of  removed points.</dd>
+<dt>index</dt><dd>Index array identifying the cluster in which each observation point belongs.</dd>
+<dt>clusterNumber</dt><dd>Number of clusters detected.</dd>
+</ul>
+</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+A. Chorti, Spiliopoulos Giannis, Hristopulos Dionisis
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] D. T. Hristopulos, M. P. Petrakis, G.
+Spiliopoulos, A. Chorti (2009). Non-parametric estimation of
+geometric anisotropy from environmental sensor network measurements,
+StatGIS 2009: Geoinformatics for Environmental Surveillance
+Proceedings (ed. G. Dubois).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(intamapInteractive)
+
+data(walker)
+coordinates(walker)=~X+Y
+object=createIntamapObject(observations=walker)
+object=doSegmentation(object)
+
+print(summary(object$clusters$index))
+
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

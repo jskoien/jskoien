@@ -1,0 +1,97 @@
+<html><head><title>MUKV computation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>calculateMukv(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   calculateMukv">
+<param name="keyword" value=" MUKV computation">
+</object>
+
+
+<h2>MUKV computation</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes MUKV for given geostatistical parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+calculateMukv(observations, predGrid, model, formulaString, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>observations</code></td>
+<td>
+Data frame with x,y coordinates of observations and possible covariates </td></tr>
+<tr valign="top"><td><code>predGrid</code></td>
+<td>
+Data frame with x,y coordinates of prediction locations </td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+Variogram model:object of class <code>variogramModel</code>, of the form
+created by <code><a onclick="findlink('gstat', 'vgm.html')" style="text-decoration: underline; color: blue; cursor: hand">vgm</a></code></td></tr>
+<tr valign="top"><td><code>formulaString</code></td>
+<td>
+formula that defines the dependent variable as a linear model 
+of independent variables; suppose the dependent variable has name <code>z</code>, 
+for ordinary and simple kriging use the formula <code>z~1</code>; 
+for universal kriging, suppose <code>z</code> is linearly dependent on 
+<code>x</code> and <code>y</code>, use the formula <code>z~x+y</code>. The formulaString defaults
+to <code>"value~1"</code> if <code>value</code> is a part of the data set. 
+If not, the first column of the data set is used.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments to be passed on at lower level functions </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function computes kriging on the <code>predGrid</code> with 
+<code><a onclick="findlink('gstat', 'krige.html')" style="text-decoration: underline; color: blue; cursor: hand">krige</a></code> function, and averages the kriging variance (MUKV). With covariates, 
+the function takes a universal kriging model into account.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+MUKV value</p>
+
+<h3>Author(s)</h3>
+
+<p>
+S.J. Melles and O. Baume
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

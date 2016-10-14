@@ -1,0 +1,146 @@
+<html><head><title>Finds (and removes) biases between overlapping networks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>findLocalBias(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   findLocalBias">
+<param name="keyword" value="R:   removeLocalBias">
+<param name="keyword" value=" Finds (and removes) biases between overlapping networks">
+</object>
+
+
+<h2>Finds (and removes) biases between overlapping networks</h2>
+
+
+<h3>Description</h3>
+
+<p>
+The function tries to identify differences between different networks
+of observation stations that share a region. From these differences, 
+biases are estimated, and can be removed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+findLocalBias(object, gid = "group",
+              formulaString = value ~ 1, regCode="regCode",...)
+removeLocalBias(object, localBias, gid = "group", formulaString = value ~ 1, regCode = "regCode")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+data frame with observations</td></tr>
+<tr valign="top"><td><code>gid</code></td>
+<td>
+name of column identifying groups of local networks</td></tr>
+<tr valign="top"><td><code>formulaString</code></td>
+<td>
+formula that defines the dependent variable as a linear model 
+of independent variables; suppose the dependent variable has name <code>z</code>, 
+for ordinary and simple kriging use the formula <code>z~1</code>; 
+for universal kriging, suppose <code>z</code> is linearly dependent on 
+<code>x</code> and <code>y</code>, use the formula <code>z~x+y</code></td></tr>
+<tr valign="top"><td><code>regCode</code></td>
+<td>
+the column name of regions in the <code>object</code>, if existing</td></tr>
+<tr valign="top"><td><code>localBias</code></td>
+<td>
+List of data frames, for a single region, or for 
+each of the regions, each containing
+biases for different networks in the region(s), result of 
+<code>findLocalBias</code></td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+arguments to be passed to sub-functions</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>findLocalBias</code> tries to identify biases between overlapping networks, i.e. when
+there is no boundary between different networks sampling the same type of data.
+This can typically happen if different governmental bodies are responsible for
+different types of measurement, e.g. one measuring the situation around populated
+areas, the other one measuring close to water bodies. 
+</p>
+<p>
+The function will then try to find the difference between the different networks, 
+and estimate the individual bias for each network, relative to a reference value,
+usually the average of all networks. The method is not recommended if there
+can be assumed to be a dependency beteween the process and the networks.
+</p>
+<p>
+<code>removeLocalBias</code> removes the bias estimated in <code>findLocalBias</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+From <code>findLocalBias</code>: A list consisting of one element for each regional network, or an element <code>single</code>
+if only one regional network is apparent. Each of these elements is again a list 
+consisting of several other elements, where <code>bias</code> is the interesting one.
+The remaining elements are only necessary for debugging purposes. The elements
+D, V and Q refers to the matrices with same names in Skoien et al. (2009), i.e.
+the relationship matrix, the variance matrix and the difference matrix.
+<br>
+From <code>removeLocalBias</code>: A <code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code>
+with the biases subtracted.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+<p>
+Skoien, J. O., O. P. Baume, E. J. Pebesma, and G. B. M. Heuvelink. 2009. 
+Identifying and removing heterogeneities between monitoring networks. 
+Environmetrics, Accepted.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Assuming that the soil type is the source of biases
+library(intamapInteractive)
+data(meuse)
+coordinates(meuse) = ~x+y
+
+lb = findLocalBias(meuse,gid = "soil",formulaString=as.formula(zinc~1))
+lb$single$bias
+
+meuseUnbias = removeLocalBias(meuse,localBias = lb, gid = "soil",
+    formulaString = zinc~1)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>
