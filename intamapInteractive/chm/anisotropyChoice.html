@@ -1,0 +1,154 @@
+<html><head><title>anisotropyChoice</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>anisotropyChoice(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   anisotropyChoice">
+<param name="keyword" value=" anisotropyChoice">
+</object>
+
+
+<h2>anisotropyChoice</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function combines segmentation of scattered 2D
+data and estimation of anisotropy parameters using the CTI method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>anisotropyChoice(object)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+An Intamap type object containing one 
+<code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code> with <code>observations</code>.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function <code>AnisotropyChoice</code> function employs the
+<code><a href="doSegmentation.html">doSegmentation</a></code> function to
+automatically separate the original dataset into clusters based on the sampling density and the spatial
+locations of the data (see <code><a href="doSegmentation.html">doSegmentation</a></code> for
+details). The results of the segmentation procedure and the
+anisotropy analysis per cluster are returned in  a matrix of
+dimension [cl]x5, where [cl] is the number of clusters . Each row of
+the matrix contains the cluster index, the anisotropy ratio, the
+anisotropy direction, the number of cluster points and the area
+inside the convex hull of the cluster. In addition, a single set of
+anisotropy parameters is returned in the element <code>anisPar</code>.
+These parameters are calculated using weighted averages of the
+covariance Hessian matrix estimates in each cluster. The weights are
+based on the area enclosed by the convex hull of each cluster.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code>object</code>: A modified Intamap type object is returned,
+which contains  the results of the anisotropy parameter estimation.
+The anisotropy parameters are returned in the element <code>anisPar</code>
+as described below.
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>anisPar</code></td>
+<td>
+List element in <code>object</code> that contains a list with the following
+elements:
+<ul>
+<dt><code>ratio</code></dt><dd>A coarse-grained  anisotropy ratio for all the data</dd>
+<dt><code>direction</code></dt><dd>A coarse-grained  anisotropy  orientation for all the data</dd>
+<dt><code>clusters</code></dt><dd>A matrix of dimension [cl]x5 which determines the anisotropy per cluster.
+Each row of <code>clusters</code> gives the
+(cluster id, anisotropy ratio, anisotropy direction, number of points, area) for each cluster detected.</dd>
+</ul>
+</td></tr>
+<tr valign="top"><td><code>clusters</code></td>
+<td>
+list element added to the original object containing the segmentation results.
+<ul>
+<dt>index</dt><dd>Index array identifying the cluster in which each observation point belongs. 
+Zero value means that the observations has been removed.</dd>
+<dt>clusterNumber</dt><dd>Number of clusters detected.</dd>
+</ul>
+</td></tr>
+</table>
+
+<h3>Note</h3>
+
+<p>
+This function uses the <code>akima</code> package to perform
+"bilinear" and "bicubic" interpolation for the estimation of spatial
+derivatives
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+D.T. Hristopulos, G.Spiliopoulos, A.Chorti
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] http://www.intamap.org
+</p>
+<p>
+[2] A. Chorti and D. T. Hristopulos (2008). Non-parametric
+Identification of Anisotropic (Elliptic) Correlations in Spatially
+Distributed Data Sets, IEEE Transactions on Signal Processing,
+56(10), 4738-4751 (2008).
+</p>
+<p>
+[3] D. T. Hristopulos, M. P. Petrakis, G. Spiliopoulos, A. Chorti
+(2009). Non-parametric estimation of geometric anisotropy from
+environmental sensor network measurements, StatGIS 2009:
+Geoinformatics for Environmental Surveillance Proceedings (ed. G.
+Dubois).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(intamapInteractive)
+
+data(walker)
+coordinates(walker)=~X+Y
+object=createIntamapObject(observations=walker)
+object=anisotropyChoice(object)
+
+print(summary(object$clusters$index))
+print(object$anisPar)
+
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

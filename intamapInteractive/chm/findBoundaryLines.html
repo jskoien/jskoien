@@ -1,0 +1,131 @@
+<html><head><title>Finding the regional boundaries</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>findBoundaryLines(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   findBoundaryLines">
+<param name="keyword" value=" Finding the regional boundaries">
+</object>
+
+
+<h2>Finding the regional boundaries</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Method for identifying points on the boundaries between regions 
+(in most cases biases between countries)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+findBoundaryLines(polygons, projOrig, projNew, regCode = "regCode")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>polygons</code></td>
+<td>
+A <code><a onclick="findlink('sp', 'SpatialPolygonsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygonsDataFrame</a></code> with the polygons
+defining the boundaries of each separate region.</td></tr>
+<tr valign="top"><td><code>projOrig</code></td>
+<td>
+The original projection of the boundaries</td></tr>
+<tr valign="top"><td><code>projNew</code></td>
+<td>
+If a different projection is wanted for the output</td></tr>
+<tr valign="top"><td><code>regCode</code></td>
+<td>
+the column name of regions in the data polygons</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function finds the points defining the boundary between two polygons and 
+passes a <code><a onclick="findlink('sp', 'SpatialPointsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code> with these points back.
+The result in mainly used by <code><a href="findRegionalBias.html">findRegionalBias</a></code> for estimation
+of regional biases. The function is based on the boundary between the 
+polygons being defined by the same points.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A <code><a onclick="findlink('sp', 'SpatialPointsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code> with points defining the
+boundaries between regions.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+<p>
+Skoien, J. O., O. P. Baume, E. J. Pebesma, and G. B. M. Heuvelink. 2009. 
+Identifying and removing heterogeneities between monitoring networks. Environmetrics, Accepted.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ 
+library(intamap)
+
+data(meuse)
+observations = data.frame(x = meuse$x,y = meuse$y,value = log(meuse$zinc))
+coordinates(observations) = ~x+y
+pBoundaries = spsample(observations, 10, "regular", bb = bbox(observations) +  
+                         matrix(c(-400,-400,400,400),ncol=2),offset=c(0,0))
+gridded(pBoundaries) = TRUE
+cs = pBoundaries@grid@cellsize[1]/2
+
+Srl = list()
+nb = dim(coordinates(pBoundaries))[1]
+for (i in 1:nb) {
+  pt1 = coordinates(pBoundaries)[i,]
+  x1 = pt1[1]-cs
+  x2 = pt1[1]+cs
+  y1 = pt1[2]-cs
+  y2 = pt1[2]+cs
+
+  boun = data.frame(x=c(x1,x2,x2,x1,x1),y=c(y1,y1,y2,y2,y1))
+  coordinates(boun) = ~x+y
+  boun = Polygon(boun)
+  Srl[[i]] = Polygons(list(boun),ID = as.character(i))
+}
+pBoundaries = SpatialPolygonsDataFrame(SpatialPolygons(Srl),
+                                       data = data.frame(ID=c(1:nb)))
+observations$ID = overlay(observations,pBoundaries)
+blines = findBoundaryLines(pBoundaries,regCode = "ID")
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>
