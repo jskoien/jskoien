@@ -1,0 +1,60 @@
+<html><head><title>Simulated Intamap Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>intamapExampleObject(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   intamapExampleObject">
+<param name="keyword" value=" Simulated Intamap Object">
+</object>
+
+
+<h2>Simulated Intamap Object</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Intamap object of class "copula" containing a simulated data set with 196 spatial locations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(intamapExampleObject)</pre>
+
+
+<h3>Details</h3>
+
+<p>
+The data set is 
+a realization of a random field generated using a Gaussian copula and generalized extreme value distributed margins (location=40,shape=0.5, scale=30). The correlation function is Matern (Stein's representation) with range=4, kappa=3 and nugget=0.05.
+Furthermore, there is geometric anisotropy with direction=pi/3 and ratio=2.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="spatialPredict.html">spatialPredict.copula</a></code>, <code><a href="estimateParameters.html">estimateParameters.copula</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+data(intamapExampleObject)
+## estimate parameters for the copula model
+intamapExampleObject&lt;-estimateParameters(intamapExampleObject)
+## make predictions at unobserved locations
+intamapExampleObject&lt;-spatialCopula(intamapExampleObject)
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

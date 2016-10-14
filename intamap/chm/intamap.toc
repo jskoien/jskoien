@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package intamap:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package intamap:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="intamap-package">
+<param name="Local" value="intamap-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="bayesCopula">
+<param name="Local" value="bayesCopula.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="blockPredict">
+<param name="Local" value="blockPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="checkSetup">
+<param name="Local" value="checkSetup.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="coarsenGrid">
+<param name="Local" value="coarsenGrid.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="conformProjections">
+<param name="Local" value="conformProjections.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="copulaEstimation">
+<param name="Local" value="copulaEstimation.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="createIntamapObject">
+<param name="Local" value="createIntamapObject.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateAnisotropy">
+<param name="Local" value="estimateAnisotropy.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.automap">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.copula">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.default">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.idw">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.linearVariogram">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.transGaussian">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateParameters.yamamoto">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateTimeModel">
+<param name="Local" value="estimateTimeModel.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="generateTimeModels">
+<param name="Local" value="generateTimeModels.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getIntamapParams">
+<param name="Local" value="getIntamapParams.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getInterpolationMethodNames">
+<param name="Local" value="getInterpolationMethodNames.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="intamapExampleObject">
+<param name="Local" value="intamapExampleObject.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="interpolate">
+<param name="Local" value="interpolate.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="interpolateBlock">
+<param name="Local" value="interpolate.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="methodParameters">
+<param name="Local" value="methodParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="methodParameters.copula">
+<param name="Local" value="methodParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="methodParameters.default">
+<param name="Local" value="methodParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="methodParameters.idw">
+<param name="Local" value="methodParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.automap">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.copula">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.default">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.idw">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.linearVariogram">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.transGaussian">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.yamamoto">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plotIntamap">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="postProcess">
+<param name="Local" value="postProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="postProcess.default">
+<param name="Local" value="postProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="postProcess.idw">
+<param name="Local" value="postProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="predictTime">
+<param name="Local" value="predictTime.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="preProcess">
+<param name="Local" value="preProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="preProcess.default">
+<param name="Local" value="preProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="preProcess.idw">
+<param name="Local" value="preProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="rotateAnisotropicData">
+<param name="Local" value="rotateAnisotropicData.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.automap">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.block">
+<param name="Local" value="blockPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.copula">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.default">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.idw">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.linearVariogram">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.transGaussian">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatialPredict.yamamoto">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.automap">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.copula">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.idw">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.linearVariogram">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.transGaussian">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.yamamoto">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summaryIntamap">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="timeModels">
+<param name="Local" value="timeModels.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="unbiasedKrige">
+<param name="Local" value="unbiasedKrige.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="yamamotoKrige">
+<param name="Local" value="yamamotoKrige.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package intamap:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="A package providing methods for automatic interpolation: pre-processing, parameter estimation, spatial prediction and post processing">
+<param name="Local" value="intamap-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Automatic estimation of correlation structure parameters">
+<param name="Local" value="estimateParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="check setup">
+<param name="Local" value="checkSetup.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Coarsening of a spatial grid">
+<param name="Local" value="coarsenGrid.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Create an object for interpolation within the intamap package">
+<param name="Local" value="createIntamapObject.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateAnisotropy">
+<param name="Local" value="estimateAnisotropy.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="estimateTimeModel">
+<param name="Local" value="estimateTimeModel.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="generate string for generation of method parameters">
+<param name="Local" value="methodParameters.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Generate time models">
+<param name="Local" value="generateTimeModels.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="get interpolation method names">
+<param name="Local" value="getInterpolationMethodNames.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Getting conformed projections">
+<param name="Local" value="conformProjections.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="kriging and simulation with alternative kriging variance">
+<param name="Local" value="yamamotoKrige.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="ML-estimation of the spatial copula model parameters">
+<param name="Local" value="copulaEstimation.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="models for estimating prediction time in intamap package">
+<param name="Local" value="timeModels.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Performs spatial interpolation using copulas">
+<param name="Local" value="bayesCopula.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot intamap objects">
+<param name="Local" value="plotIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="pre-process data">
+<param name="Local" value="postProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="pre-processing of data">
+<param name="Local" value="preProcess.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="rotateAnisotropicData">
+<param name="Local" value="rotateAnisotropicData.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Setting parameters for the intamap package">
+<param name="Local" value="getIntamapParams.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Simulated Intamap Object">
+<param name="Local" value="intamapExampleObject.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spatial block prediction">
+<param name="Local" value="blockPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spatial interpolation">
+<param name="Local" value="interpolate.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spatial prediction">
+<param name="Local" value="spatialPredict.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary intamap objects">
+<param name="Local" value="summaryIntamap.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Time prediction for intamap package methods">
+<param name="Local" value="predictTime.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Unbiased kriging">
+<param name="Local" value="unbiasedKrige.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

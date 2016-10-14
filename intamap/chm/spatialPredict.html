@@ -1,0 +1,189 @@
+<html><head><title>Spatial prediction</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>spatialPredict(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   spatialPredict">
+<param name="keyword" value="R:   spatialPredict.automap">
+<param name="keyword" value="R:   spatialPredict.copula">
+<param name="keyword" value="R:   spatialPredict.default">
+<param name="keyword" value="R:   spatialPredict.idw">
+<param name="keyword" value="R:   spatialPredict.linearVariogram">
+<param name="keyword" value="R:   spatialPredict.transGaussian">
+<param name="keyword" value="R:   spatialPredict.yamamoto">
+<param name="keyword" value=" Spatial prediction">
+</object>
+
+
+<h2>Spatial prediction</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>spatialPredict</code> is a generic method for spatial predictions 
+within the <code><a href="intamap-package.html">intamap-package</a></code>.
+A series of methods have been implemented, 
+partly based on other R-packages (as <code><a onclick="findlink('gstat', 'krige.html')" style="text-decoration: underline; color: blue; cursor: hand">krige</a></code>),
+other methods have been developed particularly for the INTAMAP project. The object 
+has to include a range of variables, further described in 
+<code><a href="intamap-package.html">intamap-package</a></code>. The prediction method is 
+chosen based on the class of the object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'automap':
+spatialPredict(object, nsim = 0, ...)
+## S3 method for class 'copula':
+spatialPredict(object, ...)
+## Default S3 method:
+spatialPredict(object, ...)
+## S3 method for class 'idw':
+spatialPredict(object, ...)
+## S3 method for class 'linearVariogram':
+spatialPredict(object, nsim = 0, ...)
+## S3 method for class 'transGaussian':
+spatialPredict(object, nsim = 0, ...)
+## S3 method for class 'yamamoto':
+spatialPredict(object, nsim = 0, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+a list object. Most arguments necessary for interpolation
+are passed through this object. See <code><a href="intamap-package.html">intamap-package</a></code> for further 
+description of the necessary content of this variable</td></tr>
+<tr valign="top"><td><code>nsim</code></td>
+<td>
+number of simulations to return, for methods able to return simulations</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments that will be passed to the requested interpolation method. 
+See the individual interpolation methods for more information. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The function <code>spatialPredict</code> is a wrapper around different
+spatial interpolation methods found within the <code>link{intamap-package}</code> or within other packages
+in <code>R</code>. It is for most of the
+methods necessary to have parameters of the correlation structure
+included in <code>object</code> to be able to carry out the spatial prediction.
+Below are some details 
+about particular interpolation methods
+</p>
+
+<dl>
+<dt><code>default</code></dt><dd>a default method is not really implemented, this function is only 
+created to give a sensible error message if the function is called
+with an object for which no method exist</dd>
+
+
+<dt><code>automap</code></dt><dd>If the object already has an element <code>variogramModel</code> with
+variogram parameters,
+<code><a onclick="findlink('gstat', 'krige.html')" style="text-decoration: underline; color: blue; cursor: hand">krige</a></code> is called. If the this is not a part of the object,
+<code><a href="estimateParameters.html">estimateParameters</a></code> is called to create this element.</dd>
+
+
+<dt><code>copula</code></dt><dd>spatial prediction using <code><a href="bayesCopula.html">bayesCopula</a></code></dd>
+
+
+<dt><code>idw</code></dt><dd>applies inverse distance modelling with the idp-power found by <code>estimateParameters.idw</code></dd>
+
+
+<dt><code>linearVariogram</code></dt><dd>this function estimates the process using an unfitted linear variogram; although variance is returned it can not be relied upon</dd>
+
+
+<dt><code>transGaussian</code></dt><dd>spatial prediction using <code><a onclick="findlink('gstat', 'krigeTg.html')" style="text-decoration: underline; color: blue; cursor: hand">krigeTg</a></code></dd>
+
+
+<dt><code>yamamoto</code></dt><dd>spatial prediction using <code><a href="yamamotoKrige.html">yamamotoKrige</a></code></dd>
+
+<p>
+It is also possible to add to the above methods with functionality from
+other packages, if wanted. See description on <a href="http://www.intamap.org/newMethods.php">http://www.intamap.org/newMethods.php</a>
+You can also check which methods are available from other packages by calling 
+<pre>
+&gt;methods(spatialPredict)
+</pre>
+</dl>
+
+<h3>Value</h3>
+
+<p>
+a list object similar to <code>object</code>, but extended with predictions at
+a the set of locations defined <code>object</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('gstat', 'gstat.html')" style="text-decoration: underline; color: blue; cursor: hand">gstat</a></code>,<code><a onclick="findlink('automap', 'autoKrige.html')" style="text-decoration: underline; color: blue; cursor: hand">autoKrige</a></code>, 
+<code><a href="createIntamapObject.html">createIntamapObject</a></code>, <code><a href="estimateParameters.html">estimateParameters</a></code>, 
+<code><a href="intamap-package.html">intamap-package</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# This example skips some steps that might be necessary for more complicated
+# tasks, such as estimateParameters and pre- and postProcessing of the data
+data(meuse)
+coordinates(meuse) = ~x+y
+meuse$value = log(meuse$zinc)
+data(meuse.grid)
+gridded(meuse.grid) = ~x+y
+proj4string(meuse) = CRS("+init=epsg:28992")
+proj4string(meuse.grid) = CRS("+init=epsg:28992")
+
+# set up intamap object:
+obj = createIntamapObject(
+        observations = meuse,
+        predictionLocations = meuse.grid,
+        targetCRS = "+init=epsg:3035",
+        params = getIntamapParams(),
+        class = "linearVariogram"
+)
+
+# do interpolation step:
+obj = spatialPredict(obj)  # spatialPredict.linearVariogram
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

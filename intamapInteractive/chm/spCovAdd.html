@@ -1,0 +1,103 @@
+<html><head><title>Spatial coverage method to add new measurements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>spCovAdd(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   spCovAdd">
+<param name="keyword" value=" Spatial coverage method to add new measurements">
+</object>
+
+
+<h2>Spatial coverage method to add new measurements</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function spCovAdd allows to build optimization scenarios based on spatial coverage method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+spCovAdd( observations, candidates, nDiff, nGridCells, plotOptim = TRUE, nTry, ... )
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>observations</code></td>
+<td>
+object of class <code><a onclick="findlink('base', 'data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">data.frame</a></code> with x,y coordinates</td></tr>
+<tr valign="top"><td><code>candidates</code></td>
+<td>
+a <code><a onclick="findlink('sp', 'SpatialPolygonsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygonsDataFrame</a></code> to explore: in use when optimizing 
+the implementation of new measurement stations to an existing network </td></tr>
+<tr valign="top"><td><code>nDiff</code></td>
+<td>
+number of stations to add or delete </td></tr>
+<tr valign="top"><td><code>nGridCells</code></td>
+<td>
+number of grid cells to work on spatial coverage strafication </td></tr>
+<tr valign="top"><td><code>plotOptim</code></td>
+<td>
+logical; to plot the result or not</td></tr>
+<tr valign="top"><td><code>nTry</code></td>
+<td>
+the method will try <code>nTry</code> initial configurations and will keep the best solution in order to reduce the risk of ending up with an unfavorable solution </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments to be passed on at lower level functions such as 
+<code><a onclick="findlink('spcosa', 'stratify.html')" style="text-decoration: underline; color: blue; cursor: hand">stratify</a></code> </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function allows to build optimization scenarios based on spatial coverage method. The scenario action is "add". To add new measurement locations to the running network, the function uses function <code><a onclick="findlink('spcosa', 'stratify.html')" style="text-decoration: underline; color: blue; cursor: hand">stratify</a></code> from package <code>spcosa</code>. 
+Function stratify adds new strata to the domain study.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code><a onclick="findlink('base', 'data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">data.frame</a></code> of optimized locations</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Olivier Baume
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] <a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+<p>
+[2] D. J. Brus, J. de Gruijter, J. van Groenigen (2006). Designing spatial coverage samples using
+the k-means clustering algorithm. In A. McBratney M. Voltz and P. Lagacherie,
+editor, Digital Soil Mapping: An Introductory Perspective, Developments in Soil
+Science, vol. 3., Elsevier, Amsterdam.
+</p>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

@@ -1,0 +1,235 @@
+<html><head><title>Create an object for interpolation within the intamap package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>createIntamapObject(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   createIntamapObject">
+<param name="keyword" value=" Create an object for interpolation within the intamap package">
+</object>
+
+
+<h2>Create an object for interpolation within the intamap package</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This is a help function for creating an object (see <code><a href="intamap-package.html">intamap-package</a></code>
+to be used for interpolation within the <code><a href="intamap-package.html">intamap-package</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>createIntamapObject(observations, obsChar, formulaString,
+            predictionLocations=100, targetCRS, boundaries, boundaryLines,
+            intCRS, params=list(), boundFile, lineFile, class="idw",
+            outputWhat, blockWhat = "none",...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>observations</code></td>
+<td>
+a 
+<code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code>, 
+<code><a onclick="findlink('sp', 'SpatialPixelsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPixelsDataFrame</a></code>, 
+<code><a onclick="findlink('sp', 'SpatialPixelsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialGridDataFrame</a></code>,
+<code><a onclick="findlink('sp', 'SpatialLines.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialLinesDataFrame</a></code> or
+<code><a onclick="findlink('sp', 'SpatialPolygons.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygonsDataFrame</a></code> with observations. Note that there
+are only few methods that can actually handle interpolation of
+observations with a support</td></tr>
+<tr valign="top"><td><code>obsChar</code></td>
+<td>
+list with observation characteristics, used by some interpolation methods</td></tr>
+<tr valign="top"><td><code>formulaString</code></td>
+<td>
+formula that defines the dependent variable as a linear model 
+of independent variables; suppose the dependent variable has name <code>z</code>, 
+for ordinary and simple kriging use the formula <code>z~1</code>; 
+for universal kriging, suppose <code>z</code> is linearly dependent on 
+<code>x</code> and <code>y</code>, use the formula <code>z~x+y</code>. The formulaString defaults
+to <code>"value~1"</code> if <code>value</code> is a part of the data set. 
+If not, the first column of the data set is used.</td></tr>
+<tr valign="top"><td><code>predictionLocations</code></td>
+<td>
+either a <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>* object with 
+prediction locations or an integer with the requested number
+of prediction locations. If <code>boundaries</code> are supported, 
+the sampled prediction locations will be sampled within the 
+<code>boundaries</code> </td></tr>
+<tr valign="top"><td><code>targetCRS</code></td>
+<td>
+the wanted projection for the interpolated map</td></tr>
+<tr valign="top"><td><code>boundaries</code></td>
+<td>
+<code><a onclick="findlink('sp', 'SpatialPixelsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygonsDataFrame</a></code> with the boundaries
+of regions in the prediction region</td></tr>
+<tr valign="top"><td><code>boundaryLines</code></td>
+<td>
+<code><a onclick="findlink('sp', 'SpatialPixelsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code> with the boundaries between
+pairs of regions discretized as points. 
+Will be read from file if <code>lineFile</code> is 
+given or will be created from <code>boundaries</code> if not.</td></tr>
+<tr valign="top"><td><code>intCRS</code></td>
+<td>
+a particular projection requested for the interpolation</td></tr>
+<tr valign="top"><td><code>params</code></td>
+<td>
+parameters for the interpolation, given as exceptions to the 
+default parameters set in the function <code><a href="getIntamapParams.html">getIntamapParams</a></code> </td></tr>
+<tr valign="top"><td><code>boundFile</code></td>
+<td>
+Filename where boundaries can be found, e.g. a shapefile </td></tr>
+<tr valign="top"><td><code>lineFile</code></td>
+<td>
+Filename where paired points on boundaries can be found</td></tr>
+<tr valign="top"><td><code>class</code></td>
+<td>
+setting the class(es) of the object, see <code><a href="intamap-package.html">intamap-package</a></code></td></tr>
+<tr valign="top"><td><code>outputWhat</code></td>
+<td>
+List defining the requested type of output. Parameters:
+<dl>
+<dt><code>mean = TRUE</code></dt><dd>Usual kriging prediction </dd>
+<dt><code>variance = TRUE</code></dt><dd>Usual kriging error </dd>
+<dt><code>quantile</code></dt><dd>The estimated quantile for a certain threshold</dd>
+<dt><code>excprob</code></dt><dd>Exceedance probability for a certain threshold</dd>
+<dt><code>cumdistr</code></dt><dd>The cumulative distribution for a certain value</dd>
+<dt><code>MOK</code></dt><dd>Assumed unbiased prediction using the MOK method for the threshold given.
+See <code><a href="unbiasedKrige.html">unbiasedKrige</a></code></dd>
+<dt><code>IWQSEL</code></dt><dd>Assumed unbiased prediction using the IWQSEL method for the threshold given.
+See <code><a href="unbiasedKrige.html">unbiasedKrige</a></code></dd>
+<dt><code>...</code></dt><dd>Additional prediction types that do not exist in the default parameter set,
+particularly parameters necessary for new methods within the 
+<code><a href="intamap-package.html">intamap-package</a></code>.</dd>
+</dl>
+The list defaults to list (mean = TRUE) for objects of class IDW and 
+list(mean=TRUE, variance = TRUE) for all other objects.
+</td></tr>
+<tr valign="top"><td><code>blockWhat</code></td>
+<td>
+List defining particular output for block predictions. These include:
+<dl>
+<dt><code>blockMax</code></dt><dd>logical; whether to predict maximum within block, if block predictions</dd>
+<dt><code>blockMin</code></dt><dd>logical; whether to predict mimimum within block, if block predictions</dd>
+<dt><code>fat</code></dt><dd>Prediction of area within block above a <code>threshold</code> (<code>fat = threshold</code></dd>
+<dt><code>blockMaxVar</code></dt><dd>logical; whether to predict the variance of the prediction of max within the block, 
+similarly it is possible to set
+<code>blockMinVar = TRUE</code> and <code>fatVar = threshold</code></dd>
+</dl>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<ul>
+<li>Either: other elements that can be used by particular interpolation methods. 
+These are added to the object as named elements.
+<li>Or: elements that have been created 
+in earlier calls to one of the functions in the <code><a href="intamap-package.html">intamap-package</a></code>, 
+and that are
+not supposed to change in the second call. By adding these
+elements to the object in <code>createIntamapObject</code>, they can be reused 
+without having to re-estimate them. Typical examples are the elements created 
+from a call to <code><a href="preProcess.html">preProcess</a></code>
+</ul> 
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function is a help function for creating an object (see
+<code><a href="intamap-package.html">intamap-package</a></code>) for interpolation within the 
+<code><a href="intamap-package.html">intamap-package</a></code>.
+The function uses some default values if certain elements are not included.
+</p>
+<p>
+If <code>createIntamapObject</code> is called without predictionLocations, or if a number
+is given, the function will sample a set of predictionLocations. These will
+be sampled from a regular grid.
+</p>
+<p>
+targetCRS and intCRS are not mandatory variables, but are recommended if the 
+user wants predictions of a certain projection. intCRS is not necessary if
+the targetCRS is given and has a projection (is not lat-long). It is recommended
+to include the argument intCRS if all projected elements are lat-long, as many of 
+the interpolation methods do not work optimal with lat-long data. 
+</p>
+<p>
+The ...-argument can be used for arguments necessary for new methods not being 
+a part of the <code><a href="intamap-package.html">intamap-package</a></code>.  It is also a method for reusing previously calculated
+elements that can be assumed to be unchanged for the second interpolation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object with observations, prediction locations, parameters and possible
+additional elements for automatic interpolation. The object will have class
+equal to the value of argument <code>class</code>, and methods in the 
+<code><a href="intamap-package.html">intamap-package</a></code> will dispatch on the
+object according to this class.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="intamap-package.html">intamap-package</a></code> and <code><a href="getIntamapParams.html">getIntamapParams</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(intamap)
+
+# set up data:
+data(meuse)
+coordinates(meuse) = ~x+y
+meuse$value = log(meuse$zinc)
+data(meuse.grid)
+gridded(meuse.grid) = ~x+y
+proj4string(meuse) = CRS("+init=epsg:28992")
+proj4string(meuse.grid) = CRS("+init=epsg:28992")
+
+# set up intamap object:
+idwObject = createIntamapObject(
+        observations = meuse,
+        predictionLocations = meuse.grid,
+        targetCRS = "+init=epsg:3035",
+        class = "idw"
+)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

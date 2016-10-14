@@ -1,0 +1,132 @@
+<html><head><title>rotateAnisotropicData</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>rotateAnisotropicData(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   rotateAnisotropicData">
+<param name="keyword" value=" rotateAnisotropicData">
+</object>
+
+
+<h2>rotateAnisotropicData</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function applies an isotropic transformation of
+the coordinates specified in <code>object</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>rotateAnisotropicData(object,anisPar)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+(i) An Intamap type  object (see <code><a href="intamap-package.html">intamap-package</a></code>) 
+containing one <code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code>
+data frame named  <code>observations</code> which includes the observed values (ii) or a 
+<code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code>
+which includes both coordinates and observations or (iii) <code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPoints</a></code> which includes only
+coordinates to be rotated.</td></tr>
+<tr valign="top"><td><code>anisPar</code></td>
+<td>
+An array containing the anisotropy parameters (anisotropy ratio and axes orientation)
+(see <code><a href="estimateAnisotropy.html">estimateAnisotropy</a></code>) for the rotation.
+If <code>object</code> is the output of <code><a href="estimateAnisotropy.html">estimateAnisotropy</a></code> function, these parameters are part of <code>object</code>.
+In cases (ii) and (iii) <code>anisPar</code> defines the two anisotropy
+parameters. For the definition of the anisotropy parameters see <code><a href="estimateAnisotropy.html">estimateAnisotropy</a></code>.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function performs a rotation and rescaling of the
+coordinate axes in order to obtain a new coordinate system, in which
+the observations become statistically isotropic. This assumes that
+the estimates of the anisotropy ratio and the orientation angle
+provided in <code>anisPar</code> are accurate.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+(i) A modified object with transformed coordinates if 
+rotateAnisotropicData is called with an Intamap object as input (see
+<code><a href="intamap-package.html">intamap-package</a></code>) or (ii) the transformed coordinates if a
+<code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code> is used as input or (iii)
+the transformed coordinates if a <code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPoints</a></code>
+object is the input.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Hristopulos Dionisis, Spiliopoulos Giannis
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] http://www.intamap.org
+</p>
+<p>
+[2] A. Chorti and D. T. Hristopulos (2008). Non-parametric Identification of Anisotropic (Elliptic) 
+Correlations in Spatially Distributed Data Sets, IEEE Transactions on Signal Processing, 56(10), 4738-4751 (2008).
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code>estimateAnisotropy</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+    library(gstat)
+    data(sic2004)
+    coordinates(sic.val)=~x+y
+    sic.val$value=sic.val$dayx
+
+    params=NULL
+    
+    obj&lt;-list(
+        observations=sic.val
+        )
+    obj&lt;-estimateAnisotropy(obj)
+    print(obj$anisPar)  
+
+    obj$observations&lt;-rotateAnisotropicData(obj$observations,obj$anisPar)
+
+    obj&lt;-estimateAnisotropy(obj)
+    print(obj$anisPar)  
+
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

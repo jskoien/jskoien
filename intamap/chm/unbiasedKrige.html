@@ -1,0 +1,159 @@
+<html><head><title>Unbiased kriging</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>unbiasedKrige(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   unbiasedKrige">
+<param name="keyword" value=" Unbiased kriging">
+</object>
+
+
+<h2>Unbiased kriging</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>unbiasedKrige</code> is a function for modifying a kriging prediction
+to a prediction that can be assumed to be unbiased for a certain threshold.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+unbiasedKrige(object, formulaString, observations, predictionLocations,
+              model, outputWhat, nmax, nsim, yamamoto, debug.level, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+either an object of the intamap type (see <code><a href="intamap-package.html">intamap-package</a></code> 
+for further 
+description of the necessary content of this variable) or the output from the function
+<code><a onclick="findlink('gstat', 'krige.html')" style="text-decoration: underline; color: blue; cursor: hand">krige</a></code> in <code><a onclick="findlink('gstat', 'gstat.html')" style="text-decoration: underline; color: blue; cursor: hand">gstat</a></code>. If the object is a result
+from the intamap procedure spatialPredict, the remaining arguments are not necessary.</td></tr>
+<tr valign="top"><td><code>formulaString</code></td>
+<td>
+formula that defines the dependent variable as a linear model of independent variables; 
+suppose the dependent variable has name z, for ordinary and simple kriging use the formula z~1; 
+for universal kriging, suppose z is linearly dependent on x and y, use the formula z~x+y</td></tr>
+<tr valign="top"><td><code>observations</code></td>
+<td>
+a <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>*DataFrame with observations; 
+should contain the dependent variable, independent variables, and coordinates</td></tr>
+<tr valign="top"><td><code>predictionLocations</code></td>
+<td>
+the predictionLocations, only necessary if the 
+method is "IWQSEL" and formulaString contains independent variables.
+Should preferentally be a grid if the method is "IWQSEL"</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+variogram model of dependent variable (or its residuals), defined 
+by a call to <code><a onclick="findlink('gstat', 'vgm.html')" style="text-decoration: underline; color: blue; cursor: hand">vgm</a></code> or <code><a onclick="findlink('automap', 'autofitVariogram.html')" style="text-decoration: underline; color: blue; cursor: hand">autofitVariogram</a></code> </td></tr>
+<tr valign="top"><td><code>outputWhat</code></td>
+<td>
+Argument with type of unbiasedness method ("MOK" or "IWQSEL") and the thresholds.</td></tr>
+<tr valign="top"><td><code>nmax</code></td>
+<td>
+for local kriging: the number of nearest observations that 
+should be used in simulations for the "IWQSEL" method in terms of the space of the spatial locations. 
+Defaults to nmax = 10 when object is a Spatial*DataFrame.</td></tr>
+<tr valign="top"><td><code>nsim</code></td>
+<td>
+number of simulations necessary if the method is "IWQSEL".
+Defaults to nsim = 100 when object is a <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>*DataFrame.</td></tr>
+<tr valign="top"><td><code>yamamoto</code></td>
+<td>
+logical describing if the yamamoto approach )is to be used in simulations.
+Defaults to yamamoto = FALSE when object is a <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>*DataFrame.</td></tr>
+<tr valign="top"><td><code>debug.level</code></td>
+<td>
+debug level, passed to subfunctions</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments that will be passed to subfunctions</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+It is a fact that predictions from kriging tend to be biased towards the mean of
+the process. The function <code>unbiasedKrige</code> is a function that adds one or more predictions
+to the original output, which are assumed to be unbiased relative to a certain 
+threshold. The two methods supported are the IWQSEL-method (Craigmile, 2006) and
+MOK (Skoien et al, 2008).
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+an object of type intamap, as described in <code><a href="intamap-package.html">intamap-package</a></code>, or a 
+<code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>*DataFrame with one or more new prediction columns, representing different
+methods and thresholds.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Craigmile, P. F., N. Cressie, T. J. Santner, and Y. Rao. 2006. 
+A loss function approach to identifying environmental exceedances. Extremes, 8, 143-159.
+</p>
+<p>
+Skoien, J. O., G. B. M. Heuvelink, and E. J. Pebesma. 2008. 
+Unbiased block predictions and exceedance probabilities for environmental thresholds. 
+In: J. Ortiz C. and X. Emery (eds). Proceedings of the eight international geostatistics congress. 
+Gecamin, Santiago, Chile,  pp. 831-840.
+</p>
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(intamap)
+data(meuse)
+data(meuse.grid)
+coordinates(meuse) = ~x+y
+gridded(meuse.grid) = ~x+y
+
+predictionLocations = coarsenGrid(meuse.grid,5,)
+vmod = autofitVariogram(log(zinc)~1,meuse)$var_model
+prediction = krige(log(zinc)~1,meuse,predictionLocations,vmod)
+summary(prediction)
+
+prediction = unbiasedKrige(prediction,log(zinc)~1,
+  meuse,  model = vmod, outputWhat = list(MOK = 6.0, MOK = 7.0, IWQSEL=7.0))
+summary(prediction)
+
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

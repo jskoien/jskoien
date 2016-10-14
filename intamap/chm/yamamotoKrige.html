@@ -1,0 +1,142 @@
+<html><head><title>kriging and simulation with alternative kriging variance</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>yamamotoKrige(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   yamamotoKrige">
+<param name="keyword" value=" kriging and simulation with alternative kriging variance">
+</object>
+
+
+<h2>kriging and simulation with alternative kriging variance</h2>
+
+
+<h3>Description</h3>
+
+<p>
+ordinary kriging and simulation with an alternative kriging variance
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>yamamotoKrige(formula,Obs, newPoints,model,nsim = 0,nmax = 20)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+formula that defines the dependent variable as a linear model of 
+independent variables; suppose the dependent variable has name 
+<code>z</code>, for ordinary and simple kriging use the formula <code>z~1</code>; 
+only ordinary kriging is currently implemented, <code>formula</code> is
+hence mainly used to identify the dependent variable </td></tr>
+<tr valign="top"><td><code>Obs</code></td>
+<td>
+<code><a onclick="findlink('sp', 'SpatialPoints.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPointsDataFrame</a></code> with observations</td></tr>
+<tr valign="top"><td><code>newPoints</code></td>
+<td>
+<code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code> object with prediction locations, either points or grid</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+variogram model - of the type that can be found by a call to 
+<code><a onclick="findlink('gstat', 'vgm.html')" style="text-decoration: underline; color: blue; cursor: hand">vgm</a></code> </td></tr>
+<tr valign="top"><td><code>nsim</code></td>
+<td>
+integer; if set to a non-zero value, conditional simulation is used 
+instead of kriging interpolation. For this, sequential Gaussian simulation 
+is used, following a single random path through the data. </td></tr>
+<tr valign="top"><td><code>nmax</code></td>
+<td>
+for local kriging: the number of nearest observations that should 
+be used for a kriging prediction or simulation, where nearest is 
+defined in terms of the space of the spatial locations. 
+By default, all observations are used. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The term <code>yamamotoKrige</code> comes from the paper of Yamamoto (2000) where
+he suggests using local variance around the kriging estimate (weighted with
+the kriging weights) as an alternative kriging variance. This as a 
+solution to more reliable estimates of the kriging variance also when the 
+stationarity assumption has been violated. The method was applied by 
+Skoien et al. (2008), who showed that it can have advantages for cases where the 
+stationarity assumption behind kriging is violated.
+</p>
+<p>
+If the number of observations is high, it is recommended have <code>nmax</code> lower.
+This is partly because the method relies on positive kriging weights. The method
+to do this adds the norm of the largest negative weight to all weights, and rescales.
+This tends to smooth the weights, giving a prediction closer to the average if a 
+too large number of observation locations is used.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Either a <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>*DataFrame with predictions and prediction variance, 
+in the columns <code>var1.pred</code> and <code>var1.var</code>, together with the
+classical ordinary kriging variance in <code>var1.ok</code>, or simulations with 
+column names <code>simx</code> where x is the number of the simulation.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Skoien, J. O., G. B. M. Heuvelink, and E. J. Pebesma. 2008. 
+Unbiased block predictions and exceedance probabilities for environmental thresholds. 
+In: J. Ortiz C. and X. Emery (eds). Proceedings of the eight international 
+geostatistics congress. Santiago, Chile: Gecamin, pp. 831-840.
+</p>
+<p>
+Yamamoto, J. K. 2000. An alternative measure of the reliability of ordinary 
+kriging estimates. Mathematical Geology, 32 (4), 489-509.
+</p>
+<p>
+<a href="http://www.intamap.org">http://www.intamap.org</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(intamap)
+data(sic2004)
+coordinates(sic.val) = ~x+y
+coordinates(sic.test) = ~x+y
+variogramModel = autofitVariogram(joker~1,sic.val)$var_model
+newData = yamamotoKrige(joker~1,sic.val,sic.test,variogramModel,nmax = 20)
+summary(newData)
+plot(sqrt(var1.ok)~var1.pred,newData) 
+# Kriging variance the same in regions with extreme values
+plot(sqrt(var1.var)~var1.pred,newData) 
+# Kriging standard deviation higher for high predictions (close to extreme values)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n#############################################\n# Default preProcessing function\n#\n# Input: intamap object\n#        lgFUN - function for grouping data locally\n#        cid - country ID - or other regional grouping factor\n#\n# Output: intamap object with the following added\n#         localBias - data frame with local biases\n#         regionalBias - data frame with biases between countries\n#         Modifications of observations\n#         Elevations added (still not properly implemented\n#         Duplicated data observations deleted\n#         Projections are conformed and an interpolation projection\n#                     set if they do not conform, or dont have a projection\n#\n###########################################\n\n\npreProcess.default = function(object,...) {\n  params = object$params\n  observations = object$observations\n#  FUN = try(match.fun(cleanData),silent=TRUE)\n#  if (!inherits(FUN,\"try-error\")) {\n#    print(\"Found function cleanData for cleaning data\")\n#    observations = FUN(observations,...) # practically unimplemented\n#  } else if (sum(duplicated(coordinates(observations))) > 1) {\n#  FUN = try(match.fun(findElevation),silent=TRUE)\n#  if (!inherits(FUN,\"try-error\")) {\n#    print(\"Found function findElevation for adding elevations to data frame\")\n#    observations$elev = FUN(observations,...) # practically unimplemented\n#  }\n  \n  object$observations = observations\n#  if (!is.na(params$removeBias[[1]]) && require(intamapInteractive)) \n#\t\tobject = biasCorr(object,...)\n  object\n}\n\nestimateParameters.default = function(object, ...) {\n\tstop(paste(\"there is no parameter estimation method or default method for objects of class\",class(object)))\n}\n\nspatialPredict.default = function(object, ...) {\n\tstop(paste(\"there is no prediction method or default method for objects of class\",class(object)))\n}\n\npostProcess.default = function(object, ...) {\n\t# smooth over boundaries?\n\n\t# spatial aggregation?\n#\tif (object$blockWhat != \"none\")\n#\t\tobject = spatialAggregate(object)\n\n# Tranform output to requested target projection\n  if (requireNamespace(\"rgdal\")) {\n    if (\"targetCRS\" %in% names(object) && \n        (CRSargs(CRS(proj4string(object$predictions))) != CRSargs(CRS(object$targetCRS)))){\n      object$predictions = spTransform(object$predictions,CRS(object$targetCRS))\n    }\n  }\n# find out what to output\n  object$outputTable = getOutputTable(object)\n\n\t# write to data base\n\n\treturn(object)\n}\n\n#\t\tblockFat=TRUE,??\n\n",
+    "created" : 1475157516335.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2325183410",
+    "id" : "E60B4320",
+    "lastKnownWriteTime" : 1452243156,
+    "last_content_update" : 1452243156,
+    "path" : "E:/Intamap/SVNI/intamap/R/default.R",
+    "project_path" : "R/default.R",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,131 @@
+<html><head><title>Performs spatial interpolation using copulas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>bayesCopula(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   bayesCopula">
+<param name="keyword" value=" Performs spatial interpolation using copulas">
+</object>
+
+
+<h2>Performs spatial interpolation using copulas</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates predictive mean, predictive variance, predictive quantiles and exceedance probabilities for certain thresholds in the spatial copula model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bayesCopula(obj,estimates,search=10,calc=list(mean=TRUE,variance=TRUE),testMean=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obj</code></td>
+<td>
+Intamap object including observations and predictionLocations, see 
+<code><a href="intamap-package.html">intamap-package</a></code></td></tr>
+<tr valign="top"><td><code>estimates</code></td>
+<td>
+List of estimated parameters (typically obtained by calling <code><a href="copulaEstimation.html">copulaEstimation</a></code>)</td></tr>
+<tr valign="top"><td><code>search</code></td>
+<td>
+local prediction: number of observed locations considered for prediction at each unknown point</td></tr>
+<tr valign="top"><td><code>calc</code></td>
+<td>
+list of what prediction type is required:
+<ul> 
+<dt><code>mean = TRUE</code></dt><dd><code>TRUE</code> if the predictive mean should be calculated, <code>FALSE</code> otherwise</dd>
+<dt><code>variance = TRUE</code></dt><dd><code>TRUE</code> if the predictive variance should be calculated, <code>FALSE</code> otherwise</dd>
+<dt><code>quantiles = NULL</code></dt><dd>Vector of desired predictive quantiles, e.g. 0.95 or 0.05</dd>
+<dt><code>excprob = NULL</code></dt><dd>Vector of thresholds, where the probability of exceeding this threshold is desired</dd>
+</ul></td></tr>
+<tr valign="top"><td><code>testMean</code></td>
+<td>
+Whether or not the predictive means (if calculated) should be tested for being reasonable.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>bayesCopula</code> is used for plug-in prediction at unobserved spatial locations. The name of the function is somewhat 
+misleading since  no Bayesian approach is implemented so far. It is possible to calculate numerically the predictive mean
+and variance for both the Gaussian and the chi-square spatial copula model. Exceedance probabilities and predictive 
+quantiles are only supported for the Gaussian copula model. Note that it may occur that the predictive distribution has 
+no finite moments. In this case, a possible predictor is the median of the predictive distribution. If <code>testMean=TRUE</code> and
+the predictive means have no reasonable values, the median is automatically calculated and a warning is produced.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+List with the following elements:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>mean</code></td>
+<td>
+Mean of the predictive distribution. NULL if not calculated.</td></tr>
+<tr valign="top"><td><code>variance</code></td>
+<td>
+Variance of the predtictive distribution. NULL if not calculated.</td></tr>
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+Quantiles of the predictive distribution NULL if not calculated.</td></tr>
+<tr valign="top"><td><code>excprob</code></td>
+<td>
+Probabilities for the predictive distribution to exceed predefined thresholds. NULL if not calculated.</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Hannes Kazianka
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Kazianka, H. and Pilz, J. (2009), Spatial Interpolation Using Copula-Based Geostatistical Models. GeoENV2008 - Geostatistics for Environmental Application (P. Atkinson, C. Lloyd, eds.), Springer, New York
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="copulaEstimation.html">copulaEstimation</a></code>, <code><a href="spatialPredict.html">spatialPredict</a></code>, <code><a href="estimateParameters.html">estimateParameters</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+data(intamapExampleObject)
+## estimate parameters for the copula model
+copula&lt;-list(method="norm")
+anisotropy&lt;-list(lower=c(0,1),upper=c(pi,Inf),params=c(pi/3,2))
+correlation&lt;-list(model="Ste",lower=c(0.01,0.01,0.01),upper=c(0.99,Inf,20),params=c(0.05,4,3))
+margin&lt;-list(name="gev",lower=c(0.01,-Inf),upper=c(Inf,Inf),params=c(30,0.5))
+trend&lt;-list(F=as.matrix(rep(1,196)),lower=-Inf,upper=Inf,params=40)
+estimates&lt;-copulaEstimation(intamapExampleObject,margin,trend,correlation,anisotropy,copula)
+## make predictions at unobserved locations
+predictions&lt;-bayesCopula(intamapExampleObject,estimates,search=25,calc=list(mean=TRUE,variance=TRUE,excprob=40,quantile=0.95))
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-13 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

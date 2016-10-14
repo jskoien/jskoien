@@ -1,0 +1,26 @@
+importFrom("spatstat", nndist, nndist.default)
+import(spcosa)
+import(gstat)
+import(automap)
+import(intamap)
+
+export(
+	anisotropyChoice,
+	biasCorr,
+	calculateMukv,
+	doSegmentation,
+	findBiasUK,
+	findBoundaryLines,
+	findLocalBias,
+	findRegionalBias,
+#	getNuts,
+#	nuts2Boundaries,
+	optimizeNetwork,
+	removeLocalBias,
+	removeRegionalBias,
+  	spCovAdd,
+  	spCovDel,
+  	ssaOptim
+)
+
+S3method(preProcess, removeBias)

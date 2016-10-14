@@ -1,0 +1,169 @@
+<html><head><title>Optimization of networks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>optimizeNetwork(intamapInteractive)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   optimizeNetwork">
+<param name="keyword" value=" Optimization of networks">
+</object>
+
+
+<h2>Optimization of networks</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function allows to choose several options for optimizing a network of 
+observation locations
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+optimizeNetwork(observations, predGrid, candidates, method, action,
+nDiff, model, criterion = "MUKV", plotOptim = TRUE, nGridCells, nTry, nr_iterations, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>observations</code></td>
+<td>
+object of class <code><a onclick="findlink('base', 'data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">data.frame</a></code> with x,y coordinates and possible covariates </td></tr>
+<tr valign="top"><td><code>predGrid</code></td>
+<td>
+object of class <code><a onclick="findlink('base', 'data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">data.frame</a></code> with x,y coordinates of prediction locations when <code>method</code> is <code>"ssa"</code> </td></tr>
+<tr valign="top"><td><code>candidates</code></td>
+<td>
+when method is <code>"manual"</code>, candidates is the study area of class <code><a onclick="findlink('sp', 'SpatialPolygonsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygonsDataFrame</a></code>; for other methods, when action is <code>"add"</code>, candidates is a <code><a onclick="findlink('base', 'data.frame.html')" style="text-decoration: underline; color: blue; cursor: hand">data.frame</a></code> with x,y coordinates or 
+a <code><a onclick="findlink('sp', 'SpatialPolygonsDataFrame.html')" style="text-decoration: underline; color: blue; cursor: hand">SpatialPolygonsDataFrame</a></code></td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+character string: <code>"spcov"</code> for spatial coverage, <code>"ssa"</code> for spatial simulated annealing or <code>"manual"</code> for manual processing of the network</td></tr>
+<tr valign="top"><td><code>action</code></td>
+<td>
+character string indicating which type of action to simulate: 
+<code>"add"</code> to add new measurement stations to the existing network or <code>"del"</code> to turn off existing stations </td></tr>
+<tr valign="top"><td><code>nDiff</code></td>
+<td>
+number of stations to add or delete </td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+variogram model to consider when <code>criterion = "mukv"</code>; object of class <code><a onclick="findlink('gstat', 'variogramModel.html')" style="text-decoration: underline; color: blue; cursor: hand">variogramModel</a></code></td></tr>
+<tr valign="top"><td><code>criterion</code></td>
+<td>
+Only in use for method <code>"ssa"</code>:  character string like <code>"mukv"</code> </td></tr>
+<tr valign="top"><td><code>plotOptim</code></td>
+<td>
+plot or not the result; TRUE by default </td></tr>
+<tr valign="top"><td><code>nGridCells</code></td>
+<td>
+when method is <code>"spcov"</code> and action is <code>"add"</code>:  string forcing the number gridcells to explore for candidate locations of new measurements</td></tr>
+<tr valign="top"><td><code>nTry</code></td>
+<td>
+the method will try <code>nTry</code> initial configurations and will keep the best solution in order to reduce the risk of ending up with an unfavorable solution  </td></tr>
+<tr valign="top"><td><code>nr_iterations</code></td>
+<td>
+number of iterations before stoping </td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments to be passed on at lower level functions </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function allows to build optimization scenarios with the choice of several options. 
+The user should be aware of the following limitations:\
+Method <code>ssa</code> is only implemented for the criterion <code>mukv</code>.
+Input <code>candidates</code> should preferably be a continuous domain such as <code>SpatialPolygonsDataFrame</code>
+When <code>action = "add"</code>, candidates are taken from existing network <code>observations</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Data frame with x,y coordinates of optimized locations</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Olivier Baume
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] <a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+<p>
+[2] D. J. Brus, G. B. M. Heuvelink (2007). Optimization of sample patterns for universal 
+kriging of environmental variables, Geoderma, 138: 86-95 (2007).
+</p>
+<p>
+[3] D. J. Brus, J. de Gruijter, J. van Groenigen (2006). Designing spatial coverage samples using
+the k-means clustering algorithm. In A. McBratney M. Voltz and P. Lagacherie,
+editor, Digital Soil Mapping: An Introductory Perspective, Developments in Soil
+Science, vol. 3., Elsevier, Amsterdam.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(intamapInteractive)
+library(maptools)
+# use SIC2004 dataset
+data(sic2004)
+# load a shape file of the study area
+rpath = system.file("inst/external", package="intamapInteractive")
+setwd(rpath)
+candidates = readShapePoly("sic2004")
+# load the input for the observation and prediction locations
+# including the covariates for UK, and changing to more intuitive 
+# variable names
+coordinates(sic.val) = ~x+y
+observations = sic.val["dayx"] 
+predGrid= sic.grid
+# limit the number of prediction locations to have faster UK 
+# computations
+nGrid = length(predGrid$x)
+predGrid = predGrid[sample(seq(1,nGrid),1000),]
+coordinates(predGrid) = ~x+y
+# fit the variogram model (using function fit.variogram from package
+# gstat)
+model = fit.variogram(variogram(dayx~x+y, observations), vgm(50, "Sph", 250000, 250))
+plot(variogram(dayx~x+y, observations), model=model)
+# compute the Mukv of the current network
+initMukv &lt;- calculateMukv(observations, predGrid, model)
+print(initMukv)
+# delete optimally 20 stations from current network with method "ssa"
+# (spatial simulated annealing) and criterion "mukv"
+
+windows()
+optim = optimizeNetwork(observations, predGrid, candidates, method = "ssa", 
+            action = "del", nDiff = 20, model = model, criterion = "MUKV", plot = TRUE )
+## End(Not run)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamapInteractive</em> version 1.0-6 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package intamapInteractive:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package intamapInteractive:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="intamapInteractive-package">
+<param name="Local" value="intamapInteractive-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="anisotropyChoice">
+<param name="Local" value="anisotropyChoice.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="biasCorr">
+<param name="Local" value="biasCorr.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="calculateMukv">
+<param name="Local" value="calculateMukv.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="doSegmentation">
+<param name="Local" value="doSegmentation.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="findBiasUK">
+<param name="Local" value="findBiasUK.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="findBoundaryLines">
+<param name="Local" value="findBoundaryLines.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="findLocalBias">
+<param name="Local" value="findLocalBias.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="findRegionalBias">
+<param name="Local" value="findRegionalBias.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="optimizeNetwork">
+<param name="Local" value="optimizeNetwork.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="removeLocalBias">
+<param name="Local" value="findLocalBias.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="removeRegionalBias">
+<param name="Local" value="findRegionalBias.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spCovAdd">
+<param name="Local" value="spCovAdd.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="spCovDel">
+<param name="Local" value="spCovDel.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="ssaOptim">
+<param name="Local" value="ssaOptim.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package intamapInteractive:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="anisotropyChoice">
+<param name="Local" value="anisotropyChoice.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Bias correction">
+<param name="Local" value="biasCorr.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Find and/or remove regional biases">
+<param name="Local" value="findRegionalBias.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Finding the regional biases using GLM">
+<param name="Local" value="findBiasUK.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Finding the regional boundaries">
+<param name="Local" value="findBoundaryLines.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Finds (and removes) biases between overlapping networks">
+<param name="Local" value="findLocalBias.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Interactive functionality added to the intamap package">
+<param name="Local" value="intamapInteractive-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="MUKV computation">
+<param name="Local" value="calculateMukv.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Optimization of networks">
+<param name="Local" value="optimizeNetwork.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Optimize the network with spatial coverage methods">
+<param name="Local" value="spCovDel.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spatial coverage method to add new measurements">
+<param name="Local" value="spCovAdd.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spatial Segmentation - Clustering for Scattered Observations">
+<param name="Local" value="doSegmentation.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Spatial simulated annealing for optimized model based mapping">
+<param name="Local" value="ssaOptim.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

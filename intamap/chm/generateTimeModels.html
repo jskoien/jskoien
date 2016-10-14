@@ -1,0 +1,105 @@
+<html><head><title>Generate time models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>generateTimeModels(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   generateTimeModels">
+<param name="keyword" value=" Generate time models">
+</object>
+
+
+<h2>Generate time models</h2>
+
+
+<h3>Description</h3>
+
+<p>
+function that generates time models and saves them in workspace.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>generateTimeModels(genClasses = NULL, noGenClasses = NULL, nSam = 1, test = FALSE,
+             debug.level = 0)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>genClasses</code></td>
+<td>
+list of particular classes for which time models should be generated</td></tr>
+<tr valign="top"><td><code>noGenClasses</code></td>
+<td>
+list of particular classes for which time models should not be generated</td></tr>
+<tr valign="top"><td><code>nSam</code></td>
+<td>
+number of attempts to be tried for each combination of predictions and observations,
+defaults to 1, higher number should be used for better accuracy. nSam/2 is used for
+copulas, to reduce computation time.</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+logical; if true, the time models are generated based on fewer iterations, for speed </td></tr>
+<tr valign="top"><td><code>debug.level</code></td>
+<td>
+if <code>debug.level &gt;= 1</code>, the function will store 
+tables with the prediction times for each model in the workspace.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function calculates a time model for different interpolation types
+in the <code><a href="intamap-package.html">intamap-package</a></code> and returns a list object
+with the estimated models. It's users responsibility to store the model in the 
+workspace. The normal procedure would be to run the function without arguments. However,
+it is both possible to define a list for which classes the user want to 
+generate models, or a list of classes that are not of interest.
+</p>
+<p>
+The time model is based on creation of a set of synthetical data sets
+of different size, both regarding number of observations and prediction locations.
+The function will estimate parameters and make predictions with the different combinations,
+and for each method, fit a local polynomial regression model (<code><a onclick="findlink('stats', 'loess.html')" style="text-decoration: underline; color: blue; cursor: hand">loess</a></code>) 
+</p>
+<p>
+This model can then be used by <code><a href="predictTime.html">predictTime</a></code> to estimate the 
+prediction time for an interpolation request with a certain number 
+of observations and prediction locations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The function generates a <code>timeModels</code> object, which can be used to estimate
+prediction times for different requests to the <code><a href="interpolate.html">interpolate</a></code> function
+in the <code><a href="intamap-package.html">intamap-package</a></code>, via <code><a href="predictTime.html">predictTime</a></code>.</p>
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+timeModels=generateTimeModels()
+q("yes")
+## restart R in the same directory
+## End(Not run)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

@@ -1,0 +1,61 @@
+<html><head><title>models for estimating prediction time in intamap package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>timeModels(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   timeModels">
+<param name="keyword" value=" models for estimating prediction time in intamap package">
+</object>
+
+
+<h2>models for estimating prediction time in intamap package</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This is a standard model for estimating the prediction time within the 
+<code><a href="intamap-package.html">intamap-package</a></code>. It was created by the function
+<code><a href="generateTimeModels.html">generateTimeModels</a></code>, on a 64 bits Linux server running 
+<code>R</code> version 2.9.0 and <code><a href="intamap-package.html">intamap-package</a></code> version 1.1.15. 
+</p>
+<p>
+The prediction time will depend on the speed of the local machine, on the version
+of <code>R</code> and <code><a href="intamap-package.html">intamap-package</a></code>, and on the installed libraries. 
+It is therefore strongly recommended to run <code><a href="generateTimeModels.html">generateTimeModels</a></code> on the local
+machine and store the result in the workspace if the predicted interpolation 
+time is of real interest. <code>timeModels</code> in the workspace will be chosen if available.
+</p>
+<p>
+It is not necessary to load the data set, this happens automatically in predictTime
+if <code>timeModels</code> if the object is not already existing in the workspace.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data(timeModels)
+</pre>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-08 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

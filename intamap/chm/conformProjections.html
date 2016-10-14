@@ -1,0 +1,135 @@
+<html><head><title>Getting conformed projections</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>conformProjections(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   conformProjections">
+<param name="keyword" value=" Getting conformed projections">
+</object>
+
+
+<h2>Getting conformed projections</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Getting a conformed projection for a set of <code><a onclick="findlink('sp', 'Spatial-class.html')" style="text-decoration: underline; color: blue; cursor: hand">Spatial</a></code>* elements
+necessary for interpolation in the <code><a href="intamap-package.html">intamap-package</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre> 
+conformProjections(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+an object of the type described in <code><a href="intamap-package.html">intamap-package</a></code></td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>conformProjections</code> is a function that attempts to reproject all projected 
+elements in <code>object</code> to one common projection. 
+The function is usually called with an intamap object as argument 
+from <code><a href="createIntamapObject.html">createIntamapObject</a></code> if the parameter <code>confProj = TRUE</code>. 
+Thus it is a function that is usually not necessary to call separately.
+</p>
+<p>
+The need for this function is because 
+several of the functions in a typical spatial interpolation work flow inside the 
+<code><a href="intamap-package.html">intamap-package</a></code> require that the elements have a common projection. In 
+addition, there are some functions which are not able to deal with 
+unprojected spatial objects, i.e. objects with coordinates given in lattitude and
+longitude. <code>conformProjections</code> will hence also attempt to reproject all 
+elements that 
+have coordinates in lattitude and longitude, even in the cases where they 
+all have the same projections.
+</p>
+<p>
+If only one of observations or predictionLocations has a projection (or is longlat), 
+the other one is assumed to be equal. A warning is issued in this case.
+</p>
+<p>
+The common projection depends on the object that is passed to conformProjections.
+First of all, if <code>intCRS</code> (see below) is present as an element of the object, all elements
+will be reprojected to this projection. If not, <code>intCRS</code> will be set equal to 
+the first projection possible in the list below.
+</p>
+
+<dl>
+<dt>intCRS</dt><dd>Can be given as a component in <code>object</code> - and is the 
+user-defined common projection used for interpolation</dd>
+<dt>targetCRS</dt><dd>Can be given as a component in <code>object</code> - and is 
+the user-defined target projections</dd>
+<dt>predCRS</dt><dd>The projection of the predictionLocations in <code>object</code></dd>
+<dt>obsCRS</dt><dd>The projection of the observations</dd> 
+</dl>
+
+<h3>Value</h3>
+
+<p>
+A list of the parameters to be included in the <code>object</code> described in <code><a href="intamap-package.html">intamap-package</a></code></p>
+
+<h3>Author(s)</h3>
+
+<p>
+Jon Olav Skoien
+</p>
+
+
+<h3>References</h3>
+
+<p>
+<a href="http://www.intamap.org/">http://www.intamap.org/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+library(intamap)
+
+data(meuse)
+coordinates(meuse) = ~x+y
+proj4string(meuse) &lt;- CRS("+proj=stere +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel +units=m")
+
+predictionLocations = spsample(meuse, 50, "regular")
+
+krigingObject = createIntamapObject(
+        observations = meuse,
+        predictionLocations = predictionLocations,
+  formulaString = as.formula("log(zinc)~1"),
+  intCRS = "+init=epsg:3035"
+        )
+
+krigingObject = conformProjections(krigingObject)
+proj4string(meuse)
+proj4string(krigingObject$observations)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-18 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

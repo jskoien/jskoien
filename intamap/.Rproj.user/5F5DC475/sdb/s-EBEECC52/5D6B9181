@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "preProcess.idw = function(object, ...) {\n\t# perhaps first do some method-specific stuff, then\n\t# call the default method for this here:\n\tNextMethod()\n}\n\nestimateParameters.idw = function(object, ...) {\n\n  params = getIntamapParams(object$params, ...)\n  idpRange = params$idpRange\n  if (is.null(idpRange)) idpRange = seq(0.1, 2.9, 0.1)\n  nfold = params$nfold\n  if (is.null(nfold)) nfold = 5\n\t# add parameter estimate\n\tmse = rep(NA, length(idpRange))\n  if (\"formulaString\" %in% names(object)) formulaString = object$formulaString else formulaString = as.formula(\"value ~ 1\")\n  dots = list(...)\n  nmax = params$nmax\n  maxdist = params$maxdist\n  \n \tfor (i in seq(along = idpRange)) {\n  \tmse[i] = mean(krige.cv(formulaString, object$observations, nfold = nfold, \n  \tnmax = nmax, maxdist = maxdist, set = list(idp = idpRange[i]), verbose = params$debug.level)$residual ** 2)\t\n\t}\n  best = which(mse == min(mse))[1]\n\tobject$inverseDistancePower = idpRange[best]\n\tprint(paste(\"best idp value found is\", object$inverseDistancePower, \"rmse\", sqrt(mse[best])))\n\treturn(object)\n}\n\nspatialPredict.idw = function(object, ...) {\n  dots = list(...)\n  if (!all(names(object$outputWhat) == \"mean\"))\n    stop(paste(\"It is not possible to request other prediction types than mean for method idw\",\n          \"requested\",names(object$outputWhat))) \n  if (\"formulaString\" %in% names(object)) formulaString = object$formulaString else formulaString = as.formula(\"value ~ 1\")\n  if (\"nmax\" %in% names(dots)) {\n    nmax = dots$nmax\n  } else nmax = object$params$nmax\n  if (\"maxdist\" %in% names(dots)) {\n    maxdist = dots$maxdist\n  } else maxdist = object$params$maxdist\n  \n  if (is.null(maxdist)) maxdist = Inf\n \tobject$predictions = idw(formulaString, object$observations, object$predictionLocations, \n\t\tnmax = nmax, maxdist = maxdist, idp = object$inverseDistancePower, debug.level = object$params$debug.level)\n\treturn(object)\n}\n\npostProcess.idw = function(object, ...) {\n\t# smooth over boundaries?\n\n\t# spatial aggregation?\n\n\t# find out what to output\n\n\t# write to data base\n  object$predictions = object$predictions[,-2]\n  object = NextMethod(object,...)\n\treturn(object)\n}\n",
+    "created" : 1475158059650.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2594167993",
+    "id" : "5D6B9181",
+    "lastKnownWriteTime" : 1475250170,
+    "last_content_update" : 1475250170919,
+    "path" : "E:/Intamap/SVNI/intamap/R/idw.R",
+    "project_path" : "R/idw.R",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

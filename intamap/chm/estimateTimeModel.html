@@ -1,0 +1,66 @@
+<html><head><title>estimateTimeModel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>estimateTimeModel(intamap)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   estimateTimeModel">
+<param name="keyword" value=" estimateTimeModel">
+</object>
+
+
+<h2>estimateTimeModel</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Function that takes time samples function that can read intamap objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>estimateTimeModel(FUN, class, formulaString, debug.level, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+A string with function's name</td></tr>
+<tr valign="top"><td><code>class</code></td>
+<td>
+class of intamapObject, which interpolation method to be used.</td></tr>
+<tr valign="top"><td><code>formulaString</code></td>
+<td>
+the formula of the request, mainly to see if the request has independent variables.</td></tr>
+<tr valign="top"><td><code>debug.level</code></td>
+<td>
+if <code>debug.level &gt;= 1</code>, the function will store 
+tables with the prediction times for each model in the workspace.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other arguments as defined in the <a href="createIntamapObject.html">createIntamapObject</a> function</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function uses createIntamapObject function to create synthetic data, in order to 
+take time samples for the function with string name "FUN". The calculated model is stored, 
+as an element of a list, in a local file (workspace for now) and it's used in order to give quick time estimates.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The function does not return a variable but stores the result in an element list with the same name.</p>
+
+
+<hr><div align="center">[Package <em>intamap</em> version 1.2-13 <a href="00Index.html">Index</a>]</div>
+
+</body></html>
