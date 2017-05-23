@@ -55,12 +55,12 @@ getIntamapParams = function(oldPar, newPar,...){
 
 getIntamapDefaultParams = function(doAnisotropy = TRUE, 
   testMean = FALSE, removeBias = NA,  addBias = NA, biasRemovalMethod = "LM", 
-  nmax = 50, maxdist = Inf, ngrid = 100, nsim = 100, sMin = 4, block=numeric(0),  
+  nmax = 50, nmin = 0, omax = 0, beta = NULL, maxdist = Inf, ngrid = 100, nsim = 100, sMin = 4, block=numeric(0),  
   processType="gaussian",
   confProj = FALSE, debug.level = 0, nclus = 1, ... ) {
 return(list(doAnisotropy = doAnisotropy, testMean = testMean, removeBias = removeBias, addBias = addBias,
   biasRemovalMethod = biasRemovalMethod, 
-  nmax = nmax, maxdist = maxdist, ngrid = ngrid, nsim = nsim, sMin = 4, block = block, processType = processType,
+  nmax = nmax, nmin = nmin, omax = omax, beta = beta, maxdist = maxdist, ngrid = ngrid, nsim = nsim, sMin = 4, block = block, processType = processType,
   confProj = confProj, debug.level = debug.level, nclus = nclus, ... ))
 }
 

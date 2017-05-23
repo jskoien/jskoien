@@ -19,12 +19,12 @@ proj4string(meuse.grid) <- crs
 
 meuse$value = log(meuse$zinc)
 meuse.grid = meuse.grid[sample(1:dim(meuse.grid)[1], 100),]
-output = interpolate(meuse, meuse.grid, list(mean=T, variance=T, nsim = 5),methodName = "automap")
+output = interpolate(meuse, meuse.grid, list(mean=T, variance=T, nsim = 5), methodName = "automap")
 summary(t(output$outputTable), digits = 4)
 
 output = interpolate(meuse, meuse.grid,
     optList = list(idpRange = seq(0.1, 2.9, 0.5), nfold = 3), 
-    outputWhat = list(mean=TRUE),methodName = "idw")
+    outputWhat = list(mean=TRUE), methodName = "idw")
 summary(t(output$outputTable), digits = 4)
 
 
@@ -53,9 +53,13 @@ output5 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quan
 output6 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), optList = list(variogramModel = output5$variogramModel),
                       cv = TRUE)
 output6$variogramModel$range[2] = 1000
-output7 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), optList = list(variogramModel = output6$variogramModel),
-                      cv = TRUE)
+output7 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), 
+                      cv = TRUE, optList = list(variogramModel = output6$variogramModel))
+output8 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), 
+                      cv = TRUE, optList = list(nclus = 4), methodName = "automap")
+
 all.equal(output5$predictions, output6$predictions) # Should be the same
+all.equal(output5$predictions, output8$predictions) # Should be the same
 all.equal(output5$predictions, output7$predictions)  # Should be different
 
 
