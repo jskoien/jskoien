@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519034807844.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4046313640",
+    "id" : "B3E05C6D",
+    "lastKnownWriteTime" : 1519054021,
+    "last_content_update" : 1519054021445,
+    "path" : "E:/R/Misc/psgp/psgp2016/psgp/src/psgp_common.cpp",
+    "project_path" : "src/psgp_common.cpp",
+    "properties" : {
+        "cursorPosition" : "303,27",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 17,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}

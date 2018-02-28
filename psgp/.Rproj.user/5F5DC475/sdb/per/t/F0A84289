@@ -1,0 +1,17 @@
+{
+    "contents" : "import(gstat)\nimport(automap)\nimport(intamap)\nimport(doParallel)\nimport(rgdal)\nimport(foreach)\nimport(sp)\nimport(parallel)\n\nuseDynLib(psgp)\n\nexport(estimateParameters, spatialPredict, learnParameters, makePrediction, buildMetadata)\n\nS3method(estimateParameters, psgp)\nS3method(spatialPredict, psgp)\n",
+    "created" : 1452165079973.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3033413200",
+    "id" : "F0A84289",
+    "lastKnownWriteTime" : 1452244603,
+    "path" : "E:/R/Misc/psgp/psgp2016/psgp/NAMESPACE",
+    "project_path" : "NAMESPACE",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_namespace"
+}

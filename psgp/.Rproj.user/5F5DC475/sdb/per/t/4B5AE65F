@@ -1,0 +1,17 @@
+{
+    "contents" : "makePrediction <- function(object, vario)\n{\n  inputs = object$observations\n  pred = object$predictionLocations\n  \n  # put data into an easy parseable format for the backend C++ code\n  x = coordinates(inputs)\n  y = as.vector(inputs$value)\n  \n  ### error variance vector\n  e = as.vector(inputs$var)\n  \n  tx = coordinates(pred)\n  \n  ### error variance vector\n  e = as.vector(inputs$value)\n  \n  #-------------------------------------\n  # Extract observation error components\n  #-------------------------------------\n  # To each observation corresponds:\n  # - the index of an error model (oeid), i.e. the model oeid(i) is used \n  #   for obs i\n  # - a sensor model (sensorid) - THIS IS NOT USED YET\n  # - and either:\n  #   - a full metadata description of the error models, i.e. a list of\n  #     strings in the form \"<distname>,<bias>,<variance>\". For example:\n  #     [ \"GAUSSIAN,0.0,1.3\"\n  #       \"GAUSSIAN,0.2,1.6\" ]\n  #     At the moment, only a GAUSSIAN distribution with zero bias is \n  #     allowed by PSGP.\n  #   or:\n  #   - the variances of the error models (oevar) - which variance is used \n  #     for a particular observation is determined by the index in oeid.\n  #   - the biases of the error models (oebias) - same as above for the bias\n  #     The variance and bias terms are only taken into account if no metadata\n  #     is provided, and are converted to a valid metadata table.\n  obsErrId = as.integer(inputs$oeid)\n  sensorId = as.integer(inputs$sensor)\n  \n  # If a metadata has been provided, pass it to PSGP directly\n  metaData = object$obsChar\n  \n  # Otherwise, check if observation error information has been \n  # provided instead\n  if (is.null(metaData)) \n  {\n    metaData <- buildMetadata(inputs);\n  }\n\n  try(\n  r <- .Call(\"predict\", x, y, tx, vario, obsErrId,\n             sensorId, metaData, PACKAGE = \"psgp\")\n  )\n}\n\n\n",
+    "created" : 1452165122494.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1335112622",
+    "id" : "4B5AE65F",
+    "lastKnownWriteTime" : 1361194758,
+    "path" : "E:/R/Misc/psgp/psgp2016/psgp/R/makePrediction.R",
+    "project_path" : "R/makePrediction.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "Package: psgp\nVersion: 0.3-7\nDate: 2014-05-08\nTitle: Projected Spatial Gaussian Process (psgp) methods\nAuthor: Ben Ingram <bri@utalca.cl>, Remi Barillec <r.barillec@aston.ac.uk>\nMaintainer: Remi Barillec <r.barillec@aston.ac.uk>\nDepends: R (>= 3.0.2), intamap\nImports: gstat, automap, sp, doParallel, rgdal, foreach, parallel\nSuggests: \nLinkingTo: Rcpp, RcppArmadillo (>= 0.2.0)\nDescription: Implements projected sparse Gaussian process kriging for the intamap package.\nLicense: GPL (>= 2)\nRepository: CRAN\nPackaged: 2014-05-08 10:58:40 UTC; barillrl\nNeedsCompilation: yes\nDate/Publication: 2014-05-08 16:45:17\n",
+    "created" : 1452165076132.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2756790531",
+    "id" : "570FFD57",
+    "lastKnownWriteTime" : 1452249003,
+    "path" : "E:/R/Misc/psgp/psgp2016/psgp/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "dcf"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519032514095.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3389521796",
+    "id" : "3A9BF711",
+    "lastKnownWriteTime" : 1519053378,
+    "last_content_update" : 1519053378565,
+    "path" : "E:/R/Misc/psgp/psgp2016/psgp/src/optimisation/SCGModelTrainer.cpp",
+    "project_path" : "src/optimisation/SCGModelTrainer.cpp",
+    "properties" : {
+        "cursorPosition" : "60,33",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}
