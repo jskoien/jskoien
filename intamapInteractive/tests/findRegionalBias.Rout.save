@@ -1,7 +1,7 @@
 
-R version 3.0.1 (2013-05-16) -- "Good Sport"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: x86_64-redhat-linux-gnu (64-bit)
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -59,25 +59,42 @@ interpolating border between  8 5
 interpolating border between  5 2 
 [using ordinary kriging]
 [using ordinary kriging]
+Warning messages:
+1: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+2: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+3: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+4: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+5: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+6: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+7: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
+8: In validityMethod(object) :
+  duplicate rownames are interpreted by rgeos as MultiPoints; use SpatialMultiPoints to define these; in future sp versions this warning will become an error
 > rb$regionalBias
-   ID          ols    ols.std ols.t.value      ols.p          wls    wls.std
-x1 12 -0.445941743 0.12577513 -3.54554785 0.07116190 -0.440095920 0.09828582
-x2  9 -0.389676005 0.08028035 -4.85394027 0.03991928 -0.383830182 0.06573835
-x3  8 -0.029488587 0.08028035 -0.36732013 0.74860681 -0.021996582 0.06706801
-x4  5 -0.012276606 0.05762046 -0.21305984 0.85102512 -0.006430783 0.04975117
-x5  4  0.099305510 0.08948375  1.10976021 0.38266270  0.081768041 0.07854582
-x6  6  0.004935375 0.08028035  0.06147675 0.95657039  0.009135016 0.06706801
-x7  2  0.253621817 0.08948375  2.83427780 0.10520370  0.251673209 0.08918710
-x8  1  0.519520240 0.09782510  5.31070485 0.03367568  0.509777202 0.09584238
-   wls.t.value      wls.p
-x1  -4.4777152 0.04642946
-x2  -5.8387563 0.02810256
-x3  -0.3279743 0.77408292
-x4  -0.1292589 0.90897953
-x5   1.0410234 0.40718068
-x6   0.1362053 0.90413195
-x7   2.8218567 0.10598952
-x8   5.3189124 0.03357700
+   ID          ols    ols.std ols.t.value      ols.p           wls    wls.std
+x1 12 -0.445225055 0.13265188 -3.35634177 0.07846453 -0.4389124287 0.10234795
+x2  9 -0.388959039 0.08466967 -4.59384131 0.04426334 -0.3826464120 0.06841482
+x3  8 -0.011536711 0.08466967 -0.13625553 0.90409689 -0.0047292281 0.06982007
+x4  5 -0.006451925 0.06077086 -0.10616808 0.92513849 -0.0001392988 0.05181279
+x5  4  0.086939382 0.09437628  0.92119954 0.45419524  0.0680015020 0.08180645
+x6  6 -0.001367140 0.08466967 -0.01614675 0.98858327  0.0044506305 0.06982007
+x7  2  0.253382854 0.09437628  2.68481513 0.11523842  0.2512786455 0.09290803
+x8  1  0.513217634 0.10317369  4.97430741 0.03811844  0.5026965897 0.09983893
+    wls.t.value      wls.p
+x1 -4.288433898 0.05030747
+x2 -5.593034149 0.03051173
+x3 -0.067734508 0.95215931
+x4 -0.002688503 0.99809895
+x5  0.831248624 0.49327053
+x6  0.063744286 0.95497170
+x7  2.704595503 0.11383479
+x8  5.035075691 0.03725436
 > 
 > obs2 = removeRegionalBias(observations, rb, value~1, regCode = "ID")
 > 
@@ -92,13 +109,13 @@ proj4string : [NA]
 Number of points: 155
 Data attributes:
      value             ID        
- Min.   :4.718   Min.   : 1.000  
- 1st Qu.:5.413   1st Qu.: 5.000  
- Median :6.026   Median : 8.000  
- Mean   :6.048   Mean   : 7.735  
- 3rd Qu.:6.575   3rd Qu.: 9.000  
- Max.   :7.666   Max.   :12.000  
+ Min.   :4.723   Min.   : 1.000  
+ 1st Qu.:5.407   1st Qu.: 5.000  
+ Median :6.025   Median : 8.000  
+ Mean   :6.043   Mean   : 7.735  
+ 3rd Qu.:6.569   3rd Qu.: 9.000  
+ Max.   :7.665   Max.   :12.000  
 > 
 > proc.time()
    user  system elapsed 
-  2.847   0.094   3.223 
+   5.84    0.56    6.34 

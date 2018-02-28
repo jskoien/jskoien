@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519373582739.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3592027560",
+    "id" : "84DF1972",
+    "lastKnownWriteTime" : 1519373590,
+    "last_content_update" : 1519373590662,
+    "path" : "E:/Git/jskoien/intamapInteractive/R/anisotropyChoice.r",
+    "project_path" : "R/anisotropyChoice.r",
+    "properties" : {
+        "cursorPosition" : "123,12",
+        "scrollLine" : "111"
+    },
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

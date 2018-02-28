@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519286369570.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3596168557",
+    "id" : "93BEBEF8",
+    "lastKnownWriteTime" : 1519286379,
+    "last_content_update" : 1519286379583,
+    "path" : "E:/Git/jskoien/intamapInteractive/man/findBoundaryLines.Rd",
+    "project_path" : "man/findBoundaryLines.Rd",
+    "properties" : {
+        "cursorPosition" : "33,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}

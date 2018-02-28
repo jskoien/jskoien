@@ -32,11 +32,11 @@
 ########################################
 
 
-getIntamapParams = function(oldPar, newPar,...){
+getIntamapParams2 = function(oldPar, newPar,...){
   dots = list(...)
   twoLists = FALSE
   if (!missing(oldPar) && !inherits(oldPar,"IntamapParams")) {
-    if (!missing(newPar)) {
+    if (!missing(newPar) && !is.null(dots)) {
       newPar2 = newPar 
       newPar = oldPar 
       twoLists = TRUE
@@ -51,6 +51,18 @@ getIntamapParams = function(oldPar, newPar,...){
   class(oldPar) = "IntamapParams"
   return(oldPar)
 }
+
+getIntamapParams = function(oldPar, newPar,...){
+
+  params = getIntamapDefaultParams()
+  if (!missing(oldPar) && !is.null(oldPar)) params = modifyList(params, oldPar)  
+  if (!missing(newPar) && !is.null(newPar)) params = modifyList(params, newPar) 
+  dots = list(...)
+  if (!is.null(dots)) params = modifyList(params, dots)
+  class(params) = "IntamapParams"
+  return(params)
+}
+
 
 
 getIntamapDefaultParams = function(doAnisotropy = TRUE, 

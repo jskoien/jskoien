@@ -5,9 +5,7 @@ unbiasedKrige = function(object, formulaString, observations, predictionLocation
   dots = list(...)
   
   
-  if ("params" %in% names(object)) {
-    params = getIntamapParams(object$params, ...)
-  } else params = getIntamapParams(...)
+  params = getIntamapParams(object$params, ...)
   nmax = params$nmax
   nmin = params$nmin
   omax = params$omax
@@ -31,7 +29,6 @@ unbiasedKrige = function(object, formulaString, observations, predictionLocation
     outputWhat = object$outputWhat
     iwqs = outputWhat[names(outputWhat) == "IWQSEL"]
     predictions = object$predictions
-    params = object$params
     if (missing(debug.level)) debug.level = object$debug.level
     if (length(iwqs) > 0) {
       model = object$variogramModel

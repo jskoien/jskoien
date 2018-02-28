@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1517393569484.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1097705194",
+    "id" : "30A6800",
+    "lastKnownWriteTime" : 1519286765,
+    "last_content_update" : 1519286765369,
+    "path" : "E:/Git/jskoien/intamapInteractive/R/bound.R",
+    "project_path" : "R/bound.R",
+    "properties" : {
+        "cursorPosition" : "68,36",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

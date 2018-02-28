@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519286382628.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3653074719",
+    "id" : "C5802901",
+    "lastKnownWriteTime" : 1519286390,
+    "last_content_update" : 1519286390145,
+    "path" : "E:/Git/jskoien/intamapInteractive/man/findLocalBias.Rd",
+    "project_path" : "man/findLocalBias.Rd",
+    "properties" : {
+        "cursorPosition" : "64,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}

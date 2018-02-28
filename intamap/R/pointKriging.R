@@ -1,24 +1,21 @@
 
 estimateParameters.automap = function(object,...) {
 
+  params = getIntamapParams(object$params, ...)
+  debug.level = params$debug.level
+
   dots = list(...)
-  if ("debug.level" %in% names(dots)) 
-  	debug.level = dots$debug.level 
-  else 
-    debug.level = object$params$debug.level
   observations = object$observations
   depVar = as.character(object$formulaString[[2]])
-  if ("model" %in% names(dots)) {
-    model = dots$model
-  } else if ("model" %in% names(object$params)) {
-    model = object$params$model
+  if ("model" %in% names(params)) {
+    model = params$model
   } else {
     if (dim(coordinates(object$predictionLocations))[1] > 100000) 
             model = c("Sph", "Exp", "Gau") else model = c("Sph", "Exp", "Gau", "Ste")
   }
     
 #estimate Anisotropy
-  if (object$params$doAnisotropy) {
+  if (params$doAnisotropy) {
     object = estimateAnisotropy(object) 
     if (object$anisPar$doRotation && all(as.character(object$formulaString[[3]])=="1")){
 			#rotate Data
@@ -56,18 +53,14 @@ estimateParameters.automap = function(object,...) {
 }
 
 spatialPredict.automap = function(object, nsim = 0, ...) {
-# This function does not take the clusters properly into account at the moment. 
-# Variograms should be estimated separately, prediction locations needs to 
-# be associated with a cluster and we need to figure out what to do in the case 
-# of 
 # 
   params = getIntamapParams(object$params, ...)
-  nmax = object$params$nmax
-  nmin = object$params$nmin
-  omax = object$params$omax
-  beta = object$params$beta
-  maxdist = object$params$maxdist
-  debug.level = object$params$debug.level
+  nmax = params$nmax
+  nmin = params$nmin
+  omax = params$omax
+  beta = params$beta
+  maxdist = params$maxdist
+  debug.level = params$debug.level
   if (is.null(maxdist)) maxdist = Inf
   
     if (! "variogramModel" %in% names(object)) object = estimateParameters(object,...)
@@ -132,12 +125,12 @@ estimateParameters.yamamoto = function(object,...) {
 spatialPredict.yamamoto = function(object, nsim = 0, ...) {
 # 
   params = getIntamapParams(object$params, ...)
-  nmax = object$params$nmax
-  nmin = object$params$nmin
-  omax = object$params$omax
-  beta = object$params$beta
-  maxdist = object$params$maxdist
-  debug.level = object$params$debug.level
+  nmax = params$nmax
+  nmin = params$nmin
+  omax = params$omax
+  beta = params$beta
+  maxdist = params$maxdist
+  debug.level = params$debug.level
   if (is.null(maxdist)) maxdist = Inf
   
   formulaString = object$formulaString

@@ -2,7 +2,7 @@
 
 estimateParameters.transGaussian = function(object, ...) {
   params = getIntamapParams(object$params, ...)
-  lambda = object$params$lambda
+  lambda = params$lambda
   significant = object$params$significant = TRUE
   observations = object$observations
   formulaString = object$formulaString
@@ -53,7 +53,7 @@ spatialPredict.transGaussian = function(object, nsim = 0, ...) {
 #             observations[[as.character(formulaString[[2]])]]+ object$TGcorrection
 
   nPred = nrow(coordinates(object$predictionLocations))
-  if ("nclus" %in% names(object$params) && nsim == 0 && nPred >= 5000 ) 
+  if ("nclus" %in% names(params) && nsim == 0 && nPred >= 5000 ) 
     nclus = params$nclus else nclus = 1
   if (nclus > 1) {
     if (!suppressMessages(suppressWarnings(requireNamespace("doParallel"))))

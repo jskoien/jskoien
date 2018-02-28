@@ -32,6 +32,7 @@ output = interpolate(meuse, meuse.grid, list(mean=T, variance=T),methodName = "t
 summary(t(output$outputTable), digits = 4)
 
 
+set.seed(15331)
 data(meuse)
 meuse = meuse[sample(dim(meuse)[1],30),]
 meuse$value=meuse$zinc
@@ -46,8 +47,9 @@ output2 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quan
 
 output3 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
                      methodName = "automap",optList = list(model = c("Exp", "Sph")), cv = TRUE)
+
 output4 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
-                     methodName = "psgp", cv = TRUE)
+                      methodName = "psgp", cv = TRUE)
 
 output5 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), cv = TRUE, methodName = "automap")
 output6 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), optList = list(variogramModel = output5$variogramModel),

@@ -73,9 +73,6 @@ Checking object ... OK
 > krigingObject = blockPredict(krigingObject)
 [using ordinary kriging]
 [1] "performed ordinary block kriging"
-Warning message:
-In if (blockWhat == "none") blockWhat = list(mean = TRUE) else blockWhat$mean = TRUE :
-  the condition has length > 1 and only the first element will be used
 > krigingObject = postProcess(krigingObject)
 > predictions = krigingObject$predictions
 > 
@@ -105,4 +102,4 @@ In if (blockWhat == "none") blockWhat = list(mean = TRUE) else blockWhat$mean = 
 > 
 > proc.time()
    user  system elapsed 
-   2.81    0.35    3.17 
+   3.03    0.12    3.15 
