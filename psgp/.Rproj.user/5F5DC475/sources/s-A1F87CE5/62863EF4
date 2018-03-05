@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519137195558.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "62863EF4",
+    "lastKnownWriteTime" : 1519137285,
+    "last_content_update" : 1519137285627,
+    "path" : "E:/Git/jskoien/psgp/tests/psgp.R",
+    "project_path" : "tests/psgp.R",
+    "properties" : {
+        "cursorPosition" : "20,41",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

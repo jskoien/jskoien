@@ -10,15 +10,15 @@
 
 #include "psgp_data.h"
 #include "psgp_settings.h"
-#include "gaussianProcesses/PSGP.h"
-#include "likelihoodModels/GaussianLikelihood.h"
-#include "covarianceFunctions/CovarianceFunction.h"
-#include "covarianceFunctions/SumCovarianceFunction.h"
-#include "covarianceFunctions/ExponentialCF.h"
-#include "covarianceFunctions/Matern5CF.h"
-#include "covarianceFunctions/ConstantCF.h"
-#include "covarianceFunctions/WhiteNoiseCF.h"
-#include "optimisation/SCGModelTrainer.h"
+#include "PSGP.h"
+#include "GaussianLikelihood.h"
+#include "CovarianceFunction.h"
+#include "SumCovarianceFunction.h"
+#include "ExponentialCF.h"
+#include "Matern5CF.h"
+#include "ConstantCF.h"
+#include "WhiteNoiseCF.h"
+#include "SCGModelTrainer.h"
 
 class PsgpEstimator {
 public:

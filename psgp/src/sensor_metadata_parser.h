@@ -11,8 +11,8 @@
 #include <vector>
 #include <string>
 
-#include "likelihoodModels/LikelihoodType.h"
-#include "likelihoodModels/GaussianLikelihood.h"
+#include "LikelihoodType.h"
+#include "GaussianLikelihood.h"
 #include "psgp_common.h"
 
 #include "Rinternals.h"
