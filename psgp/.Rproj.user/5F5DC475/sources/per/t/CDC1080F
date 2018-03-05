@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519032501129.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2404553007",
+    "id" : "CDC1080F",
+    "lastKnownWriteTime" : 1399546720,
+    "last_content_update" : 1399546720,
+    "path" : "E:/Git/jskoien/psgp/src/optimisation/SCGModelTrainer.h",
+    "project_path" : "src/optimisation/SCGModelTrainer.h",
+    "properties" : {
+        "cursorPosition" : "29,2",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "h"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519640640609.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2140707413",
+    "id" : "CCA3117B",
+    "lastKnownWriteTime" : 1519982454,
+    "last_content_update" : 1519982454624,
+    "path" : "E:/Git/jskoien/psgp/src/init.cpp",
+    "project_path" : "src/init.cpp",
+    "properties" : {
+        "cursorPosition" : "22,31",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 24,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}

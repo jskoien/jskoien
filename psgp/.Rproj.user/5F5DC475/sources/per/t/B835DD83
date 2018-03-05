@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519034933266.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1962544180",
+    "id" : "B835DD83",
+    "lastKnownWriteTime" : 1519053963,
+    "last_content_update" : 1519053963357,
+    "path" : "E:/Git/jskoien/psgp/src/gaussianProcesses/PSGP.cpp",
+    "project_path" : "src/gaussianProcesses/PSGP.cpp",
+    "properties" : {
+        "cursorPosition" : "984,33",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 19,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}

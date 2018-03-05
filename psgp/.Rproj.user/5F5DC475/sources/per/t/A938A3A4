@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1519221444386.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "697187657",
+    "id" : "A938A3A4",
+    "lastKnownWriteTime" : 1519222432,
+    "last_content_update" : 1519222432515,
+    "path" : "E:/Git/jskoien/psgp/src/gaussianProcesses/GaussianProcess.cpp",
+    "project_path" : "src/gaussianProcesses/GaussianProcess.cpp",
+    "properties" : {
+        "cursorPosition" : "39,51",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 18,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}
