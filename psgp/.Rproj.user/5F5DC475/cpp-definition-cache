@@ -1,2 +1,92 @@
 [
+    {
+        "definitions" : [
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_data.h",
+                "kind" : 2,
+                "line" : 24,
+                "name" : "PsgpData",
+                "parent_name" : "",
+                "usr" : "c:@C@PsgpData"
+            },
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_data.h",
+                "kind" : 7,
+                "line" : 40,
+                "name" : "getX",
+                "parent_name" : "PsgpData",
+                "usr" : "c:@C@PsgpData@F@getX#"
+            },
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_data.h",
+                "kind" : 7,
+                "line" : 41,
+                "name" : "getY",
+                "parent_name" : "PsgpData",
+                "usr" : "c:@C@PsgpData@F@getY#"
+            }
+        ],
+        "file" : "E:/Git/jskoien/psgp/src/psgp_data.h",
+        "file_last_write" : 1519892926
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_estimator.h",
+                "kind" : 2,
+                "line" : 23,
+                "name" : "PsgpEstimator",
+                "parent_name" : "",
+                "usr" : "c:@C@PsgpEstimator"
+            },
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_estimator.h",
+                "kind" : 7,
+                "line" : 31,
+                "name" : "setFixedSweeps(int)",
+                "parent_name" : "PsgpEstimator",
+                "usr" : "c:@C@PsgpEstimator@F@setFixedSweeps#I#"
+            },
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_estimator.h",
+                "kind" : 7,
+                "line" : 32,
+                "name" : "setUpdateSweeps(int)",
+                "parent_name" : "PsgpEstimator",
+                "usr" : "c:@C@PsgpEstimator@F@setUpdateSweeps#I#"
+            },
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/psgp_estimator.h",
+                "kind" : 7,
+                "line" : 33,
+                "name" : "setActivePoints(int)",
+                "parent_name" : "PsgpEstimator",
+                "usr" : "c:@C@PsgpEstimator@F@setActivePoints#I#"
+            }
+        ],
+        "file" : "E:/Git/jskoien/psgp/src/psgp_estimator.h",
+        "file_last_write" : 1519892951
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 7,
+                "file" : "E:/Git/jskoien/psgp/src/sensor_metadata_parser.h",
+                "kind" : 2,
+                "line" : 25,
+                "name" : "SensorMetadataParser",
+                "parent_name" : "",
+                "usr" : "c:@C@SensorMetadataParser"
+            }
+        ],
+        "file" : "E:/Git/jskoien/psgp/src/sensor_metadata_parser.h",
+        "file_last_write" : 1519893018
+    }
 ]
