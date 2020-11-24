@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "importFrom(\"spatstat\", nndist, nndist.default)\nimport(spcosa)\nimport(gstat)\nimport(automap)\nimport(intamap)\nimport(sp)\nimport(rgdal)\n    importFrom(\"grDevices\", \"chull\", \"dev.copy2eps\", \"terrain.colors\", \"rainbow\")\n  importFrom(\"graphics\", \"filled.contour\", \"identify\", \"locator\",\n             \"mtext\", \"points\", \"title\", \"image\")\n  importFrom(\"methods\", \"as\", \"extends\", \"getSlots\", \"is\")\n  importFrom(\"stats\", \"as.formula\", \"delete.response\", \"lm\",\n             \"model.frame\", \"na.omit\", \"runif\", \"sd\", \"setNames\",\n             \"terms\", \"pnorm\")\n  importFrom(\"utils\", \"write.csv\")\n  \nexport(\n\tanisotropyChoice,\n\tbiasCorr,\n\tcalculateMukv,\n\tdoSegmentation,\n\tfindBiasUK,\n\tfindBoundaryLines,\n\tfindLocalBias,\n\tfindRegionalBias,\n#\tgetNuts,\n#\tnuts2Boundaries,\n\toptimizeNetwork,\n\tremoveLocalBias,\n\tremoveRegionalBias,\n  \tspCovAdd,\n  \tspCovDel,\n  \tssaOptim\n)\n\nS3method(preProcess, removeBias)\n",
+    "created" : 1595331088505.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3009283589",
+    "id" : "BF574E36",
+    "lastKnownWriteTime" : 1595329892,
+    "last_content_update" : 1595329892,
+    "path" : "D:/GitHub/jskoien/intamapInteractive/NAMESPACE",
+    "project_path" : "NAMESPACE",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_namespace"
+}
