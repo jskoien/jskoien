@@ -1,5 +1,5 @@
 Package: intamap
-Version: 1.4-8
+Version: 1.4-10
 Date: 2020-11-24
 Title: Procedures for Automated Interpolation
 Author: Edzer Pebesma <edzer.pebesma@uni-muenster.de>, Jon Olav Skoien
@@ -12,6 +12,7 @@ Depends:
 Imports:
     gstat (>= 0.9-36),
     automap,
+    MBA,
     mvtnorm,
     MASS,
     evd,

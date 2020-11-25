@@ -44,6 +44,5 @@ Pebesma, E., Cornford, D., Dubois, G., Heuvelink, G.B.M., Hristopulos, D., Pilz,
 data(meuse.grid)
 gridded(meuse.grid) = ~x+y
 newMeuseGrid = coarsenGrid(meuse.grid,coarse=2,offset=c(1,1))
-
 }
 \keyword{spatial}

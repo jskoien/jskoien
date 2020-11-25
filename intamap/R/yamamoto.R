@@ -1,6 +1,6 @@
 sYamKrige = function(newCor, cmat, Obs, depVar="value", nmax, maxdist, model, inv, ikri){
 # Function for predicting at one location
-  if (!missing(ikri) && ikri %% 100 == 0) print(ikri)
+#  if (!missing(ikri) && ikri %% 100 == 0) print(ikri)
   
   c0dist = spDistsN1(coordinates(Obs), newCor)
   clen = length(c0dist)

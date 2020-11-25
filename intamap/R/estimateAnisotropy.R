@@ -217,7 +217,6 @@ estimateAnisotropySc<-function(x, y, r, len=length(x), method="linear", min.x=mi
 # earlier dependency on akima (non GPL)?
   } else if (TRUE) {
     dat = data.frame(x = x, y = y, z = r)
-    require(MBA)
     yex = max(y) - min(y)
     xex = max.x - min.x
     emax = max(yex, xex)
