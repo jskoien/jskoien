@@ -3,22 +3,22 @@
     "path": "D:/GitHub/jskoien/intamapInteractive/DESCRIPTION",
     "project_path": "DESCRIPTION",
     "type": "dcf",
-    "hash": "2340440890",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1612770131931.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
-        "cursorPosition": "7,8",
+        "cursorPosition": "1,15",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1623793060,
+    "lastKnownWriteTime": 1623793251,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1623793060506,
+    "last_content_update": 1623793251301,
     "read_only": false,
     "read_only_alternatives": []
 }
