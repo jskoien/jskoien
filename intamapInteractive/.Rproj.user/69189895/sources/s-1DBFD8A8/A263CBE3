@@ -1,0 +1,24 @@
+{
+    "id": "A263CBE3",
+    "path": "D:/GitHub/jskoien/intamapInteractive/R/optimizeNetwork.R",
+    "project_path": "R/optimizeNetwork.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1612701693739.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "cursorPosition": "42,39",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1612775485,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1612775485628,
+    "read_only": false,
+    "read_only_alternatives": []
+}

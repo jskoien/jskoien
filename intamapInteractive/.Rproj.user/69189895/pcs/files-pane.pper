@@ -1,9 +1,9 @@
 {
-    "path" : "D:/GitHub/jskoien/intamapInteractive",
-    "sortOrder" : [
+    "path": "D:/GitHub/jskoien/intamapInteractive",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }
