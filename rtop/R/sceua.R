@@ -1,6 +1,3 @@
-
-
-
 sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.01,
     ngs = 5, npg = 5, nps = 5, nspl = 5, mings = 5, iniflg = 1, iprint = 0, iround = 3, 
     peps = 0.0001, plog = rep(FALSE,length(pars)), implicit = NULL, timeout = NULL, ...) {
