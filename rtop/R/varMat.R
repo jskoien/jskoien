@@ -296,6 +296,7 @@ varMat.list = function(object, object2=NULL, coor1, coor2, maxdist = Inf,
       list(lmat, lorder)
     }    
     if (equal) d2 = NULL
+    parallel::clusterExport(cl, c("d1", "d2", "coor1", "coor2", "equal", "maxdist", "fun", "debug.level"))
     vmll = parallel::clusterApplyLB(cl, 1:length(d1), d1 = d1, d2 = d2, coor1 = coor1, coor2 = coor2, 
                        equal = equal, maxdist = maxdist, fun = fun, debug.level = debug.level)
 
