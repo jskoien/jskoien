@@ -75,7 +75,7 @@ Environmetrics 21(1), 66-84.
 \code{\link{findLocalBias}}
 }
 \examples{
-\dontrun{
+\donttest{
 data(meuse)
 data(meuse.grid)
 observations = data.frame(x = meuse$x,y = meuse$y,value = log(meuse$zinc))

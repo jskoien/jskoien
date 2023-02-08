@@ -1,7 +1,7 @@
 `ssaOptim` <-
 function (observations, predGrid, candidates, action, nDiff,
     model, nr_iterations, plotOptim = TRUE, formulaString = NULL, 
-    coolingFactor = nr_iterations/10, covariates = "over", ...)
+    coolingFactor = nr_iterations/10, covariates = "over", fun, ...)
 {
 
   if (missing(formulaString) || is.null(formulaString)) {
@@ -55,7 +55,7 @@ function (observations, predGrid, candidates, action, nDiff,
             minShiftFactorY = 0, start_p = 0.2, 
             netPts, addPts, delPts, crit1, nn, action, nDiff,
             netPtsInit, nr_iterations, plotOptim, formulaString = formulaString,
-            coolingFactor = coolingFactor,
+            coolingFactor = coolingFactor, fun = fun,
             ...)
 
         if ("data.frame" %in% getSlots(class(netPts)) && !"data.frame" %in%
@@ -134,7 +134,8 @@ function (observations, predGrid, candidates, action, nDiff,
             minShiftFactorY = 0, start_p = 0.2, 
             netPts, addPts, delPts, crit1, nn, action, nDiff,
             netPtsInit, nr_iterations, plotOptim, formulaString = formulaString,
-            models = models, coolingFactor = coolingFactor, covariates = covariates, ...)
+            models = models, coolingFactor = coolingFactor, covariates = covariates, 
+            fun = fun, ...)
         if ("data" %in% names(getSlots(class(netPts))) && 
             !"data" %in% names(getSlots(class(res))))
             res = SpatialPointsDataFrame(res, data = netPts@data[as.numeric(row.names(res@data)),

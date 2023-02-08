@@ -40,8 +40,9 @@ MUKV value
 
 \author{ S.J. Melles, O. Baume, J. Skoien }
 \examples{
-\dontrun{
+\donttest{
 # load data:
+library(gstat)
 data(meuse)
 coordinates(meuse) = ~x+y
 data(meuse.grid)

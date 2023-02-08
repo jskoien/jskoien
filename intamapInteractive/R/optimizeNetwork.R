@@ -40,12 +40,8 @@ function (observations, predGrid, candidates, method, action,
     }
     if (method == "spcov") {
         if (action == "add") {
-            if (requireNamespace("spcosa", quietly = TRUE)) {
               return(spCovAdd(observations, candidates, nDiff,
                   nGridCells, plotOptim, nTry))
-            } else {
-              stop("The package spcosa must be installed for adding points with the spcov method")
-            }
         }
         if (action == "del") {
             return(spCovDel(observations, candidates, nDiff,

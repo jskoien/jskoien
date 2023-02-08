@@ -272,6 +272,9 @@ varMat.list = function(object, object2=NULL, coor1, coor2, maxdist = Inf,
 
     
     fun = function(ia, d1, d2, coor1, coor2, equal, maxdist, debug.level) {    
+      if (debug.level > 10) {
+        print(paste("ia", typeof(ia)))
+      }
       t1 = proc.time()[[3]]
       ndim = length(d1)
       if (equal) {
@@ -296,7 +299,7 @@ varMat.list = function(object, object2=NULL, coor1, coor2, maxdist = Inf,
       list(lmat, lorder)
     }    
     if (equal) d2 = NULL
-    parallel::clusterExport(cl, c("d1", "d2", "coor1", "coor2", "equal", "maxdist", "fun", "debug.level"))
+    parallel::clusterExport(cl, c("d1", "d2", "coor1", "coor2", "equal", "maxdist", "fun", "debug.level"), envir = environment())
     vmll = parallel::clusterApplyLB(cl, 1:length(d1), d1 = d1, d2 = d2, coor1 = coor1, coor2 = coor2, 
                        equal = equal, maxdist = maxdist, fun = fun, debug.level = debug.level)
 

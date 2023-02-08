@@ -151,12 +151,13 @@ Pebesma, E., Cornford, D., Dubois, G., Heuvelink, G.B.M., Hristopulos, D., Pilz,
 \author{ Edzer Pebesma }
 
 \examples{
+\donttest{
 data(meuse)
 coordinates(meuse) = ~x+y
 meuse$value = meuse$zinc
 data(meuse.grid)
 gridded(meuse.grid) = ~x+y
 x = interpolate(meuse, meuse.grid, list(mean=TRUE, variance=TRUE))
-summary(t(x$outputTable))
+summary(t(x$outputTable))}
 }
 \keyword{spatial}

@@ -17,7 +17,7 @@ function (observations, predGrid, model, formulaString, fun, ...)
             dim(coordinates(obs))[1])))
       names(obs) = as.character(eq[[2]])
     }
-    red_ann_gam_krig = krige(eq, obs, prG, model)
+    red_ann_gam_krig = krige(eq, obs, prG, model, debug.level = 0)
     return(mean(red_ann_gam_krig$var1.var))
 }
 

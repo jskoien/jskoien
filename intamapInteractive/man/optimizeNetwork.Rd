@@ -130,8 +130,9 @@ Science, vol. 3., Elsevier, Amsterdam.
 \code{\link[spcosa:stratify-methods]{stratify}} }
 
 \examples{
-\dontrun{
+\donttest{
 # load data:
+library(gstat)
 data(meuse)
 coordinates(meuse) = ~x+y
 data(meuse.grid)

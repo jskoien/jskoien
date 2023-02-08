@@ -371,7 +371,7 @@ jpdf_old<-function(Rf,thetaf,Rest,thetaEst,N){
 
     maxV<-max(mesh$x[which(booleanC)])
     minV<-min(mesh$x[which(booleanC)])
-    print(paste("jpdf 95% R maximum ratio for statistical isotropy: ",maxV))
+    message(paste("jpdf 95% R maximum ratio for statistical isotropy: ",maxV))
     doRotation=(RRest>maxV || RRest<minV)
 #   doRotation=(max(mesh$x[which(booleanC)])<RRest)
         

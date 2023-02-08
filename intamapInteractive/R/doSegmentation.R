@@ -1,7 +1,7 @@
 doSegmentation<-function(object){
 #	ptm<-proc.time()
 	
-	print("Clustering - Segmentation")
+#	print("Clustering - Segmentation")
 	
   xy<-coordinates(object$observations)
 	dd<-cbind(xy[,1:2],object$observations$value)
@@ -180,8 +180,8 @@ segmentData<-function(ddd,pl=FALSE,dev=FALSE,soft=0.2,br){
 #      }
 
 	if(tim==1){
-    	print("Total")
-    	print(proc.time() - ptm)
+    	message("Total")
+    	message(proc.time() - ptm)
 	}
 	
 	

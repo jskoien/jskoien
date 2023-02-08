@@ -1,20 +1,5 @@
 [
     {
-        "file": "D:/GitHub/jskoien/rtop/src/registerDynamicSymbol.c",
-        "file_last_write": 1523024198.0,
-        "definitions": [
-            {
-                "usr": "c:@F@R_init_rtop",
-                "kind": 6,
-                "parent_name": "",
-                "name": "R_init_rtop(DllInfo *)",
-                "file": "D:/GitHub/jskoien/rtop/src/registerDynamicSymbol.c",
-                "line": 21,
-                "column": 6
-            }
-        ]
-    },
-    {
         "file": "D:/R/rtop/src/registerDynamicSymbol.c",
         "file_last_write": 1523024198.0,
         "definitions": [

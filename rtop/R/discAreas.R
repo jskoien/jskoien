@@ -128,7 +128,7 @@ rtopDisc.SpatialPolygons = function(object, params = list(), bb = bbox(object), 
       
       cl = rtopCluster(nclus, type = params$clusType, outfile = params$outfile)
 #      cl = rtopCluster(nclus, {require(rtop); bbArea = rtop:::bbArea}, type = params$clusType)
-      
+      parallel::clusterExport(cl, c("resol", "ires0", "bbdia", "small"), envir = environment())
       spp = parallel::clusterApply(cl, object@polygons, fun = function(x) lfun(x, resol, ires0, bbdia, small))
 
     } else {

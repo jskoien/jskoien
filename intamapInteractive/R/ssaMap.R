@@ -11,8 +11,7 @@ ssaMap = function(candidates, predGrid, model, max_points_shift, maxShiftFactorX
                   netPts, addPts, delPts, crit1, nn, action, nDiff, netPtsInit, 
                   nr_iterations, plotOptim,
                   formulaString = NULL, models, nmax = 200, coolingFactor = nr_iterations/10, 
-                  covariates = "over", countMax = 200, ...) {
-  
+                  covariates = "over", countMax = 200, fun, ...) {
   
  
   cnames = dimnames(coordinates(netPts))[[2]]
@@ -73,7 +72,7 @@ ssaMap = function(candidates, predGrid, model, max_points_shift, maxShiftFactorX
       delPts=rbind(oldDelPoints[which(selected_shifts_del>max_points_shift),],newDelPt)
       netPts=rbind(oldpoints[which(selected_shifts_net>max_points_shift),],oldDelPt)
       criterion = calculateMukv(observations = netPts, predGrid = predGrid, model = model, 
-                  formulaString = formulaString, ...)
+                  formulaString = formulaString, fun = fun, ...)
 
     } else if (action=="add") {
 # scenario of addition
@@ -137,10 +136,11 @@ ssaMap = function(candidates, predGrid, model, max_points_shift, maxShiftFactorX
         } else stop(paste("Not able to use method", covariates, "for interpolating covariates"))
       }
       criterion = calculateMukv(observations = netPts, predGrid = predGrid, model = model, 
-            formulaString = formulaString, ...)
+            formulaString = formulaString, fun = fun, ...)
       netPts <- as.data.frame(netPts) # need as dataframe for oldpoints
     }
-
+    lastPts = netPts
+    lastCrit = criterion
     p = runif(1) # to allow accepting an inferior design
     if (criterion <= oldcriterion){
       oldpoints = netPts
@@ -148,24 +148,24 @@ ssaMap = function(candidates, predGrid, model, max_points_shift, maxShiftFactorX
       oldcriterion = criterion
       nr_designs = nr_designs+1
       count = 0
-      cat("No improvement for",count,"iterations ")
-      cat("[Will stop at",countMax,"iterations with no improvement]", "\n")
+      message("No improvement for ", count, " iterations [Will stop at ", countMax, 
+              " iterations with no improvement]")
     } else if (criterion > oldcriterion & p <= (start_p*exp(-k/coolingFactor))){
       oldpoints = netPts
       if (action == "del") oldDelPoints = delPts
       oldcriterion = criterion
       nr_designs = nr_designs+1
       count = count + 1
-      cat("No improvement for",count,"iterations  p = ", p, "lim = ",start_p*exp(-k/coolingFactor) )
-      cat("[Will stop at",countMax,"iterations with no improvement]", "\n")
+      message("No improvement for ", count, " iterations  p = ", round(p, 3), " lim = ", round(start_p*exp(-k/coolingFactor), 3),
+            " [Will stop at ", countMax, " iterations with no improvement]")
     } else{
       criterion = oldcriterion
       if (action == "del") oldDelPt = oldDelPoints
       netPts = oldpoints
       nr_designs = nr_designs
       count = count + 1
-      cat("No improvement for",count,"iterations ")
-      cat("[Will stop at",countMax,"iterations with no improvement]", "\n")
+      message("No improvement for ", count, " iterations [Will stop at ", countMax,
+              " iterations with no improvement]")
     }
     criterionIterf[k] <- criterion
     if (criterion < bestCriterion/1.0000001) {
@@ -214,15 +214,17 @@ ssaMap = function(candidates, predGrid, model, max_points_shift, maxShiftFactorX
         }
         nr_designs = nr_designs + 1
         count = 0
-        cat("Reached countMax with suboptimal design, restarting with previously best design \n")
-        cat("No improvement for",count,"iterations ")
-        cat("[Will stop at",countMax,"iterations with no improvement]", "\n")
+        message("Reached countMax with suboptimal design, restarting with previously best design")
+        message("No improvement for ", count, " iterations [Will stop at", countMax,
+                 "iterations with no improvement]")
       } else break
     }
   } 
 
   if (!inherits(netPts,"Spatial")) coordinates(netPts) = cform
   attr(netPts,"criterion") = criterionIterf
+  attr(netPts, "lastPts") = lastPts
+  attr(netPts, "lastCrit") = lastCrit
   return(netPts)
 }
 

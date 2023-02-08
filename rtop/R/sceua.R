@@ -1,3 +1,6 @@
+
+
+
 sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.01,
     ngs = 5, npg = 5, nps = 5, nspl = 5, mings = 5, iniflg = 1, iprint = 0, iround = 3, 
     peps = 0.0001, plog = rep(FALSE,length(pars)), implicit = NULL, timeout = NULL, ...) {
@@ -55,16 +58,16 @@ sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.0
   stdinit = rep(1,npars)
   for (ii in ifelse(iniflg == 1,2,1):npt) {
     parset[ii,] = getpnt(idist = 1,lower,upper,stdinit,lower, implicit)
-    lpars = ifelse(plog,10^parset[ii,, drop = FALSE],parset[ii,, drop = FALSE])
+    lpars = ifelse(plog,10^parset[ii,],parset[ii,])
     xf[ii] = oofun(lpars)
     icall = icall + 1
     if (iprint > 0 && icall %% iprint == 0) cat(icall,round(xf[ii],iround), "\n")
   }
 
-  parset = parset[order(xf),, drop = FALSE]
+  parset = parset[order(xf),]
   xf = sort(xf)
-  bestpar = parset[1,, drop = FALSE]
-  worstpar = parset[npt,, drop = FALSE]
+  bestpar = parset[1,]
+  worstpar = parset[npt,]
   bestf = xf[1]
   worstf = xf[npt]
 
@@ -77,7 +80,7 @@ sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.0
     nloop = nloop + 1
     for (igs in 1:ngs) {
       karr = (c(1:npg)-1)*ngs + igs
-      cx = parset[karr,, drop = FALSE]
+      cx = parset[karr,]
       cf = xf[karr]
       for (loop in 1:nspl) {
         kpos = 1
@@ -90,7 +93,7 @@ sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.0
           if (kpos > nps) break 
         }
         lcs = sort(lcs)
-        soc = cx[lcs,, drop = FALSE]
+        soc = cx[lcs,]
         sf = cf[lcs]  
         cceout = cce(oofun, npars, nps = nps, soc = soc, sf = sf, lower = lower, 
                      upper = upper, parstd = parstd, icall = icall,
@@ -101,7 +104,7 @@ sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.0
         icall = cceout$icall
         cx[lcs,] = soc
         cf[lcs] = sf
-        cx = cx[order(cf),, drop = FALSE]
+        cx = cx[order(cf),]
         cf = sort(cf)
         if (!is.null(timeout)) 
           if (difftime(Sys.time() - tstart, "secs") > timeout)
@@ -112,10 +115,10 @@ sceua = function(OFUN, pars, lower, upper, maxn = 10000, kstop = 5, pcento = 0.0
       parset[karr,] = cx
       xf[karr] = cf
     }
-    parset = parset[order(xf),, drop = FALSE]
+    parset = parset[order(xf),]
     xf = sort(xf)
-    bestpar = parset[1,, drop = FALSE]
-    worstpar = parset[npt,, drop = FALSE]
+    bestpar = parset[1,]
+    worstpar = parset[npt,]
     bestf = xf[1]
     worstf = xf[npt]
     parsttout = parstt(npt,npars,parset,bound, peps)
@@ -150,7 +153,7 @@ comp = function(npars,npt,ngs,npg,parset,xf){
   for (igs in 1:ngs) {
     karr1 = (c(1:npg)-1)*ngs + igs
     karr2 = (c(1:npg)-1)*(ngs-1) + igs
-    xn[karr2,] = parset[karr1,, drop = FALSE]
+    xn[karr2,] = parset[karr1,]
     xfn[karr2] = xf[karr1]
   }
   return(list(parset = xn, xf = xfn))

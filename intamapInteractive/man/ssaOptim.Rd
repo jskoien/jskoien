@@ -48,11 +48,13 @@ ssaOptim(observations, predGrid, candidates, action, nDiff, model,
       higher numbers give slower cooling. }
 \item{covariates}{ character string defining whether possible covariates should be found 
          by "over" or "krige", see also details below }
+\item{fun}{A possibility so supply an alternative objective function, instead of 
+      \code{\link{calculateMukv}}. See details below.  }
 \item{...}{ other arguments to be passed on to lower level functions }
 }
 
 \details{
-This function applies spatial simulated annealing for the special case of 
+The default version of this function applies spatial simulated annealing for  
 optimization with the MUKV criterion (\code{\link{calculateMukv}}). 
 With covariates, the function takes a universal kriging model into account. 
 When optimizing a sampling design using SSA and \code{criterion = "mukv"}, 
@@ -88,7 +90,15 @@ estimate covariate values at new locations from predGrid. The first method is
 generally faster, the second method is most likely more exact, particularly if 
 the resolution of predGrid is low in relation to the spatial correlation lengths of the covariates. 
 Both methods are approximations that may influence the criterion used for 
-optimization with increasing numbers of points added. }
+optimization with increasing numbers of points added. 
+
+
+It is possible to submit an alternative function \code{fun} as objective function.
+This function should take at least the observation locations and the predGrid as input, and 
+return a value which should be minimized. See also  \code{\link{calculateMukv}} for more information
+about arguments to this function.
+
+}
 
 \value{
 SpatialPointsDataFrame with optimized locations
@@ -106,8 +116,9 @@ the spatial pattern of networks for monitoring radioactive releases, Computers a
 }
 \author{ O. Baume, S.J. Melles, J. Skoien }
 \examples{
-\dontrun{
+\donttest{
 # load data:
+library(gstat)
 data(meuse)
 coordinates(meuse) = ~x+y
 data(meuse.grid)

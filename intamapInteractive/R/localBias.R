@@ -66,8 +66,6 @@ localNetworkBias = function(localData,igid,formulaString,minKrige = 3,...)  {
 #    cat(paste(i,ig,"\n"))
 
     if (ndat > minKrige) varModel = autofitVariogram(formulaString,groupData,model="Sph")$var_model
-    print(ndat)
-    print(varModel)
     if (i == 1) {
       gdat = gstat(NULL,id = as.character(ig),formula = formulaString,model = varModel,data = groupData)
     } else {

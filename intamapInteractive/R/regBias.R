@@ -82,7 +82,7 @@ for (i in 1:(nRegCode-1)) {
 #        cat(paste(rci,rcj,dim(lbound)[1],dim(lbound),"\n"))
         xlinNew = SpatialLines(list(Lines(list(Line(coordinates(lbound))),ID = bord)))
         proj4string(xlinNew) = CRS(proj4string(boundaries))
-        cat(paste("interpolating border between ",rci,rcj,"\n"))
+        message(paste("interpolating border between ", rci, rcj))
         stri = krige(formulaString, localDatai,xlinNew,imod)
         strj = krige(formulaString, localDataj,xlinNew,jmod)
       }
