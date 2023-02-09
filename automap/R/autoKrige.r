@@ -53,9 +53,9 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
   	if (is(input_data, "Spatial")) p4s_obj1 = proj4string(input_data) else p4s_obj1 = st_crs(input_data)
     if (is(new_data, "Spatial")) p4s_obj2 = proj4string(new_data) else p4s_obj2 = st_crs(new_data)
   	if(!all(is.na(c(p4s_obj1, p4s_obj2)))) {
-  		if(is.na(p4s_obj1) & !is.na(p4s_obj2) & is(inpu_data, "Spatial")) proj4string(input_data) = proj4string(new_data)
+  		if(is.na(p4s_obj1) & !is.na(p4s_obj2) & is(input_data, "Spatial")) proj4string(input_data) = proj4string(new_data)
   		if(!is.na(p4s_obj1) & is.na(p4s_obj2) & is(input_data, "Spatial")) proj4string(new_data) = proj4string(input_data)
-  		if(is.na(p4s_obj1) & !is.na(p4s_obj2) & is(inpu_data, "sf")) st_crs(input_data) = st_crs(new_data)
+  		if(is.na(p4s_obj1) & !is.na(p4s_obj2) & is(input_data, "sf")) st_crs(input_data) = st_crs(new_data)
   		if(!is.na(p4s_obj1) & is.na(p4s_obj2) & is(input_data, "sf")) st_crs(new_data) = st_crs(input_data)
   		if (is(input_data, "Spatial")) {
     		if(any(!c(is.projected(input_data), is.projected(new_data)))) stop(paste(

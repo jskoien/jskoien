@@ -17,7 +17,7 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
       if(is.na(longlat)) longlat = FALSE
       diagonal = spDists(t(bbox(input_data)), longlat = longlat)[1,2]                # 0.35 times the length of the central axis through the area
     } else {
-      longlat = st_crs(input_data) == st_crs("+init=epsg:4326")   # sfTODO - missing longlat spDist
+      longlat = st_is_longlat(input_data)
       if (is.na(longlat)) longlat = FALSE
       bb = st_bbox(input_data)
       diagonal = sqrt(((bb$xmax-bb$xmin)^2)+((bb$ymax-bb$ymin)^2))

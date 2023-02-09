@@ -6,8 +6,7 @@ Author: Paul Hiemstra <p.h.hiemstra@gmail.com>
 Maintainer: Jon Olav Skoien <jon.skoien@gmail.com>
 Description: Performs an automatic interpolation by automatically estimating the variogram and then calling gstat.
 Depends: R (>= 2.10.0)
-Imports: gstat, lattice, reshape, methods, ggplot2, maptools, sp
-Suggests: sf (>= 0.7-2), stars (>= 0.3-0),
+Imports: gstat, lattice, reshape, methods, ggplot2, sp, sf, stars, graphics
 License: GPL
 Packaged: 2013-08-28 08:23:20 UTC; skoiejo
 NeedsCompilation: no

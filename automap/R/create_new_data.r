@@ -8,7 +8,7 @@ create_new_data = function(obj) {
   	new_data = spsample(d, 5000, type = "regular")
   	gridded(new_data) = TRUE
   } else {
-    convex_hull = st_convex_hull(st_union(mm))
+    convex_hull = st_convex_hull(st_union(obj))
     new_data = st_sample(convex_hull, 5000, type = "regular")
   }
 	return(new_data)
