@@ -1,6 +1,6 @@
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,6 +17,8 @@ Type 'q()' to quit R.
 
 > library(intamap)
 Loading required package: sp
+Warning message:
+package 'sp' was built under R version 4.2.2 
 > 
 > # observations = Something from Java...
 > # Until then we use the Meuse data:
@@ -85,21 +87,21 @@ Checking object ... OK
  Mean   :180051   Mean   :331946   Mean   :6.048   Mean   :0.10364  
  3rd Qu.:180572   3rd Qu.:332728   3rd Qu.:6.374   3rd Qu.:0.16456  
  Max.   :180572   Max.   :333509   Max.   :6.785   Max.   :0.33726  
-   excprob5.9        cumdistr5.9       quantile0.1         fat7         
- Min.   :0.000287   Min.   :0.01470   Min.   :4.783   Min.   :0.009495  
- 1st Qu.:0.427082   1st Qu.:0.03642   1st Qu.:5.525   1st Qu.:0.075707  
- Median :0.698870   Median :0.30113   Median :5.716   Median :0.164949  
- Mean   :0.611131   Mean   :0.38887   Mean   :5.693   Mean   :0.172652  
- 3rd Qu.:0.963581   3rd Qu.:0.57292   3rd Qu.:6.005   3rd Qu.:0.252298  
- Max.   :0.985297   Max.   :0.99971   Max.   :6.264   Max.   :0.380101  
-    fatVar7             blockMax      blockMaxVar         blockMin    
- Min.   :0.0003123   Min.   :6.755   Min.   :0.08544   Min.   :3.979  
- 1st Qu.:0.0030803   1st Qu.:7.466   1st Qu.:0.12191   1st Qu.:4.371  
- Median :0.0044864   Median :7.820   Median :0.17630   Median :4.454  
- Mean   :0.0143819   Mean   :7.713   Mean   :0.19836   Mean   :4.507  
- 3rd Qu.:0.0299516   3rd Qu.:8.151   3rd Qu.:0.24059   3rd Qu.:4.702  
- Max.   :0.0411645   Max.   :8.326   Max.   :0.41355   Max.   :4.954  
+   excprob5.9        cumdistr5.9       quantile0.1         fat7        
+ Min.   :0.000287   Min.   :0.01470   Min.   :4.783   Min.   :0.01747  
+ 1st Qu.:0.427082   1st Qu.:0.03642   1st Qu.:5.525   1st Qu.:0.09583  
+ Median :0.698870   Median :0.30113   Median :5.716   Median :0.15141  
+ Mean   :0.611131   Mean   :0.38887   Mean   :5.693   Mean   :0.16795  
+ 3rd Qu.:0.963581   3rd Qu.:0.57292   3rd Qu.:6.005   3rd Qu.:0.24177  
+ Max.   :0.985297   Max.   :0.99971   Max.   :6.264   Max.   :0.35838  
+    fatVar7             blockMax      blockMaxVar        blockMin    
+ Min.   :0.0005592   Min.   :6.935   Min.   :0.1121   Min.   :3.981  
+ 1st Qu.:0.0032834   1st Qu.:7.544   1st Qu.:0.1568   1st Qu.:4.351  
+ Median :0.0062627   Median :7.799   Median :0.1728   Median :4.459  
+ Mean   :0.0130755   Mean   :7.745   Mean   :0.2076   Mean   :4.502  
+ 3rd Qu.:0.0239857   3rd Qu.:8.104   3rd Qu.:0.2323   3rd Qu.:4.673  
+ Max.   :0.0381382   Max.   :8.265   Max.   :0.3682   Max.   :4.977  
 > 
 > proc.time()
    user  system elapsed 
-   3.03    0.12    3.15 
+   2.23    0.29    2.53 

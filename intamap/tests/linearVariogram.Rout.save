@@ -1,6 +1,6 @@
 
-R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
-Copyright (C) 2015 The R Foundation for Statistical Computing
+R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,6 +17,8 @@ Type 'q()' to quit R.
 
 > library(intamap)
 Loading required package: sp
+Warning message:
+package 'sp' was built under R version 4.2.2 
 > 
 > # set up data:
 > data(meuse)
@@ -46,6 +48,8 @@ Loading required package: sp
 +       		cumdistr = 6.6,
 +       		cumdistr = 7.9)
 + )
+[1] "rgdal is not installed, standardization of projections is not possible"
+[1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
 [1] "createIntamapObject: formulaString is missing, using:  value~1"
 > class(obj) = "linearVariogram"
 > 
@@ -58,52 +62,55 @@ Checking object ... OK
 > obj = estimateParameters(obj)
 > obj = spatialPredict(obj)
 > obj = postProcess(obj)
-Warning message:
-In spTransform(object$predictions, CRS(object$targetCRS)) :
-  Grid warping not available, coercing to points
+Loading required package: rgdal
+Warning messages:
+1: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called 'rgdal'
+2: In CPL_crs_from_input(x) :
+  GDAL Message 1: +init=epsg:XXXX syntax is deprecated. It might return a CRS with a non-EPSG compliant axis order.
 > output = obj$predictions
 > 
 > # generate some output:
 > summary(obj$predictions)
 Object of class SpatialPointsDataFrame
 Coordinates:
-      min     max
-x 4020670 4023754
-y 3102639 3106521
+              min     max
+coords.x1 4020598 4023682
+coords.x2 3102604 3106476
 Is projected: TRUE 
 proj4string :
-[+init=epsg:3035 +proj=laea +lat_0=52 +lon_0=10 +x_0=4321000
-+y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs]
-Number of points: 193
+[+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80
++units=m +no_defs]
+Number of points: 195
 Data attributes:
-   var1.pred        var1.var     
- Min.   :4.611   Min.   : 17.78  
- 1st Qu.:5.195   1st Qu.: 67.62  
- Median :5.517   Median : 93.45  
- Mean   :5.688   Mean   :114.82  
- 3rd Qu.:6.222   3rd Qu.:141.10  
- Max.   :7.483   Max.   :421.72  
+   var1.pred        var1.var      
+ Min.   :4.592   Min.   :  5.568  
+ 1st Qu.:5.194   1st Qu.: 68.524  
+ Median :5.513   Median : 94.766  
+ Mean   :5.683   Mean   :119.007  
+ 3rd Qu.:6.176   3rd Qu.:148.064  
+ Max.   :7.364   Max.   :438.732  
 > gridded(output) = FALSE
 > summary(output)
 Object of class SpatialPointsDataFrame
 Coordinates:
-      min     max
-x 4020670 4023754
-y 3102639 3106521
+              min     max
+coords.x1 4020598 4023682
+coords.x2 3102604 3106476
 Is projected: TRUE 
 proj4string :
-[+init=epsg:3035 +proj=laea +lat_0=52 +lon_0=10 +x_0=4321000
-+y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs]
-Number of points: 193
+[+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80
++units=m +no_defs]
+Number of points: 195
 Data attributes:
-   var1.pred        var1.var     
- Min.   :4.611   Min.   : 17.78  
- 1st Qu.:5.195   1st Qu.: 67.62  
- Median :5.517   Median : 93.45  
- Mean   :5.688   Mean   :114.82  
- 3rd Qu.:6.222   3rd Qu.:141.10  
- Max.   :7.483   Max.   :421.72  
+   var1.pred        var1.var      
+ Min.   :4.592   Min.   :  5.568  
+ 1st Qu.:5.194   1st Qu.: 68.524  
+ Median :5.513   Median : 94.766  
+ Mean   :5.683   Mean   :119.007  
+ 3rd Qu.:6.176   3rd Qu.:148.064  
+ Max.   :7.364   Max.   :438.732  
 > 
 > proc.time()
    user  system elapsed 
-   2.48    0.26    2.75 
+   1.56    0.23    1.82 

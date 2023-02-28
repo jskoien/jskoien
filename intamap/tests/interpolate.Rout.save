@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -19,37 +19,50 @@ Type 'q()' to quit R.
 > set.seed(15331)
 > library(intamap)
 Loading required package: sp
+Warning message:
+package 'sp' was built under R version 4.2.2 
 > library(automap)
 > library(gstat)
+Warning message:
+package 'gstat' was built under R version 4.2.2 
 > library(psgp)
 > #loadMeuse()
 > 
 > sessionInfo()
-R version 3.4.3 (2017-11-30)
+R version 4.2.1 (2022-06-23 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 16299)
+Running under: Windows 10 x64 (build 19044)
 
 Matrix products: default
 
 locale:
 [1] LC_COLLATE=C                          
-[2] LC_CTYPE=English_United States.1252   
-[3] LC_MONETARY=English_United States.1252
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
 [4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.1252    
+[5] LC_TIME=English_United States.utf8    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] psgp_0.3-8     gstat_1.1-5    automap_1.0-14 intamap_1.4-7  sp_1.2-5      
+[1] psgp_0.3-19    gstat_2.1-0    automap_1.0-16 intamap_1.4-16 sp_1.6-0      
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.14      codetools_0.2-15  lattice_0.20-35   intervals_0.15.1 
- [5] mvtnorm_1.0-6     FNN_1.1           reshape_0.8.7     spacetime_1.2-1  
- [9] zoo_1.8-0         foreach_1.4.3     MASS_7.3-47       grid_3.4.3       
-[13] plyr_1.8.4        doParallel_1.0.11 xts_0.10-0        rgdal_1.2-16     
-[17] iterators_1.0.8   parallel_3.4.3    compiler_3.4.3    evd_2.3-2        
+ [1] Rcpp_1.0.10        MBA_0.1-0          pillar_1.8.1       compiler_4.2.1    
+ [5] plyr_1.8.8         iterators_1.0.14   class_7.3-21       tools_4.2.1       
+ [9] xts_0.12.2         evd_2.3-6.1        gtable_0.3.1       lifecycle_1.0.3   
+[13] tibble_3.1.8       lattice_0.20-45    pkgconfig_2.0.3    rlang_1.0.6       
+[17] foreach_1.5.2      DBI_1.1.3          cli_3.6.0          parallel_4.2.1    
+[21] mvtnorm_1.1-3      e1071_1.7-13       dplyr_1.1.0        generics_0.1.3    
+[25] vctrs_0.5.2        classInt_0.4-8     grid_4.2.1         tidyselect_1.2.0  
+[29] spacetime_1.2-8    reshape_0.8.9      glue_1.6.2         sf_1.0-9          
+[33] R6_2.5.1           fansi_1.0.4        ggplot2_3.4.0      magrittr_2.0.3    
+[37] codetools_0.2-19   MASS_7.3-58.2      scales_1.2.1       intervals_0.15.2  
+[41] units_0.8-1        colorspace_2.1-0   utf8_1.2.3         KernSmooth_2.23-20
+[45] proxy_0.4-27       doParallel_1.0.17  munsell_0.5.0      FNN_1.1.3.1       
+[49] zoo_1.8-11        
+> 
 > 
 > crs = CRS("+init=epsg:28992 +proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.417,50.3319,465.552,-0.398957,0.343988,-1.8774,4.0725 +units=m +no_defs")
 > data("meuse")
@@ -63,46 +76,52 @@ loaded via a namespace (and not attached):
 > meuse$value = log(meuse$zinc)
 > meuse.grid = meuse.grid[sample(1:dim(meuse.grid)[1], 100),]
 > output = interpolate(meuse, meuse.grid, list(mean=T, variance=T, nsim = 5), methodName = "automap")
-R 2018-02-21 16:34:13 interpolating 155 observations, 100 prediction locations
+R 2023-02-14 14:48:59 interpolating 155 observations, 100 prediction locations
+[1] "rgdal is not installed, standardization of projections is not possible"
+[1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
 Checking object ... OK
-Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+Warning messages:
+1: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
   
  using standard model for estimating time. For better 
  platform spesific predictions, please run 
  timeModels <- generateTimeModels()
   and save the workspace
+2: In CPL_crs_from_input(x) :
+  GDAL Message 1: +init=epsg:XXXX syntax is deprecated. It might return a CRS with a non-EPSG compliant axis order.
 > summary(t(output$outputTable), digits = 4)
-       x                y               mean          variance     
- Min.   :178500   Min.   :329620   Min.   :4.804   Min.   :0.0778  
- 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.202   1st Qu.:0.1243  
- Median :179820   Median :330780   Median :5.485   Median :0.1445  
- Mean   :179850   Mean   :331028   Mean   :5.670   Mean   :0.1677  
- 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.138   3rd Qu.:0.1917  
- Max.   :181460   Max.   :333620   Max.   :7.321   Max.   :0.4220  
+       x                y               mean          variance      
+ Min.   :178500   Min.   :329700   Min.   :4.812   Min.   :0.08335  
+ 1st Qu.:179330   1st Qu.:330540   1st Qu.:5.239   1st Qu.:0.12361  
+ Median :180060   Median :331140   Median :5.523   Median :0.14205  
+ Mean   :179994   Mean   :331338   Mean   :5.663   Mean   :0.16902  
+ 3rd Qu.:180670   3rd Qu.:332150   3rd Qu.:6.203   3rd Qu.:0.19770  
+ Max.   :181300   Max.   :333380   Max.   :6.770   Max.   :0.36419  
       sim1            sim2            sim3            sim4      
- Min.   :4.464   Min.   :4.149   Min.   :4.287   Min.   :4.008  
- 1st Qu.:5.240   1st Qu.:5.115   1st Qu.:5.089   1st Qu.:5.320  
- Median :5.639   Median :5.575   Median :5.663   Median :5.756  
- Mean   :5.742   Mean   :5.645   Mean   :5.644   Mean   :5.771  
- 3rd Qu.:6.257   3rd Qu.:6.099   3rd Qu.:6.162   3rd Qu.:6.124  
- Max.   :7.462   Max.   :7.346   Max.   :7.753   Max.   :7.625  
+ Min.   :4.643   Min.   :4.305   Min.   :4.361   Min.   :4.291  
+ 1st Qu.:5.290   1st Qu.:5.004   1st Qu.:5.082   1st Qu.:5.154  
+ Median :5.678   Median :5.615   Median :5.693   Median :5.678  
+ Mean   :5.780   Mean   :5.637   Mean   :5.730   Mean   :5.702  
+ 3rd Qu.:6.218   3rd Qu.:6.088   3rd Qu.:6.319   3rd Qu.:6.240  
+ Max.   :7.204   Max.   :7.226   Max.   :7.446   Max.   :7.358  
       sim5      
- Min.   :3.866  
- 1st Qu.:5.283  
- Median :5.840  
- Mean   :5.817  
- 3rd Qu.:6.255  
- Max.   :8.018  
+ Min.   :4.182  
+ 1st Qu.:5.257  
+ Median :5.688  
+ Mean   :5.673  
+ 3rd Qu.:6.169  
+ Max.   :7.252  
 > 
 > output = interpolate(meuse, meuse.grid,
 +     optList = list(idpRange = seq(0.1, 2.9, 0.5), nfold = 3), 
 +     outputWhat = list(mean=TRUE), methodName = "idw")
-R 2018-02-21 16:34:14 interpolating 155 observations, 100 prediction locations
+R 2023-02-14 14:48:59 interpolating 155 observations, 100 prediction locations
+[1] "rgdal is not installed, standardization of projections is not possible"
+[1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
 Checking object ... OK
-[1] "best idp value found is 2.6 rmse 0.460976071935718"
+[1] "best idp value found is 2.6 rmse 0.471806664612396"
 Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
   
  using standard model for estimating time. For better 
  platform spesific predictions, please run 
@@ -110,32 +129,34 @@ In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLo
   and save the workspace
 > summary(t(output$outputTable), digits = 4)
        x                y               mean      
- Min.   :178500   Min.   :329620   Min.   :4.863  
- 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.315  
- Median :179820   Median :330780   Median :5.574  
- Mean   :179850   Mean   :331028   Mean   :5.685  
- 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.093  
- Max.   :181460   Max.   :333620   Max.   :7.114  
+ Min.   :178500   Min.   :329700   Min.   :4.786  
+ 1st Qu.:179330   1st Qu.:330540   1st Qu.:5.348  
+ Median :180060   Median :331140   Median :5.601  
+ Mean   :179994   Mean   :331338   Mean   :5.691  
+ 3rd Qu.:180670   3rd Qu.:332150   3rd Qu.:6.100  
+ Max.   :181300   Max.   :333380   Max.   :6.746  
 > 
 > 
 > output = interpolate(meuse, meuse.grid, list(mean=T, variance=T),methodName = "transGaussian")
-R 2018-02-21 16:34:15 interpolating 155 observations, 100 prediction locations
+R 2023-02-14 14:49:00 interpolating 155 observations, 100 prediction locations
+[1] "rgdal is not installed, standardization of projections is not possible"
+[1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
 Checking object ... OK
 Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
   
  using standard model for estimating time. For better 
  platform spesific predictions, please run 
  timeModels <- generateTimeModels()
   and save the workspace
 > summary(t(output$outputTable), digits = 4)
-       x                y               mean          variance      
- Min.   :178500   Min.   :329620   Min.   :4.811   Min.   :0.06306  
- 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.217   1st Qu.:0.10706  
- Median :179820   Median :330780   Median :5.493   Median :0.12807  
- Mean   :179850   Mean   :331028   Mean   :5.660   Mean   :0.14978  
- 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.113   3rd Qu.:0.17678  
- Max.   :181460   Max.   :333620   Max.   :7.376   Max.   :0.34441  
+       x                y               mean          variance     
+ Min.   :178500   Min.   :329700   Min.   :4.811   Min.   :0.0611  
+ 1st Qu.:179330   1st Qu.:330540   1st Qu.:5.262   1st Qu.:0.1076  
+ Median :180060   Median :331140   Median :5.521   Median :0.1297  
+ Mean   :179994   Mean   :331338   Mean   :5.653   Mean   :0.1471  
+ 3rd Qu.:180670   3rd Qu.:332150   3rd Qu.:6.192   3rd Qu.:0.1763  
+ Max.   :181300   Max.   :333380   Max.   :6.764   Max.   :0.3693  
 > 
 > 
 > set.seed(15331)
@@ -147,126 +168,16 @@ In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLo
 > gridded(mgrid) = TRUE
 > output1 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
 +                      methodName = "copula")
-R 2018-02-21 16:34:17 interpolating 30 observations, 12 prediction locations
+R 2023-02-14 14:49:00 interpolating 30 observations, 12 prediction locations
 Checking object ... OK
-There were 50 or more warnings (use warnings() to see the first 50)
+There were 31 warnings (use warnings() to see them)
 > 
 > output2 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
 +                      methodName = "copula",optList = list(methodParameters = output1$methodParameters))
-R 2018-02-21 16:34:22 interpolating 30 observations, 12 prediction locations
-Checking object ... OK
-There were 50 or more warnings (use warnings() to see the first 50)
-> 
-> output3 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
-+                      methodName = "automap",optList = list(model = c("Exp", "Sph")), cv = TRUE)
-R 2018-02-21 16:34:23 interpolating 30 observations, 12 prediction locations
-Checking object ... OK
-Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  
- using standard model for estimating time. For better 
- platform spesific predictions, please run 
- timeModels <- generateTimeModels()
-  and save the workspace
-> 
-> output4 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
-+                       methodName = "psgp", cv = TRUE)
-R 2018-02-21 16:34:23 interpolating 30 observations, 12 prediction locations
-Checking object ... OK
-Range: 2454.542191
-Sill: 347123.595613
-Nugget: 6443.708980
-Bias: 0.002455
-No noise model specified
-Defaulting to GAUSSIAN with variance 64.437090
-Processing observation: 1/30Processing observation: 2/30Processing observation: 3/30Processing observation: 4/30Processing observation: 5/30Processing observation: 6/30Processing observation: 7/30Processing observation: 8/30Processing observation: 9/30Processing observation: 10/30Processing observation: 11/30Processing observation: 12/30Processing observation: 13/30Processing observation: 14/30Processing observation: 15/30Processing observation: 16/30Processing observation: 17/30Processing observation: 18/30Processing observation: 19/30Processing observation: 20/30Processing observation: 21/30Processing observation: 22/30Processing observation: 23/30Processing observation: 24/30Processing observation: 25/30Processing observation: 26/30Processing observation: 27/30Processing observation: 28/30Processing observation: 29/30Processing observation: 30/30Processing observation: 1/30Processing observation: 2/30Processing observation: 3/30Processing observation: 4/30Processing observation: 5/30Processing observation: 6/30Processing observation: 7/30Processing observation: 8/30Processing observation: 9/30Processing observation: 10/30Processing observation: 11/30Processing observation: 12/30Processing observation: 13/30Processing observation: 14/30Processing observation: 15/30Processing observation: 16/30Processing observation: 17/30Processing observation: 18/30Processing observation: 19/30Processing observation: 20/30Processing observation: 21/30Processing observation: 22/30Processing observation: 23/30Processing observation: 24/30Processing observation: 25/30Processing observation: 26/30Processing observation: 27/30Processing observation: 28/30Processing observation: 29/30Processing observation: 30/30Covariance function : Sum
-+ Component: 1
-   Covariance function : Isotropic Exponential
-   Range  (P0) :2454.542191
-   Variance  (P1) :347123.595613
-+ Component: 2
-   Covariance function : Matern 5/2 covariance function
-   Length scale  (P0) :2454.542191
-   Variance  (P1) :347123.595613
-+ Component: 3
-   Covariance function : Constant
-   Amplitude  (P0) :0.002455
-+ Component: 4
-   Covariance function : White noise
-   Variance  (P0) :6443.708980
-Finding optimal parametersCycle 1   Error 205.939614  Scale 1.000000
-Cycle 2   Error 205.393077  Scale 0.500000
-Cycle 3   Error 205.314162  Scale 0.250000
-Cycle 4   Error 204.864773  Scale 0.125000
-Cycle 5   Error 204.811236  Scale 0.062500
-Warning: Maximum number of iterations has been exceeded
-Cycle 1   Error 204.782280  Scale 1.000000
-Cycle 2   Error 204.487821  Scale 0.500000
-Cycle 3   Error 204.463454  Scale 0.250000
-Cycle 4   Error 204.242752  Scale 0.125000
-Cycle 5   Error 204.203175  Scale 0.062500
-Warning: Maximum number of iterations has been exceeded
-Cycle 1   Error 204.196422  Scale 1.000000
-Cycle 2   Error 204.177304  Scale 0.500000
-Cycle 3   Error 204.175019  Scale 0.250000
-Cycle 4   Error 204.146334  Scale 0.125000
-Cycle 5   Error 204.141868  Scale 0.062500
-Warning: Maximum number of iterations has been exceeded
-Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  
- using standard model for estimating time. For better 
- platform spesific predictions, please run 
- timeModels <- generateTimeModels()
-  and save the workspace
-> 
-> output5 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), cv = TRUE, methodName = "automap")
-R 2018-02-21 16:34:24 interpolating 30 observations, 12 prediction locations
-Checking object ... OK
-Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  
- using standard model for estimating time. For better 
- platform spesific predictions, please run 
- timeModels <- generateTimeModels()
-  and save the workspace
-> output6 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), optList = list(variogramModel = output5$variogramModel),
-+                       cv = TRUE)
-R 2018-02-21 16:34:25 interpolating 30 observations, 12 prediction locations
+R 2023-02-14 14:49:00 interpolating 30 observations, 12 prediction locations
 Checking object ... OK
 Warning messages:
-1: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  
- using standard model for estimating time. For better 
- platform spesific predictions, please run 
- timeModels <- generateTimeModels()
-  and save the workspace
-2: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  Could not find time model for method spatialPredict_automatic
-3: In interpolate(meuse, mgrid, list(mean = T, variance = T, excprob = 1000,  :
-  was not able to estimate prediction time for methodName automatic
-> output6$variogramModel$range[2] = 1000
-> output7 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), 
-+                       cv = TRUE, optList = list(variogramModel = output6$variogramModel))
-R 2018-02-21 16:34:25 interpolating 30 observations, 12 prediction locations
-Checking object ... OK
-Warning messages:
-1: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  
- using standard model for estimating time. For better 
- platform spesific predictions, please run 
- timeModels <- generateTimeModels()
-  and save the workspace
-2: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
-  Could not find time model for method spatialPredict_automatic
-3: In interpolate(meuse, mgrid, list(mean = T, variance = T, excprob = 1000,  :
-  was not able to estimate prediction time for methodName automatic
-> output8 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), 
-+                       cv = TRUE, optList = list(nclus = 4), methodName = "automap")
-R 2018-02-21 16:34:25 interpolating 30 observations, 12 prediction locations
-Checking object ... OK
-Warning messages:
-1: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+1: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
   
  using standard model for estimating time. For better 
  platform spesific predictions, please run 
@@ -275,35 +186,151 @@ Warning messages:
 2: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
   pseudoinverse used at 30
 3: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  neighborhood radius 1970
+  neighborhood radius 30
 4: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  reciprocal condition number  0
+  reciprocal condition number  1.1985e-16
 5: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  at  0.014316 0.0017603
+  pseudoinverse used at 30
 6: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  radius  8.8115
+  neighborhood radius 30
 7: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  all data on boundary of neighborhood. make span bigger
+  reciprocal condition number  1.1985e-16
+> 
+> output3 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
++                      methodName = "automap",optList = list(model = c("Exp", "Sph")), cv = TRUE)
+R 2023-02-14 14:49:00 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> 
+> output4 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5),
++                       methodName = "psgp", cv = TRUE)
+R 2023-02-14 14:49:01 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Range: 1329.05
+Sill: 418302.20
+Nugget: 40258.18
+Bias: 0.00
+No noise model specified
+Defaulting to GAUSSIAN with variance 402.58
+Processing observation: 1/30Processing observation: 2/30Processing observation: 3/30Processing observation: 4/30Processing observation: 5/30Processing observation: 6/30Processing observation: 7/30Processing observation: 8/30Processing observation: 9/30Processing observation: 10/30Processing observation: 11/30Processing observation: 12/30Processing observation: 13/30Processing observation: 14/30Processing observation: 15/30Processing observation: 16/30Processing observation: 17/30Processing observation: 18/30Processing observation: 19/30Processing observation: 20/30Processing observation: 21/30Processing observation: 22/30Processing observation: 23/30Processing observation: 24/30Processing observation: 25/30Processing observation: 26/30Processing observation: 27/30Processing observation: 28/30Processing observation: 29/30Processing observation: 30/30Processing observation: 1/30Processing observation: 2/30Processing observation: 3/30Processing observation: 4/30Processing observation: 5/30Processing observation: 6/30Processing observation: 7/30Processing observation: 8/30Processing observation: 9/30Processing observation: 10/30Processing observation: 11/30Processing observation: 12/30Processing observation: 13/30Processing observation: 14/30Processing observation: 15/30Processing observation: 16/30Processing observation: 17/30Processing observation: 18/30Processing observation: 19/30Processing observation: 20/30Processing observation: 21/30Processing observation: 22/30Processing observation: 23/30Processing observation: 24/30Processing observation: 25/30Processing observation: 26/30Processing observation: 27/30Processing observation: 28/30Processing observation: 29/30Processing observation: 30/30Covariance function : Sum
++ Component: 1
+   Covariance function : Isotropic Exponential
+   Range  (P0) :1329.047
+   Variance  (P1) :418302.196
++ Component: 2
+   Covariance function : Matern 5/2 covariance function
+   Length scale  (P0) :1329.047
+   Variance  (P1) :418302.196
++ Component: 3
+   Covariance function : Constant
+   Amplitude  (P0) :0.002
++ Component: 4
+   Covariance function : White noise
+   Variance  (P0) :40258.184
+Finding optimal parametersCycle 1   Error 217.261221  Scale 1.000000
+Cycle 2   Error 215.749119  Scale 0.500000
+Cycle 3   Error 214.364178  Scale 0.250000
+Cycle 4   Error 214.241191  Scale 0.125000
+Cycle 5   Error 214.204044  Scale 0.062500
+Warning: Maximum number of iterations has been exceeded
+Cycle 1   Error 214.198531  Scale 1.000000
+Cycle 2   Error 214.175453  Scale 0.500000
+Cycle 3   Error 214.169919  Scale 0.250000
+Cycle 4   Error 214.155310  Scale 0.125000
+Cycle 5   Error 214.153870  Scale 0.062500
+Warning: Maximum number of iterations has been exceeded
+Cycle 1   Error 214.153488  Scale 1.000000
+Cycle 2   Error 214.152532  Scale 0.500000
+Cycle 3   Error 214.152440  Scale 0.250000
+Cycle 4   Error 214.151971  Scale 0.125000
+Cycle 5   Error 214.151840  Scale 0.062500
+Warning: Maximum number of iterations has been exceeded
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> 
+> output5 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), cv = TRUE, methodName = "automap")
+R 2023-02-14 14:49:01 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+> output6 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), optList = list(variogramModel = output5$variogramModel),
++                       cv = TRUE)
+R 2023-02-14 14:49:01 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Warning messages:
+1: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+2: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  Could not find time model for method spatialPredict_automatic
+3: In interpolate(meuse, mgrid, list(mean = T, variance = T, excprob = 1000,  :
+  was not able to estimate prediction time for methodName automatic
+> output6$variogramModel$range[2] = 1000
+> output7 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), 
++                       cv = TRUE, optList = list(variogramModel = output6$variogramModel))
+R 2023-02-14 14:49:01 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Warning messages:
+1: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+2: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  Could not find time model for method spatialPredict_automatic
+3: In interpolate(meuse, mgrid, list(mean = T, variance = T, excprob = 1000,  :
+  was not able to estimate prediction time for methodName automatic
+> output8 = interpolate(meuse, mgrid, list(mean=T, variance=T, excprob = 1000,quantile = 0.5), 
++                       cv = TRUE, optList = list(nclus = 4), methodName = "automap")
+R 2023-02-14 14:49:02 interpolating 30 observations, 12 prediction locations
+Checking object ... OK
+Warning message:
+In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
 > 
 > all.equal(output5$predictions, output6$predictions) # Should be the same
 [1] TRUE
 > all.equal(output5$predictions, output8$predictions) # Should be the same
 [1] TRUE
 > all.equal(output5$predictions, output7$predictions)  # Should be different
-[1] "Attributes: < Component \"data\": Component \"var1.pred\": Mean relative difference: 0.1812176 >"
-[2] "Attributes: < Component \"data\": Component \"var1.var\": Mean relative difference: 2.702269 >"  
-[3] "Attributes: < Component \"data\": Component \"residual\": Mean relative difference: 0.423019 >"  
-[4] "Attributes: < Component \"data\": Component \"zscore\": Mean relative difference: 0.6659977 >"   
+[1] "Attributes: < Component \"data\": Component \"var1.pred\": Mean relative difference: 0.09743593 >"
+[2] "Attributes: < Component \"data\": Component \"var1.var\": Mean relative difference: 0.261375 >"   
+[3] "Attributes: < Component \"data\": Component \"residual\": Mean relative difference: 0.228149 >"   
+[4] "Attributes: < Component \"data\": Component \"zscore\": Mean relative difference: 0.279825 >"     
 > 
 > 
 > summary(t(output$outputTable), digits = 4)
-       x                y               mean          variance      
- Min.   :178500   Min.   :329620   Min.   :4.811   Min.   :0.06306  
- 1st Qu.:179290   1st Qu.:330220   1st Qu.:5.217   1st Qu.:0.10706  
- Median :179820   Median :330780   Median :5.493   Median :0.12807  
- Mean   :179850   Mean   :331028   Mean   :5.660   Mean   :0.14978  
- 3rd Qu.:180280   3rd Qu.:331780   3rd Qu.:6.113   3rd Qu.:0.17678  
- Max.   :181460   Max.   :333620   Max.   :7.376   Max.   :0.34441  
+       x                y               mean          variance     
+ Min.   :178500   Min.   :329700   Min.   :4.811   Min.   :0.0611  
+ 1st Qu.:179330   1st Qu.:330540   1st Qu.:5.262   1st Qu.:0.1076  
+ Median :180060   Median :331140   Median :5.521   Median :0.1297  
+ Mean   :179994   Mean   :331338   Mean   :5.653   Mean   :0.1471  
+ 3rd Qu.:180670   3rd Qu.:332150   3rd Qu.:6.192   3rd Qu.:0.1763  
+ Max.   :181300   Max.   :333380   Max.   :6.764   Max.   :0.3693  
 > 
 > output2$outputTable - output1$outputTable
             [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
@@ -320,52 +347,52 @@ attr(,"transposed")
 Object of class SpatialPointsDataFrame
 Coordinates:
      min    max
-x 178605 181352
-y 329714 333252
+x 178912 181352
+y 329714 333611
 Is projected: NA 
 proj4string : [NA]
 Number of points: 30
 Data attributes:
-   var1.pred         var1.var         observed         residual      
- Min.   : 98.05   Min.   : 13359   Min.   : 119.0   Min.   :-282.03  
- 1st Qu.:220.53   1st Qu.: 24684   1st Qu.: 170.2   1st Qu.:-100.03  
- Median :331.42   Median : 30544   Median : 232.5   Median : -36.15  
- Mean   :371.21   Mean   : 34510   Mean   : 407.3   Mean   :  36.12  
- 3rd Qu.:504.40   3rd Qu.: 37104   3rd Qu.: 552.0   3rd Qu.:  88.24  
- Max.   :985.03   Max.   :108562   Max.   :1672.0   Max.   :1333.04  
-     zscore        
- Min.   :-1.54120  
- 1st Qu.:-0.53970  
- Median :-0.17996  
- Mean   : 0.07466  
- 3rd Qu.: 0.55992  
- Max.   : 4.04579  
+   var1.pred         var1.var         observed         residual       
+ Min.   : 102.9   Min.   : 60071   Min.   : 113.0   Min.   :-554.140  
+ 1st Qu.: 254.9   1st Qu.: 72990   1st Qu.: 195.5   1st Qu.:-127.947  
+ Median : 451.1   Median : 88288   Median : 311.0   Median :   1.718  
+ Mean   : 501.2   Mean   : 99497   Mean   : 510.3   Mean   :   9.057  
+ 3rd Qu.: 665.4   3rd Qu.:105580   3rd Qu.: 692.0   3rd Qu.:  87.583  
+ Max.   :1257.1   Max.   :326039   Max.   :1571.0   Max.   : 618.833  
+     zscore         
+ Min.   :-1.650533  
+ 1st Qu.:-0.412824  
+ Median : 0.006141  
+ Mean   : 0.009715  
+ 3rd Qu.: 0.287125  
+ Max.   : 1.585608  
 > summary(output4$predictions, digits = 4)
 Object of class SpatialPointsDataFrame
 Coordinates:
      min    max
-x 178605 181352
-y 329714 333252
+x 178912 181352
+y 329714 333611
 Is projected: NA 
 proj4string : [NA]
 Number of points: 30
 Data attributes:
-   var1.pred          var1.var         observed         residual        
- Min.   :  71.73   Min.   :  2029   Min.   : 119.0   Min.   :-374.0992  
- 1st Qu.: 183.77   1st Qu.:  8865   1st Qu.: 170.2   1st Qu.: -50.1979  
- Median : 291.66   Median : 13955   Median : 232.5   Median :  -0.0599  
- Mean   : 351.31   Mean   : 26301   Mean   : 407.3   Mean   :  56.0221  
- 3rd Qu.: 509.85   3rd Qu.: 24385   3rd Qu.: 552.0   3rd Qu.:  94.8679  
- Max.   :1077.10   Max.   :212927   Max.   :1672.0   Max.   :1136.5524  
-     zscore       
- Min.   :-2.7364  
- 1st Qu.:-0.4616  
- Median :-0.0386  
- Mean   : 0.1271  
- 3rd Qu.: 0.8402  
- Max.   : 2.9196  
+   var1.pred         var1.var         observed         residual       
+ Min.   : 106.0   Min.   :  9663   Min.   : 113.0   Min.   :-610.893  
+ 1st Qu.: 210.4   1st Qu.: 21673   1st Qu.: 195.5   1st Qu.: -49.482  
+ Median : 347.2   Median : 42284   Median : 311.0   Median :  -6.026  
+ Mean   : 498.6   Mean   : 61289   Mean   : 510.3   Mean   :  11.617  
+ 3rd Qu.: 657.9   3rd Qu.: 70108   3rd Qu.: 692.0   3rd Qu.: 118.678  
+ Max.   :1510.5   Max.   :277678   Max.   :1571.0   Max.   : 489.165  
+     zscore        
+ Min.   :-2.80592  
+ 1st Qu.:-0.18067  
+ Median :-0.04791  
+ Mean   : 0.04368  
+ 3rd Qu.: 0.55660  
+ Max.   : 2.48307  
 > 
 > 
 > proc.time()
    user  system elapsed 
-  14.43    0.56   14.95 
+   4.01    0.45    4.45 
