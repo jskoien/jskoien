@@ -27,7 +27,7 @@
     \item{input_data}{An object of the 
 	            \link[sp]{SpatialPointsDataFrame-class} or \link[sf]{sf} 
 	                 containing the data to be interpolated.}
-    \item{new_data}{A \code{sp}, \code{sf} or \code{\link[star]{star}} object containing the 
+    \item{new_data}{A \code{sp}, \code{sf} or \code{stars} (\code{\link[stars]{st_as_stars}}) object containing the 
         prediction locations. \code{new_data} can be
 				a points set, a grid or a polygon. Must not contain NA's. If this object is not provided
 				a default is calculated. This is done by taking the convex hull of \code{input_data} and 
@@ -87,7 +87,7 @@ and \code{sserr} respectively.
 \seealso{\code{\link{autofitVariogram}}, \code{\link[gstat]{krige}}}
 \examples{
 # Data preparation
-\dontrun{
+\donttest{
 library(sp)
 data(meuse)
 coordinates(meuse) =~ x+y

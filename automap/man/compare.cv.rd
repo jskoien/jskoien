@@ -82,9 +82,8 @@ compare.cv(kr.cv, kr_dist.cv, kr_dist_ffreq.cv,
            bubbleplots = TRUE, col.names = c("OK","UK1","UK2"), 
            plot.diff = TRUE)
 
-# I recently added a new bubble plot that uses ggplot
-# I find it preferable, note that it requires ggplot2.
-\dontrun{
+# The following bubble plot requires ggplot2.
+\donttest{
 compare.cv(kr.cv, kr_dist.cv, kr_dist_ffreq.cv, 
            bubbleplots = TRUE, col.names = c("OK","UK1","UK2"), 
            ggplot = TRUE)
