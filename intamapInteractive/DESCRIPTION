@@ -1,6 +1,6 @@
 Package: intamapInteractive
-Version: 1.1-18
-Date: 2022-16-05
+Version: 1.2-1
+Date: 2023-02-17
 Title: Interactive Add-on Functionality for 'intamap' 
 Authors@R: c(person("Edzer", "Pebesma", role = c("aut"), email = "edzer.pebesma@uni-muenster.de"),
            person("Jon", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"),
@@ -11,6 +11,7 @@ Authors@R: c(person("Edzer", "Pebesma", role = c("aut"), email = "edzer.pebesma@
            person("Giannis", "Spiliopoulos", role = "ctb"))
 Maintainer: Jon Skoien <jon.skoien@gmail.com> 
 Depends: intamap
-Imports: spatstat.geom, automap, gstat, rgdal, methods, sp, spcosa
+Imports: spatstat.geom, automap, gstat, methods, sp, spcosa
+Suggests: rgdal
 Description: Includes additional functionality for spatial interpolation in the 'intamap' package, such as bias correction and network optimization.
 License: GPL (>=2)

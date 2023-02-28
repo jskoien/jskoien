@@ -1,22 +1,18 @@
 
 ###################################
 #
-# Bound.R included different functions for finding boundaries between polygons (countries)
+# Bound.R includes different functions for finding boundaries between polygons (countries)
 #
 ###################################
 
 findBoundaryLines = function(polygons, projOrig, projNew,regCode = "regCode") {
   
-#  FUN = try(match.fun(cleanPolygons),silent=TRUE)
-#  if (!inherits(FUN,"try-error")) {
-#    print("found function cleanPolygons")
-#    polygons = FUN(polygons)
-#  }
-#    writePolyShape(polygons,"regionLim")
   if (!missing(projOrig)) {
     proj4string(polygons) = CRS(projOrig)
     if (!missing(projNew) & projOrig != projNew) {
-      polygons = spTransform(polygons, CRS(projNew))
+      if (requireNamespace("rgdal", quietly = TRUE)) {
+        polygons = spTransform(polygons, CRS(projNew))
+      } else stop("rgdal is not installed, reprojection is not possible")
     }
   }
   boundaryLines = findBoundaries(polygons,regCode)

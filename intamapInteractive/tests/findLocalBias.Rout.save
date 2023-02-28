@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -19,22 +19,12 @@ Type 'q()' to quit R.
 > library(intamapInteractive)
 Loading required package: intamap
 Loading required package: sp
+Warning message:
+package 'sp' was built under R version 4.2.2 
 > data(meuse)
 > coordinates(meuse) = ~x+y
 > 
 > lb = findLocalBias(meuse,gid = "soil",formulaString=as.formula(zinc~1))
-[1] 97
-  model     psill   range
-1   Nug  45714.61    0.00
-2   Sph 126239.51 1029.97
-[1] 46
-  model    psill    range
-1   Nug     0.00   0.0000
-2   Sph 23657.68 390.5253
-[1] 12
-  model    psill    range
-1   Nug 1123.333   0.0000
-2   Sph 1148.522 160.8412
 [using ordinary kriging]
 [using ordinary kriging]
 [using ordinary kriging]
@@ -85,4 +75,4 @@ Data attributes:
 > 
 > proc.time()
    user  system elapsed 
-   4.87    0.50    5.26 
+   2.23    0.39    2.59 

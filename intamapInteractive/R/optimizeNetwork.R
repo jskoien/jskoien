@@ -1,7 +1,7 @@
 `optimizeNetwork` <-
 function (observations, predGrid, candidates, method, action,
     nDiff, model, criterion = "MUKV", plotOptim = TRUE, nGridCells,
-    nTry, nr_iterations = 10000, formulaString, ...)
+    nTry, nr_iterations = 10000, formulaString, fun, ...)
 {
     if (length(method) == 0)
         stop("'method' is missing")
@@ -35,7 +35,7 @@ function (observations, predGrid, candidates, method, action,
             formulaString = dum ~ 1
         }
         return(ssaOptim(observations, predGrid, candidates, action,
-            nDiff, model, nr_iterations, plotOptim, formulaString,
+            nDiff, model, nr_iterations, plotOptim, formulaString, fun,
             ...))
     }
     if (method == "spcov") {

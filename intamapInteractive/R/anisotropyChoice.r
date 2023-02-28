@@ -133,8 +133,6 @@ anisotropyChoice<-function(object){
 		cdat<-chull(temp[,1],temp[,2])
 
 		cdat<-SpatialPoints(data.frame(x=temp[cdat,1],y=temp[cdat,2]))
-#		proj4string(cdat)=CRS("+init=epsg:3035")
-#		cdat<-spTransform(cdat,CRS("+init=epsg:4326"))
 		convHull<-cbind(coordinates(cdat))
 		convHull<-rbind(convHull,convHull[1,]) #close Polygon
 		

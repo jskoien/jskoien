@@ -8,7 +8,7 @@ model for underlying spatial variation (\code{variogramModel}). }
 \usage{
 ssaOptim(observations, predGrid, candidates, action, nDiff, model,
          nr_iterations, plotOptim = TRUE, formulaString = NULL, 
-         coolingFactor = nr_iterations/10, covariates = "over", ...)
+         coolingFactor = nr_iterations/10, covariates = "over", fun, ...)
 
 }
 \arguments{
@@ -48,8 +48,8 @@ ssaOptim(observations, predGrid, candidates, action, nDiff, model,
       higher numbers give slower cooling. }
 \item{covariates}{ character string defining whether possible covariates should be found 
          by "over" or "krige", see also details below }
-\item{fun}{A possibility so supply an alternative objective function, instead of 
-      \code{\link{calculateMukv}}. See details below.  }
+\item{fun}{Alternative objective function for optimization, the input and output should match
+            the ones of  (\code{\link{calculateMukv}} (except for \code{fun})}
 \item{...}{ other arguments to be passed on to lower level functions }
 }
 

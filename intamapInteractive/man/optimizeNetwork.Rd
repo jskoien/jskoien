@@ -9,7 +9,7 @@ and spatial simulated annealing (SSA, as described in \code{\link{ssaOptim}}) us
 \usage{
 optimizeNetwork(observations, predGrid, candidates, method, action,
                 nDiff, model, criterion = "MUKV", plotOptim = TRUE, nGridCells, 
-                nTry, nr_iterations = 10000, formulaString, ...)}
+                nTry, nr_iterations = 10000, formulaString, fun, ...)}
 
 \arguments{
 \item{observations}{ object of class \code{\link[sp:Spatial-class]{Spatial}}*
@@ -52,6 +52,8 @@ optimizeNetwork(observations, predGrid, candidates, method, action,
             \code{x} and \code{y}, use the formula \code{z~x+y}. The formulaString defaults
             to \code{"value~1"} if \code{value} is a part of the data set. 
             If not, the first column of the data set in \code{observations} is used. }
+\item{fun}{Alternative objective function for optimization, the input and output should match
+            the ones of  (\code{\link{calculateMukv}} (except for \code{fun})}
 \item{...}{ other arguments to be passed on to lower level functions }
 }
 

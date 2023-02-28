@@ -4,7 +4,7 @@ import(automap)
 import(intamap)
 import(sp)
 import(spcosa)
-import(rgdal)
+#import(rgdal)
     importFrom("grDevices", "chull", "dev.copy2eps", "terrain.colors", "rainbow")
   importFrom("graphics", "filled.contour", "identify", "locator",
              "mtext", "points", "title", "image")
