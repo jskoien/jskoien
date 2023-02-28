@@ -5,15 +5,19 @@ varMat.rtop = function(object, varMatUpdate = FALSE, fullPred = FALSE, params = 
   params = getRtopParams(object$params,  newPar = params, ...)
   observations = object$observations
   if (is(observations, "STSDF")) observations = observations@sp
-  nObs = dim(observations@data)[1]
+  nObs = dim(observations)[1]
   predictionLocations = object$predictionLocations
   if (is(predictionLocations, "STSDF")) predictionLocations = predictionLocations@sp
   variogramModel = object$variogramModel
   lgDistPred = params$gDistPred
   maxDist = params$maxDist
   debug.level = params$debug.level
-  aObs = sapply(slot(observations, "polygons"), function(i) slot(i, "area"))
-
+  if (inherits(observations, "Spatial")) {
+    aObs = sapply(slot(observations, "polygons"), function(i) slot(i, "area"))
+  } else if (inherits(observations, "sf")) {
+    aObs = set_units(st_area(observations), NULL)
+  } else stop(paste("varMat: not able to find area from object of type:", 
+              paste(class(observations), collapse = " ")))
   obsComp = FALSE
   predComp = FALSE
   if ("varMatObs" %in% names(object) && !varMatUpdate) 
@@ -67,8 +71,9 @@ varMat.rtop = function(object, varMatUpdate = FALSE, fullPred = FALSE, params = 
 #    ftype = ifelse(inherits(predictionLocations,"SpatialPolygons"),"polygons","lines")
     varMatObs = object$varMatObs
     vDiagObs = diag(varMatObs)
-    ftype = "polygons"
-    nPred = length(sapply(slot(predictionLocations, ftype), function(i) slot(i, "ID")))
+    if (!is.null(dim(predictionLocations))) {
+      nPred = dim(predictionLocations)[1]
+    } else nPred = length(predictionLocations)
     if (!"dPred" %in% names(object) && !(lgDistPred && "gDistPred" %in% names(object))) 
       object$dPred = rtopDisc(predictionLocations, params = params) 
     if (!lgDistPred || !all("gDistPredObs" %in% names(object) &&  "gDistPred" %in% names(object))) {
@@ -136,7 +141,9 @@ varMat.rtop = function(object, varMatUpdate = FALSE, fullPred = FALSE, params = 
       if ("overlapPredObs" %in% names(object)) {
         overlapPredObs = object$overlapPredObs
       } else object$overlapPredObs = overlapPredObs = findOverlap(observations,predictionLocations, params = params)
-      aPred = sapply(slot(predictionLocations, "polygons"), function(i) slot(i, "area"))
+      if (inherits(predictionLocations, "Spatial")) {
+        aPred = sapply(slot(predictionLocations, "polygons"), function(i) slot(i, "area"))
+      } else aPred = set_units(st_area(predictionLocations), NULL)
       fPredObs = matrix(rep(aObs,nPred),ncol=nPred)
       sPredObs = t(matrix(rep(aPred,nObs),ncol = nObs))
       nuggPredObs = matrix(mapply(FUN = nuggEx,
@@ -282,7 +289,11 @@ varMat.list = function(object, object2=NULL, coor1, coor2, maxdist = Inf,
       } else {
         mdim = length(d2)
       }
-      a1 = coordinates(d1[[ia]])
+      a1 = d1[[ia]]
+      if (inherits(a1, "Spatial")) {
+        a1 = coordinates(a1)
+      } else if (inherits(a1, "sf")) a1 = st_coordinates(a1)
+      
       ip1 = dim(a1)[1]
       first = ifelse(equal,ia,1)
       lorder = c(first:mdim)
@@ -290,9 +301,13 @@ varMat.list = function(object, object2=NULL, coor1, coor2, maxdist = Inf,
           lorder = lorder[spDistsN1(coor2[first:mdim,],coor1[ia,]) < maxdist]
         if (length(lorder) > 0) {
           if (equal) {
-            ld = d1[lorder]
-          } else ld = d2[lorder]
-          lmat = mapply(vred,a2 = ld,MoreArgs = list(vredTyp="ind",a1 = a1,variogramModel = variogramModel))
+            a2 = d1[lorder]
+          } else a2 = d2[lorder]
+          if (inherits(a2, "Spatial")) {
+            a2 = coordinates(a2)
+          } else if (inherits(a2, "sf")) a2 = st_coordinates(a2)
+          
+          lmat = mapply(vred,a2 = a2,MoreArgs = list(vredTyp="ind",a1 = a1,variogramModel = variogramModel))
         } else lmat = -999  
       t2 = proc.time()[[3]]
       if (debug.level > 0) print(paste("varMat - Finished element ", ia, " in ", round(t2-t1,3), "PID:", Sys.getpid()))
@@ -315,15 +330,18 @@ varMat.list = function(object, object2=NULL, coor1, coor2, maxdist = Inf,
     t0 = proc.time()[[3]]
     for (ia in 1:ndim) {
       t1 = proc.time()[[3]]
-      a1 = coordinates(d1[[ia]])
+      a1 = d1[[ia]]
+      if (inherits(a1, "Spatial")) {
+        a1 = coordinates(a1)
+      } else if (inherits(a1, "sf")) a1 = st_coordinates(a1)
       ip1 = dim(a1)[1]
       first = ifelse(equal,ia,1)
       lorder = c(first:mdim)
       if (!missing(coor1) && ! missing(coor2) && maxdist < Inf) 
            lorder = lorder[spDistsN1(coor2[first:mdim,],coor1[ia,]) < maxdist]
       if (length(lorder) > 0) {
-        ld = d2[lorder]
-        lmat = mapply(vred,a2 = ld,MoreArgs = list(vredTyp="ind",a1 = a1,variogramModel = variogramModel))
+        a2 = d2[lorder]
+        lmat = mapply(vred,a2 = a2,MoreArgs = list(vredTyp="ind",a1 = a1,variogramModel = variogramModel))
 #        lmat = lvmat[[1]]
         if (!equal) varMatrix[ia,] = lmat else {
           varMatrix[ia,lorder] = lmat
