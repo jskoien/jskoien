@@ -1,6 +1,6 @@
 autoKrige.cv = function(formula, input_data, data_variogram = input_data,
                           model = c("Sph", "Exp", "Gau", "Ste"), kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
-						  fix.values = c(NA,NA,NA), verbose = c(FALSE, TRUE), GLS.model = NA,
+						  fix.values = c(NA,NA,NA), verbose = c(FALSE, interactive()), GLS.model = NA,
                           start_vals = c(NA,NA,NA), miscFitOptions = list(),...)
 # Automatically fits a variogram model to the data using autofitVariogram and performs
 # crossvalidation by calling krige.cv
