@@ -3,7 +3,7 @@ Version: 1.5-1
 Date: 2023-02-17
 Title: Procedures for Automated Interpolation
 Authors@R: c(person("Edzer", "Pebesma", role = c("aut"), email = "edzer.pebesma@uni-muenster.de"),
-           person("Jon", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"),
+           person("Jon Olav", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"),
            person("Olivier", "Baume", role = c("ctb")),
            person("A", "Chorti", role = "ctb"), 
            person("Dionisis", "Hristopulos", role = "ctb"), 
