@@ -1,0 +1,73 @@
+
+R version 4.2.2 (2022-10-31 ucrt) -- "Innocent and Trusting"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(rtop)
+> library(sf)
+Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
+Warning message:
+package 'sf' was built under R version 4.2.3 
+> set.seed(1)
+> options(error = recover)
+> rpath = system.file("extdata",package="rtop")
+> observations = st_read(rpath,"observations")
+Reading layer `observations' from data source 
+  `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
+Simple feature collection with 57 features and 7 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 392041.1 ymin: 454983.1 xmax: 512819.5 ymax: 543984.4
+Projected CRS: Lambert_Conformal_Conic
+> # Create a column with the specific runoff:
+> observations$obs = observations$QSUMMER_OB/observations$AREASQKM
+> predictionLocations = st_read(rpath,"predictionLocations")
+Reading layer `predictionLocations' from data source 
+  `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
+Simple feature collection with 235 features and 5 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 393416.8 ymin: 454919.1 xmax: 519903.3 ymax: 543984.4
+Projected CRS: Lambert_Conformal_Conic
+> 
+> params = list(gDist = TRUE, cloud = FALSE)
+> # Create a column with the specific runoff:
+> observations$obs = observations$QSUMMER_OB/observations$AREASQKM
+> # Build an object
+> rtopObj = createRtopObject(observations, predictionLocations, 
++                            params = params, formulaString = "obs ~1")
+> 
+> 
+> rtopObj = rtopFitVariogram(rtopObj, iprint = -1)
+Warning message:
+In variogram.default(y, locations, X, trend.beta = beta, grid = grid,  :
+  the following arguments are ignored: -1
+> 
+> # Predicting at prediction locations
+> rtopObj = rtopKrige(rtopObj)
+[1] "Sampling points from  57 areas"
+[1] "Sampled on average 231.88 points from 57 areas"
+[1] "Sampling points from  235 areas"
+[1] "Sampled on average 210.34 points from 235 areas"
+[1] "Creating prediction semivariance matrix. This can take some time."
+> 
+> # Cross-validation
+> rtopObj = rtopKrige(rtopObj,cv=TRUE)
+> print(cor(rtopObj$predictions$observed,rtopObj$predictions$var1.pred), 4)
+[1] 0.7484
+> 
+> proc.time()
+   user  system elapsed 
+  39.09    1.04   48.86 
