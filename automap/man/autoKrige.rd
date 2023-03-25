@@ -89,6 +89,8 @@ and \code{sserr} respectively.
 # Data preparation
 \donttest{
 library(sp)
+library(sf)
+library(stars)
 data(meuse)
 coordinates(meuse) =~ x+y
 data(meuse.grid)
