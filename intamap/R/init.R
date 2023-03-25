@@ -65,38 +65,50 @@ createIntamapObject = function(observations, obsChar, formulaString, predictionL
   targetCRS,boundaries,boundaryLines,intCRS, params=list(),boundFile,lineFile,class="idw",
   outputWhat, blockWhat = "none",...) {
   
-  if (inherits(observations, "sf")) observations = as(observations, "Spatial")
-  if (inherits(predictionLocations, "sf")) predictionLocations = as(predictionLocations, "Spatial")
+  if (!inherits(observations, "Spatial")) observations = as(observations, "Spatial")
+  if (inherits(predictionLocations, "sf") | inherits(predictionLocations, "stars")) predictionLocations = as(predictionLocations, "Spatial")
   object = list()
   dots = list(...)
   
   rgdalMessage = FALSE
   rgdalMessage2 = FALSE
+  rgdalMessage3 = FALSE
   usergdal = getIntamapParams()$usergdal
   if ("usergdal" %in% names(params)) usergdal = params$usergdal else if ("usergdal" %in% names(dots)) usergdal = dots$usergdal
   if ("targetCRS" %in% names(params) && missing(targetCRS)) {
     targetCRS = params$targetCRS
     params = params[-which(names(params) == "targetCRS")]
-    if (usergdal && requireNamespace("rgdal", quietly = TRUE)) targetCRS = rgdal::CRSargs(CRS(targetCRS)) else rgdalMessage = TRUE
+    if (usergdal) {
+      if (requireNamespace("rgdal", quietly = TRUE)) targetCRS = rgdal::CRSargs(CRS(targetCRS)) else rgdalMessage = TRUE
+    } else rgdalMessage3 = TRUE
     rgdalMessage2 = TRUE
   }
   if ("intCRS" %in% names(params) && missing(intCRS)) {
     intCRS = params$intCRS
     params = params[-which(names(params) == "intCRS")]
-    if (usergdal && requireNamespace("rgdal", quietly = TRUE)) intCRS = rgdal::CRSargs(CRS(intCRS)) else rgdalMessage = TRUE
+    if (usergdal) {
+      if (requireNamespace("rgdal", quietly = TRUE)) intCRS = rgdal::CRSargs(CRS(intCRS)) else rgdalMessage = TRUE
+    } else rgdalMessage3 = TRUE
     rgdalMessage2 = TRUE
   }
   if (!is.na(proj4string(observations))) {
-    if (usergdal && requireNamespace("rgdal", quietly = TRUE)) observations@proj4string = CRS(proj4string(observations)) else rgdalMessage = TRUE
+    if (usergdal) {
+      if (requireNamespace("rgdal", quietly = TRUE)) {
+        observations@proj4string = CRS(proj4string(observations)) 
+      } else  rgdalMessage = TRUE
+    } else rgdalMessage3 = TRUE
     rgdalMessage2 = TRUE
   }
   if (!missing(predictionLocations) && !is.na(proj4string(predictionLocations))) {
-    if (usergdal && requireNamespace("rgdal", quietly = TRUE)) 
-      predictionLocations@proj4string = CRS(proj4string(predictionLocations)) else rgdalMessage = TRUE
-      rgdalMessage2 = TRUE
+    if (usergdal) {
+      if (requireNamespace("rgdal", quietly = TRUE)) 
+           predictionLocations@proj4string = CRS(proj4string(predictionLocations)) else rgdalMessage = TRUE
+    } else rgdalMessage3 = TRUE
+    rgdalMessage2 = TRUE
   }
   
   if (rgdalMessage) print("rgdal is not installed, standardization of projections is not possible")
+  if (rgdalMessage3) print("standardization of projections is not possible when usergdal = FALSE")
   if (rgdalMessage2) print("rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear")
   
   if (!missing(observations) && !extends(class(observations),"Spatial")) 

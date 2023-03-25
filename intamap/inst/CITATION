@@ -1,8 +1,8 @@
 citHeader("To cite package intamap in publications use:")
 
-bibEntry(entry="Article",
+bibentry(bibtype="Article",
 	title = "INTAMAP: the design and implementation of an interoperable automated interpolation web service",
-	author = personList(person("E. Pebesma"), person("D. Cornford"),
+	author = c(person("E. Pebesma"), person("D. Cornford"),
 		person("G. Dubois"), person("G.B.M. Heuvelink"), 
 		person("D. Hristopoulos"), person("J. Pilz"), 
 		person("U. Stoehlker"), person("G. Morin"),

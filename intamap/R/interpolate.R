@@ -1,7 +1,7 @@
 
 interpolate = function(observations, predictionLocations, 
               outputWhat = list(mean = TRUE, variance = TRUE), obsChar = NA, 
-              methodName = "automatic", maximumTime = 30, optList = list(), cv = FALSE) {
+              methodName = "automatic", maximumTime = 30, optList = list(), cv = FALSE, ...) {
   startTime = Sys.time()
 #  save.image("debug.img")
   nPred = ifelse(is.numeric(predictionLocations), predictionLocations, 
@@ -67,7 +67,7 @@ interpolate = function(observations, predictionLocations,
 	krigingObject = preProcess(krigingObject)
   if (is.null(krigingObject$variogramModel) && is.null(krigingObject$copulaParams)
                 && is.null(krigingObject$inverseDistancePower)) {
-    krigingObject = estimateParameters(krigingObject)
+    krigingObject = estimateParameters(krigingObject, ...)
   }
   krigingObjectMp = try(methodParameters(krigingObject))
   if (!is(krigingObjectMp,"try-error")) krigingObject = krigingObjectMp
@@ -84,7 +84,7 @@ interpolate = function(observations, predictionLocations,
       kObj$predictionLocations = krigingObject$observations[i,]
       kObj$observations = krigingObject$observations[-i,]
       if (debug.level == 0) {
-        tmp = capture.output(kObj <- spatialPredict(kObj))
+        tmp = capture.output(kObj <- spatialPredict(kObj, ...))
       } else kObj <- spatialPredict(kObj)
       if ("var1.pred" %in% names(kObj$predictions) & "var1.var" %in% names(kObj$predictions)) {
         predictions@data[i,1:2] = kObj$predictions@data[,c("var1.pred", "var1.var")]
@@ -125,7 +125,7 @@ interpolate = function(observations, predictionLocations,
 
 
 interpolateBlock = function(observations, predictionLocations, outputWhat,  blockWhat = "none", 
-     obsChar = NA, methodName = "automatic", maximumTime = 30, optList = list()) {
+     obsChar = NA, methodName = "automatic", maximumTime = 30, optList = list(), ...) {
   obsIsSf = FALSE
   if (inherits(observations, "sf")) {
     obsIsSf = TRUE
@@ -206,11 +206,11 @@ interpolateBlock = function(observations, predictionLocations, outputWhat,  bloc
 	krigingObject = preProcess(krigingObject)
   if (is.null(krigingObject$variogramModel) && is.null(krigingObject$copulaParams)
                 && is.null(krigingObject$inverseDistancePower)) {
-    krigingObject = estimateParameters(krigingObject)
+    krigingObject = estimateParameters(krigingObject, ...)
   }
   krigingObjectMp = try(methodParameters(krigingObject))
   if (!is(krigingObjectMp,"try-error")) krigingObject = krigingObjectMp
-  krigingObject = spatialPredict.block(krigingObject)
+  krigingObject = spatialPredict.block(krigingObject, ...)
   krigingObject = postProcess(krigingObject)
 # Add plot if wanted
 	if (!is.null(krigingObject$returnPlot) && krigingObject$returnPlot)

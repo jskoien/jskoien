@@ -1,7 +1,7 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: x86_64-redhat-linux-gnu (64-bit)
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -38,14 +38,8 @@ Loading required package: sp
 + 	constantBias = 0,
 + 	classes = "idw"
 + )
-Loading required package: rgdal
-rgdal: version: 0.8-10, (SVN revision 478)
-Geospatial Data Abstraction Library extensions to R successfully loaded
-Loaded GDAL runtime: GDAL 1.8.1, released 2011/07/09
-Path to GDAL shared files: /usr/share/gdal
-GDAL does not use iconv for recoding strings.
-Loaded PROJ.4 runtime: Rel. 4.8.0, 6 March 2012, [PJ_VERSION: 470]
-Path to PROJ.4 shared files: (autodetected)
+[1] "rgdal is not installed, standardization of projections is not possible"
+[1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
 > 
 > # run test:
 > checkSetup(idwObject)
@@ -54,12 +48,12 @@ Checking object ... OK
 > # do interpolation steps:
 > idwObject = preProcess(idwObject)
 > idwObject = estimateParameters(idwObject, idpRange = seq(0.25,2.75,.5), nfold=3) # faster
-[1] "best idp value found is 2.25 rmse 277.246436580228"
+[1] "best idp value found is 2.25 rmse 272.204794157114"
 > idwObject = spatialPredict(idwObject)
 > idwObject = postProcess(idwObject)
 Warning message:
-In spTransform(object$predictions, CRS(object$targetCRS)) :
-  Grid warping not available, coercing to points
+In CPL_crs_from_input(x) :
+  GDAL Message 1: +init=epsg:XXXX syntax is deprecated. It might return a CRS with a non-EPSG compliant axis order.
 > 
 > # generate some output:
 > summary(as.data.frame(idwObject$outputTable))
@@ -73,4 +67,5 @@ In spTransform(object$predictions, CRS(object$targetCRS)) :
 > 
 > proc.time()
    user  system elapsed 
-  2.482   0.066   2.701 
+   3.00    0.37    3.36 
+   

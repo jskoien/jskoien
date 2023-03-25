@@ -1,6 +1,6 @@
 
-R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
-Copyright (C) 2022 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -18,8 +18,6 @@ Type 'q()' to quit R.
 > options(error = recover)
 > library(intamap)
 Loading required package: sp
-Warning message:
-package 'sp' was built under R version 4.2.2 
 > 
 > data(meuse)
 > coordinates(meuse) = ~x+y
@@ -195,4 +193,5 @@ Conditional simulation  100
 > 
 > proc.time()
    user  system elapsed 
-   1.98    0.45    2.40 
+   2.92    0.26    3.17 
+   

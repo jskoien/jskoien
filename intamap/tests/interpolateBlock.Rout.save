@@ -1,6 +1,6 @@
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -30,23 +30,17 @@ Loading required package: sp
 > 
 > outputWhat = list(mean=TRUE,variance=TRUE,quantile=0.025,quantile=0.0975)
 > res1 = interpolateBlock(meuse,predictionLocations,outputWhat,methodName = "automap")$outputTable
-R 2016-06-16 14:25:47 interpolating 155 observations, 48 prediction locations
+R 2023-03-13 21:24:57.953877 interpolating 155 observations, 48 prediction locations
 Checking object ... OK
 [using ordinary kriging]
 [1] "performed ordinary block kriging"
-Warning messages:
-1: In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+Warning message:
+In predictTime(nObs = nObs, nPred = nPred, formulaString = formulaString,  :
   
  using standard model for estimating time. For better 
  platform spesific predictions, please run 
  timeModels <- generateTimeModels()
   and save the workspace
-2: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  pseudoinverse used at 0.073968 0.0070413
-3: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  neighborhood radius 2.9545
-4: In predLoess(object$y, object$x, newx = if (is.null(newdata)) object$x else if (is.data.frame(newdata)) as.matrix(model.frame(delete.response(terms(object)),  :
-  reciprocal condition number  0
 > summary(t(res1))
        x                y               mean          variance       
  Min.   :179019   Min.   :330013   Min.   :4.920   Min.   :0.007617  
@@ -79,12 +73,12 @@ Warning messages:
 > predictionLocations = SpatialPolygons(Srl)
 > 
 > res2 = interpolateBlock(meuse,predictionLocations,outputWhat,methodName="automap")$outputTable
-R 2016-06-16 14:25:47 interpolating 155 observations, 48 prediction locations
+R 2023-03-13 21:24:58.240889 interpolating 155 observations, 48 prediction locations
 Checking object ... OK
 [using ordinary kriging]
 [1] "performed ordinary block kriging"
 Warning message:
-In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLocations))[1],  :
+In predictTime(nObs = nObs, nPred = nPred, formulaString = formulaString,  :
   
  using standard model for estimating time. For better 
  platform spesific predictions, please run 
@@ -112,4 +106,5 @@ In predictTime(nObs = dim(observations)[1], nPred = dim(coordinates(predictionLo
 > 
 > proc.time()
    user  system elapsed 
-   2.59    0.23    2.82 
+   2.65    0.15    2.78 
+   
