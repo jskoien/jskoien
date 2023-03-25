@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2023-03-14 r83979 ucrt) -- "Unsuffered Consequences"
-Copyright (C) 2023 The R Foundation for Statistical Computing
+R version 4.2.2 (2022-10-31 ucrt) -- "Innocent and Trusting"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,13 +17,15 @@ Type 'q()' to quit R.
 
 > library(rtop)
 > library(sf)
-Linking to GEOS 3.11.1, GDAL 3.6.2, PROJ 9.1.1; sf_use_s2() is TRUE
+Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
+Warning message:
+package 'sf' was built under R version 4.2.3 
 > set.seed(1)
 > options(error = recover)
 > rpath = system.file("extdata",package="rtop")
 > observations = st_read(rpath,"observations")
 Reading layer `observations' from data source 
-  `D:\RCompile\CRANguest\R-devel\lib\rtop\extdata' using driver `ESRI Shapefile'
+  `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
 Simple feature collection with 57 features and 7 fields
 Geometry type: POLYGON
 Dimension:     XY
@@ -33,7 +35,7 @@ Projected CRS: Lambert_Conformal_Conic
 > observations$obs = observations$QSUMMER_OB/observations$AREASQKM
 > predictionLocations = st_read(rpath,"predictionLocations")
 Reading layer `predictionLocations' from data source 
-  `D:\RCompile\CRANguest\R-devel\lib\rtop\extdata' using driver `ESRI Shapefile'
+  `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
 Simple feature collection with 235 features and 5 fields
 Geometry type: POLYGON
 Dimension:     XY
@@ -60,15 +62,12 @@ In variogram.default(y, locations, X, trend.beta = beta, grid = grid,  :
 [1] "Sampling points from  235 areas"
 [1] "Sampled on average 210.34 points from 235 areas"
 [1] "Creating prediction semivariance matrix. This can take some time."
-[1] "interpolating  235 areas"
 > 
 > # Cross-validation
 > rtopObj = rtopKrige(rtopObj,cv=TRUE)
-[1] "cross-validating 57 areas"
 > print(cor(rtopObj$predictions$observed,rtopObj$predictions$var1.pred), 4)
 [1] 0.7484
 > 
 > proc.time()
    user  system elapsed 
-  22.20    0.50   22.67 
-  
+  39.09    1.04   48.86 
