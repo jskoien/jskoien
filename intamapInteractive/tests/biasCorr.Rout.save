@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -59,16 +59,16 @@ Warning messages:
 2: In createIntamapObject(observations, meuse.grid, boundaryLines = blines,  :
   createIntamapObject: No prediction locations submitted - sampling from bbox of observations
 > object = biasCorr(object,regCode= "ID")
-interpolating border between  12 9 
+interpolating border between  12 9
 [using ordinary kriging]
 [using ordinary kriging]
-interpolating border between  9 8 
+interpolating border between  9 8
 [using ordinary kriging]
 [using ordinary kriging]
-interpolating border between  8 5 
+interpolating border between  8 5
 [using ordinary kriging]
 [using ordinary kriging]
-interpolating border between  5 2 
+interpolating border between  5 2
 [using ordinary kriging]
 [using ordinary kriging]
 Warning messages:
@@ -110,4 +110,5 @@ x8  5.035075691 0.03725436
 > 
 > proc.time()
    user  system elapsed 
-   5.93    0.78    6.59 
+   3.65    0.35    3.92 
+   

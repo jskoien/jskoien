@@ -1,6 +1,6 @@
 Package: intamapInteractive
-Version: 1.2-1
-Date: 2023-02-17
+Version: 1.2-4
+Date: 2023-03-15
 Title: Interactive Add-on Functionality for 'intamap' 
 Authors@R: c(person("Edzer", "Pebesma", role = c("aut"), email = "edzer.pebesma@uni-muenster.de"),
            person("Jon", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"),
@@ -13,5 +13,5 @@ Maintainer: Jon Skoien <jon.skoien@gmail.com>
 Depends: intamap
 Imports: spatstat.geom, automap, gstat, methods, sp, spcosa
 Suggests: rgdal
-Description: Includes additional functionality for spatial interpolation in the 'intamap' package, such as bias correction and network optimization.
+Description: The methods in this package adds to the functionality of  the 'intamap' package, such as bias correction and network optimization. An overview of the 'intamap' package and this package is given by Pebesma et al. (2010) <doi:10.1016/j.cageo.2010.03.019>
 License: GPL (>=2)

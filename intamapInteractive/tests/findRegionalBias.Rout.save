@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -47,16 +47,16 @@ Loading required package: sp
 > observations$ID = over(observations, geometry(pBoundaries))
 > blines = findBoundaryLines(pBoundaries, regCode = "ID")
 > rb = findRegionalBias(observations, blines, value~1, regCode = "ID")
-interpolating border between  12 9 
+interpolating border between  12 9
 [using ordinary kriging]
 [using ordinary kriging]
-interpolating border between  9 8 
+interpolating border between  9 8
 [using ordinary kriging]
 [using ordinary kriging]
-interpolating border between  8 5 
+interpolating border between  8 5
 [using ordinary kriging]
 [using ordinary kriging]
-interpolating border between  5 2 
+interpolating border between  5 2
 [using ordinary kriging]
 [using ordinary kriging]
 Warning messages:
@@ -118,4 +118,5 @@ Data attributes:
 > 
 > proc.time()
    user  system elapsed 
-   5.84    0.56    6.34 
+   3.76    0.40    4.09 
+   

@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -50,9 +50,8 @@ Loading required package: sp
 > #plot(variogram(dayx~x+y, sic.val), model=model)
 > # Computes the Mukv of the current network
 > initMukv <- calculateMukv(observations, predGrid, model, formulaString = dayx~x+y)
-[using universal kriging]
 > print(initMukv)
-[1] 116.2612
+[1] 116.712
 > # Computes Kriging and plot result 
 > #GammaDoseMap = krige(dayx~x+y, observations, predGrid, model)
 > #GammaDoseMap = as.data.frame(GammaDoseMap)
@@ -104,9 +103,8 @@ Loading required package: sp
 +                           plotOptim=FALSE)
 > # Computes the Mukv of the optimized network with spatial coverage
 > MukvDel2 = calculateMukv(optim1, predGrid, model, formulaString = dayx~x+y)
-[using universal kriging]
 > print(MukvDel2)
-[1] 116.3774
+[1] 116.8215
 > 
 > # Deletes optimally 20 stations from current network with method "ssa"
 > # (spatial simulated annealing) and criterion "mukv"
@@ -155,10 +153,11 @@ Loading required package: sp
 + MukvAdd2 <- calculateMukv(optimAdd2, predGrid, model)
 + print(MukvAdd2)
 + }
-[using ordinary kriging]
-[1] 115.5051
-Warning message:
-(Nearly) coinciding points have been removed.  
+[1] 116.0092
+Warning messages:
+1: 1 location(s) outside the target universe (as defined by 'object') have been found
+These locations have been removed. 199 location(s) have been retained 
+2: (Nearly) coinciding points have been removed.  
 > 
 > # Adds optimally 20 stations from current network with
 > # method "ssa" (spatial simulated annealing) and
@@ -180,16 +179,16 @@ Warning message:
 > 
 > # Compares computed designs based on the Mukv results (Small MUKV is better)
 > print(initMukv)
-[1] 116.2612
+[1] 116.712
 > # Deleting 20 measurements
 > #print(MukvDel1) # Manual
 > print(MukvDel2) # Spatial Coverage
-[1] 116.3774
+[1] 116.8215
 > if (test) print(MukvDel3) # Spatial simulated annealing (MUKV in objective function)
 > # Adding 20 measurements
 > #print(MukvAdd1) # Manual
 > print(MukvAdd2) # Spatial Coverage
-[1] 115.5051
+[1] 116.0092
 > if (test) print(MukvAdd3) # Spatial simulated annealing (MUKV in objective function)
 > 
 > 
@@ -198,4 +197,5 @@ Warning message:
 > 
 > proc.time()
    user  system elapsed 
-  17.06    0.84   17.39 
+  10.68    0.57   10.82 
+  

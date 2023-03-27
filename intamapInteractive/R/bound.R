@@ -16,7 +16,6 @@ findBoundaryLines = function(polygons, projOrig, projNew,regCode = "regCode") {
     }
   }
   boundaryLines = findBoundaries(polygons,regCode)
-#    save(regionalBoundaries,file="regionalBoundaries.r")
 
   if (!extends(class(boundaryLines),"Spatial")) coordinates(boundaryLines) = ~x+y
   if (!missing(projNew) & (is.na(is.projected(boundaryLines)) | 
@@ -58,7 +57,6 @@ for (i in 1:(nRegCode-1)) {
     rcj = as.character(uRegCode[j])
     c2k = cList[[j]]
     c2 = polyList[[j]]
-#    cat(paste("Checking",i,j,rci,rcj,"\n"))
     if ( commonArea(c1,c2)[[1]] > 0.001) {
       c21 = rbind(c1k,c2k)
       c21 = signif(c21, 14)

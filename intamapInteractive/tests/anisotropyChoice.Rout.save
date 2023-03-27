@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-12 r83975 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -50,7 +50,6 @@ $clusters
 > 
 > 
 > object=doSegmentation(object)
-[1] "Clustering - Segmentation"
 > 
 > print(summary(object$clusters$index))
        V1   
@@ -63,4 +62,5 @@ $clusters
 > 
 > proc.time()
    user  system elapsed 
-   4.81    0.64    5.35 
+   3.42    0.39    3.71 
+   

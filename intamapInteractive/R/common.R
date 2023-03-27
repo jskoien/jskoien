@@ -22,10 +22,6 @@ commonArea = function(objecti,objectj) {
   ilarea = larea/iarea
   jlarea = larea/jarea
 
-#  print(bbox(objecti))
-#  print(bbox(objectj))
-#  print(bl)
-#  cat(paste(iarea, jarea, larea, ilarea,jlarea,"\n"))
 
   return(list(ilarea,jlarea))
 }

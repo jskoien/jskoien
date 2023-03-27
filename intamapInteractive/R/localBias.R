@@ -63,7 +63,6 @@ localNetworkBias = function(localData,igid,formulaString,minKrige = 3,...)  {
     groupData = localData[localData@data[,igid] == ig,]
     class(groupData) = class(localData)[1]
     ndat = dim(groupData)[1]
-#    cat(paste(i,ig,"\n"))
 
     if (ndat > minKrige) varModel = autofitVariogram(formulaString,groupData,model="Sph")$var_model
     if (i == 1) {

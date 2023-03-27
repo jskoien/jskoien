@@ -70,16 +70,13 @@ for (i in 1:(nRegCode-1)) {
     boundaries = boundaryLines
     boundVec = (boundaries$c1 == rci & boundaries$c2 == rcj) |
                         (boundaries$c1 == rcj & boundaries$c2 == rci)
- #    cat(paste(i,j,rci,rcj,dim(lbound)[1],"\n"))
     if (sum(boundVec) > 0){
       lbound = boundaries[boundVec,]
-#      cat(paste(rci,rcj,dim(lbound)[1],(dim(lbound)[1] > 0),"\n"))
       localDataj = object[object[[regCode]] == rcj,]
       mdat = dim(localDataj)[1]
       if (mdat > minKrige) {
         jmod = gdat[rcj][[2]][[1]]
         bord = paste(rci,rcj,sep="")
-#        cat(paste(rci,rcj,dim(lbound)[1],dim(lbound),"\n"))
         xlinNew = SpatialLines(list(Lines(list(Line(coordinates(lbound))),ID = bord)))
         proj4string(xlinNew) = CRS(proj4string(boundaries))
         message(paste("interpolating border between ", rci, rcj))
