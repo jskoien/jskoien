@@ -1,6 +1,6 @@
 
-R version 4.2.2 (2022-10-31 ucrt) -- "Innocent and Trusting"
-Copyright (C) 2022 The R Foundation for Statistical Computing
+R version 4.2.3 (2023-03-15 ucrt) -- "Shortstop Beagle"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -23,8 +23,6 @@ Type 'q()' to quit R.
 > rpath = system.file("extdata",package="rtop")
 >   library(sf)
 Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
-Warning message:
-package 'sf' was built under R version 4.2.3 
 >   observations = st_read(rpath, "observations")
 Reading layer `observations' from data source 
   `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
@@ -137,16 +135,13 @@ attr(,"criterion")
 >   set.seed(1501)
 >   library(intamap)
 Loading required package: sp
-Warning messages:
-1: package 'intamap' was built under R version 4.2.3 
-2: package 'sp' was built under R version 4.2.3 
 >   useRtopWithIntamap()
 Loading optional package: intamap 
 
 >   output = interpolate(observations,predictionLocations,
 +      optList = list(formulaString = obs~1, gDist = TRUE, cloud = FALSE, nmax = 10, rresol = 25, hresol = 3), 
 +         methodName = "rtop", iprint = -1)
-R 2023-03-25 20:43:57 interpolating 30 observations, 2 prediction locations
+R 2023-03-27 13:38:01 interpolating 30 observations, 2 prediction locations
 [1] "standardization of projections is not possible when usergdal = FALSE"
 [1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
 Checking object ... OK
@@ -321,4 +316,4 @@ In variogram.default(y, locations, X, trend.beta = beta, grid = grid,  :
 > 
 > proc.time()
    user  system elapsed 
-  42.51    1.46  114.20 
+  38.15    1.51   42.45 

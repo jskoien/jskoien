@@ -238,7 +238,7 @@ createIntamapObject = function(observations, obsChar, formulaString, predictionL
 #         (a) targetCRS - if not longlat
 #         (b) observationCRS - if not longlat
 #         (c) predictionCRS - if not longlat
-#         (d) intCRS = "+init=epsg:3035" if both above are longlat
+#         (d) intCRS = "epsg:3035" if both above are longlat
 #
 ############################################################
 
@@ -280,7 +280,7 @@ conformProjections = function(object) {
           if (!length(grep("longlat",predCRS)) >0) {
             intCRS = predCRS
           } else {                
-  #          intCRS = "+init=epsg:3035"
+  #          intCRS = "epsg:3035"
             stop("Interpolation in longlat not possible, a projection is needed.")          
           } 
         }
@@ -318,7 +318,7 @@ conformProjections = function(object) {
           if (!length(grep("longlat",predCRS)) >0) {
             intCRS = predCRS
           } else {                
-            #          intCRS = "+init=epsg:3035"
+            #          intCRS = "epsg:3035"
             stop("Interpolation in longlat not possible, a projection is needed.")          
           } 
         }

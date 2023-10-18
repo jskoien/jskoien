@@ -46,3 +46,13 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .Rproj.user
+
+# R check files
+automap.Rcheck
+intamap.Rcheck
+intamapInteractive.Rcheck
+rtop.Rcheck
+
+# R binaries
+*.tar.gz
+*.zip

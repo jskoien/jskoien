@@ -110,7 +110,7 @@ if (require("rgdal") & FALSE) { # Preparing for retirement of rgdal
 
 # Setting some parameters; nclus > 1 will start a cluster with nclus 
 # workers for parallel processing
-params = list(gDist = TRUE, cloud = FALSE, nclus = 1, rresol = 100)
+params = list(gDist = TRUE, cloud = FALSE, nclus = 1, rresol = 25)
 
 # Create a column with the specific runoff:
 observations$obs = observations$QSUMMER_OB/observations$AREASQKM
