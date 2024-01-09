@@ -8,6 +8,7 @@ Maintainer: Jon Olav Skoien <jon.skoien@gmail.com>
 Description: An automatic interpolation is done by automatically estimating the variogram and then calling gstat. An overview is given by Hiemstra et al (2008) <doi:10.1016/j.cageo.2008.10.011>.
 Depends: R (>= 2.10.0)
 Imports: gstat, lattice, reshape, methods, ggplot2, sp, sf, stars, graphics
+BugReports: https://github.com/jskoien/jskoien/issues
 License: GPL
 NeedsCompilation: no
 Repository: CRAN
