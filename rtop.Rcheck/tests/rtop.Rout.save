@@ -1,5 +1,5 @@
 
-R version 4.2.3 (2023-03-15 ucrt) -- "Shortstop Beagle"
+R version 4.3.1 (2023-06-16 ucrt) -- "Beagle Scouts"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
@@ -17,15 +17,22 @@ Type 'q()' to quit R.
 
 > set.seed(1501)
 > #-----------------------------
+> ## IGNORE_RDIFF_BEGIN
 > library(rtop)
+The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+which was just loaded, were retired in October 2023.
+Please refer to R-spatial evolution reports for details, especially
+https://r-spatial.org/r/2023/05/15/evolution4.html.
+It may be desirable to make the sf package available;
+package maintainers should consider adding sf to Suggests:.
 > if (interactive()) options(error = recover)
 >   # Read directly from shape-files in data directory
 > rpath = system.file("extdata",package="rtop")
 >   library(sf)
-Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
+Linking to GEOS 3.11.2, GDAL 3.6.2, PROJ 9.2.0; sf_use_s2() is TRUE
 >   observations = st_read(rpath, "observations")
 Reading layer `observations' from data source 
-  `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
+  `D:\git\jskoien\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
 Simple feature collection with 57 features and 7 fields
 Geometry type: POLYGON
 Dimension:     XY
@@ -33,12 +40,13 @@ Bounding box:  xmin: 392041.1 ymin: 454983.1 xmax: 512819.5 ymax: 543984.4
 Projected CRS: Lambert_Conformal_Conic
 >   predictionLocations = st_read(rpath, "predictionLocations")
 Reading layer `predictionLocations' from data source 
-  `D:\GitHub\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
+  `D:\git\jskoien\jskoien\rtop.Rcheck\rtop\extdata' using driver `ESRI Shapefile'
 Simple feature collection with 235 features and 5 fields
 Geometry type: POLYGON
 Dimension:     XY
 Bounding box:  xmin: 393416.8 ymin: 454919.1 xmax: 519903.3 ymax: 543984.4
 Projected CRS: Lambert_Conformal_Conic
+> ## IGNORE_RDIFF_END
 >   observations = as(observations, "Spatial")
 >   predictionLocations = as(predictionLocations, "Spatial")
 > #Finding a few prediction locations of them
@@ -54,9 +62,6 @@ Projected CRS: Lambert_Conformal_Conic
 >   rtopObj = createRtopObject(observations,predictionLocations, params = params, formulaString = "obs ~ 1" )
 >   # Fit a variogram (function also creates it)
 >   rtopObj = rtopFitVariogram(rtopObj, iprint = -1)
-Warning message:
-In variogram.default(y, locations, X, trend.beta = beta, grid = grid,  :
-  the following arguments are ignored: -1
 >   print(rtopObj$variogramModel, 3)
 $model
 [1] "Ex1"
@@ -138,19 +143,30 @@ Loading required package: sp
 >   useRtopWithIntamap()
 Loading optional package: intamap 
 
+>   ## IGNORE_RDIFF_BEGIN
 >   output = interpolate(observations,predictionLocations,
 +      optList = list(formulaString = obs~1, gDist = TRUE, cloud = FALSE, nmax = 10, rresol = 25, hresol = 3), 
 +         methodName = "rtop", iprint = -1)
-R 2023-03-27 13:38:01 interpolating 30 observations, 2 prediction locations
-[1] "standardization of projections is not possible when usergdal = FALSE"
-[1] "rgdal is about to be retired. After this, some of the checks on projections in the intamap package will disappear"
+R 2023-10-25 23:34:02.530979 interpolating 30 observations, 2 prediction locations
+[1] "rgdal has been retired. \n                           As a result of this, some of the checks on projections in the \n                           intamap package have  disappeared"
 Checking object ... OK
 [1] "Sampling points from  30 areas"
 [1] "Sampled on average 54.2 points from 30 areas"
 [1] "Sampling points from  2 areas"
 [1] "Sampled on average 77 points from 2 areas"
 [1] "Creating prediction semivariance matrix. This can take some time."
-There were 11 warnings (use warnings() to see them)
+Warning messages:
+1: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  
+ using standard model for estimating time. For better 
+ platform spesific predictions, please run 
+ timeModels <- generateTimeModels()
+  and save the workspace
+2: In predictTime(nObs = dim(observations)[1], nPred = nPred, formulaString = formulaString,  :
+  Could not find time model for method spatialPredict_rtop
+3: In interpolate(observations, predictionLocations, optList = list(formulaString = obs ~  :
+  was not able to estimate prediction time for methodName rtop
+>   ## IGNORE_RDIFF_END
 >   
 > 
 > print(all.equal(rtopObj4$predictions@data$var1.pred, output$predictions@data$var1.pred))
@@ -176,9 +192,6 @@ There were 11 warnings (use warnings() to see them)
 >   rtopObj = createRtopObject(observations,predictionLocations, params = params, formulaString = "obs~1")
 >   # Fit a variogram (function also creates it)
 >   rtopObj = rtopFitVariogram(rtopObj, iprint = -1)
-Warning message:
-In variogram.default(y, locations, X, trend.beta = beta, grid = grid,  :
-  the following arguments are ignored: -1
 >   #rtopObj = checkVario(rtopObj)
 > 
 > rtopObj10 = rtopSim(rtopObj, nsim = 5, logdist = TRUE, debug.level = -1)
@@ -316,4 +329,4 @@ In variogram.default(y, locations, X, trend.beta = beta, grid = grid,  :
 > 
 > proc.time()
    user  system elapsed 
-  38.15    1.51   42.45 
+  14.89    0.71   15.56 

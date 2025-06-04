@@ -33,8 +33,9 @@ function (observations, predGrid, candidates, method, action,
                 data = data.frame(dum = rep(1, dim(coordinates(observations))[1])))
             formulaString = dum ~ 1
         }
+      
         return(ssaOptim(observations, predGrid, candidates, action,
-            nDiff, model, nr_iterations, plotOptim, formulaString, fun,
+            nDiff, model, nr_iterations, plotOptim, formulaString, fun = fun,
             ...))
     }
     if (method == "spcov") {

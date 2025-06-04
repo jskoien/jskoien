@@ -1,8 +1,10 @@
-options(digits=6)
+options(digits=8)
 
+# Silence version differences
 library(automap)
 library(sp)
-library(sf)
+# Neccessary to silence sf startup messages
+suppressMessages(library(sf))
 
 
 # Data preparation

@@ -12,7 +12,7 @@ offers some functionality that is not possible to access through such a WPS.
 
 The methods in this package can mainly be put into three groups:
 
-\itemize{
+\describe{
   \item{bias correction}{methods for estimating and possible correct for 
           biases between measurement networks, due to differences in measurement
           strategies, measurement devices, or (unknown) post-processing of data}

@@ -36,7 +36,7 @@ The anisotropy parameters are returned in the element \code{anisPar}
 as described below.
 \item{anisPar}{ List element in \code{object} that contains a list with the following
 elements:
-        \itemize{
+        \describe{
         \item{\code{ratio}}{A coarse-grained  anisotropy ratio for all the data}
         \item{\code{direction}}{A coarse-grained  anisotropy  orientation for all the data}
         \item{\code{clusters}}{A matrix of dimension [cl]x5 which determines the anisotropy per cluster.
@@ -45,7 +45,7 @@ elements:
         }
 }
 \item{clusters}{list element added to the original object containing the segmentation results.
-				\itemize{
+				\describe{
         \item{index}{Index array identifying the cluster in which each observation point belongs. 
                     Zero value means that the observations has been removed.}
         \item{clusterNumber}{Number of clusters detected.}

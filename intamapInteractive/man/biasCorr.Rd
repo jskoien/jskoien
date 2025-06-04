@@ -47,7 +47,7 @@ The function will remove biases according to the settings of the parameters
 Below is a list of the functions available for bias corrections. See each individual
 function for more information about usage.
 
-\itemize{
+\describe{
 \item{\link{findBiasUK}}{The universal kriging based function for 
     finding biases between neighbouring networks}
 \item{\link{findLocalBias}}{Find biases for ovelapping networks}

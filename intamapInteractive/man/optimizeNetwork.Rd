@@ -155,6 +155,7 @@ Srl = Polygons(list(Polygon(boun)),ID = as.character(1))
 candidates = SpatialPolygonsDataFrame(SpatialPolygons(list(Srl)),
                                       data = data.frame(ID=1))
 
+
 # add 20 more points assuming OK model (SSA method):
  optimOK <- optimizeNetwork(meuse, meuse.grid, candidates = candidates,
   method= "ssa", action= "add", nDiff = 20, model = vfitOK, criterion="MUKV",
@@ -178,7 +179,7 @@ optimSC = optimizeNetwork(meuse, meuse.grid, candidates, method = "spcov",
             nGridCells = 10000,nTry = 100 )
 
 # delete optimally 10 stations from current network with method "manual"
-optimMAN = optimizeNetwork(meuse, meuse.grid, candidates, method = "manual",
+if (interactive()) optimMAN = optimizeNetwork(meuse, meuse.grid, candidates, method = "manual",
             action = "del", nDiff = 10, model = model, criterion = "MUKV", plotOptim = TRUE )
 
 
@@ -196,7 +197,7 @@ calculateMukv(optimRK, predGrid, vfitRK, zinc~dist+ffreq+soil)
 calculateMukv(optimSC, predGrid, vfitOK) 
 
 # 10 stations manually deleted
-calculateMukv(optimMAN, predGrid, vfitOK, zinc~1) 
+if (interactive()) calculateMukv(optimMAN, predGrid, vfitOK, zinc~1) 
 
 }
 }

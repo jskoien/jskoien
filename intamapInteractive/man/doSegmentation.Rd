@@ -70,7 +70,7 @@ the indices of the clusters to which the remaining observation
 points are assigned
  and (iii) the number of clusters detected.
 \item{clusters}{list element added to the original object containing the segmentation results.
-				\itemize{	
+				\describe{	
         \item{rmdist}{Indices of  removed points.}
         \item{index}{Index array identifying the cluster in which each observation point belongs.}
         \item{clusterNumber}{Number of clusters detected.}

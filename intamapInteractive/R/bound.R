@@ -10,9 +10,7 @@ findBoundaryLines = function(polygons, projOrig, projNew,regCode = "regCode") {
   if (!missing(projOrig)) {
     proj4string(polygons) = CRS(projOrig)
     if (!missing(projNew) & projOrig != projNew) {
-      if (requireNamespace("rgdal", quietly = TRUE)) {
-        polygons = spTransform(polygons, CRS(projNew))
-      } else stop("rgdal is not installed, reprojection is not possible")
+      polygons = as(st_transform(polygons, crs = st_crs(projNew)), "Spatial")
     }
   }
   boundaryLines = findBoundaries(polygons,regCode)
