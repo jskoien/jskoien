@@ -1,6 +1,5 @@
 Package: automap
-Version: 1.1-16
-Date: 2025-02-13
+Version: 1.1-18
 Title: Automatic Interpolation Package
 Authors@R: c(person("Paul", "Hiemstra", role = c("aut"), email = "p.h.hiemstra@gmail.com"),
              person("Jon Olav", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"))

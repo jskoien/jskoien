@@ -15,8 +15,15 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> Sys.setenv("OMP_NUM_THREADS" = 2) 
+> Sys.setenv("OMP_THREAD_LIMIT" = 2)
+> Sys.setenv("KMP_TEAMS_THREAD_LIMIT" = 2)
+> Sys.setenv("KMP_DEVICE_THREAD_LIMIT " = 2)
+> Sys.setenv("KMP_ALL_THREADS " = 2)
 > library(automap)
 > library(sp)
+>
+>
 > # Neccessary to silence sf startup messages
 > suppressMessages(library(sf))
 > 

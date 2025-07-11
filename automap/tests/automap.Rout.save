@@ -16,7 +16,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > options(digits=8)
-> 
+> Sys.setenv("OMP_NUM_THREADS" = 2) 
+> Sys.setenv("OMP_THREAD_LIMIT" = 2)
+> Sys.setenv("KMP_TEAMS_THREAD_LIMIT" = 2)
+> Sys.setenv("KMP_DEVICE_THREAD_LIMIT " = 2)
+> Sys.setenv("KMP_ALL_THREADS " = 2) 
 > # Silence version differences
 > library(automap)
 > library(sp)
