@@ -30,7 +30,6 @@ spatialPredict and methodParameters.
 
 \author{ Jon Olav Skoien }
 \examples{
-library(intamap)
-useRtopWithIntamap()
+if (require(intamap)) useRtopWithIntamap()
 }
 \keyword{plot}

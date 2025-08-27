@@ -59,17 +59,19 @@ rtopObj4 = rtopKrige(rtopObj2)
 
 
   set.seed(1501)
-  library(intamap)
-  useRtopWithIntamap()
 ## IGNORE_RDIFF_BEGIN
+  if (require(intamap)) {
+  useRtopWithIntamap()
   output = interpolate(observations,predictionLocations,
      optList = list(formulaString = obs~1, gDist = TRUE, cloud = FALSE, nmax = 10, rresol = 25, hresol = 3), 
         methodName = "rtop", iprint = -1)
+  }
 ## IGNORE_RDIFF_END
-  
 
-  print(all.equal(rtopObj4$predictions@data$var1.pred, output$predictions@data$var1.pred))
-  print(all.equal(rtopObj4$predictions@data$var1.var, output$predictions@data$var1.var))
+  if (require(intamap)) {
+    stopifnot(all.equal(rtopObj4$predictions@data$var1.pred, output$predictions@data$var1.pred))
+    stopifnot(all.equal(rtopObj4$predictions@data$var1.var, output$predictions@data$var1.var))
+  }
 
 
 # Updating variogramModel

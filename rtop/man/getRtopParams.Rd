@@ -52,7 +52,7 @@ to be included in the object described in \code{\link{rtop-package}}}
                       are possible, as this parameter refers to the \code{axp} parameter of
                       \code{\link[graphics]{axTicks}}.}
      \item{fit.method = 9}{ - defines the type of Least Square method for fitting of variogram. 
-                  The methods 1-7 correspond to the similar methods in \code{\link[gstat]{fit.variogram}} of \code{\link{gstat}}.
+                  The methods 1-7 correspond to the similar methods in \code{\link[gstat]{fit.variogram}}.
        \describe{
         \item{1}{ - weighted least squares with number of pairs per bin: \cr 
                     err = n * (yobs-ymod)^2}
